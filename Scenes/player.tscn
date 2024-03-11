@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cemssp4v0a7o7"]
+[gd_scene load_steps=4 format=3 uid="uid://cemssp4v0a7o7"]
 
 [ext_resource type="Texture2D" uid="uid://d0h018n0q1lav" path="res://Images/OrangUtan.png" id="1_26e1i"]
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_dxo5q"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dj1h8"]
+radius = 14.0034
+height = 120.006
 
 [node name="Player" type="PanelContainer"]
 self_modulate = Color(1, 1, 1, 0)
@@ -12,3 +16,11 @@ custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture = ExtResource("1_26e1i")
 expand_mode = 1
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+visible = false
+position = Vector2(65, 113)
+rotation = 1.56726
+shape = SubResource("CapsuleShape2D_dj1h8")
