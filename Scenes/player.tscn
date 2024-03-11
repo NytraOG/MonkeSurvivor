@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cemssp4v0a7o7"]
+
+[ext_resource type="Texture2D" uid="uid://d0h018n0q1lav" path="res://Images/OrangUtan.png" id="1_26e1i"]
+
+[node name="Player" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(128, 128)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_26e1i")
+expand_mode = 1

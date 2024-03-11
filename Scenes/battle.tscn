@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0cu326xrrwqy"]
+[gd_scene load_steps=3 format=3 uid="uid://c0cu326xrrwqy"]
 
 [ext_resource type="Texture2D" uid="uid://cluta3sh7uc8p" path="res://Images/Background.png" id="1_tlb5t"]
+[ext_resource type="PackedScene" uid="uid://cemssp4v0a7o7" path="res://Scenes/player.tscn" id="2_cqqse"]
 
 [node name="Battle" type="Node"]
 
@@ -17,7 +18,11 @@ offset_bottom = 40.0
 texture = ExtResource("1_tlb5t")
 
 [node name="CameraPivot" type="Marker2D" parent="."]
-position = Vector2(1526, 1079)
+position = Vector2(1388, -435)
 
 [node name="Camera2D" type="Camera2D" parent="CameraPivot"]
-zoom = Vector2(0.6, 0.6)
+position = Vector2(434, 1570)
+zoom = Vector2(1.1, 1.1)
+
+[node name="Player" parent="." instance=ExtResource("2_cqqse")]
+position = Vector2(1467, 977)
