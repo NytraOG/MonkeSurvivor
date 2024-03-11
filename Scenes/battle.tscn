@@ -25,4 +25,8 @@ position = Vector2(434, 1570)
 zoom = Vector2(1.1, 1.1)
 
 [node name="Player" parent="." instance=ExtResource("2_cqqse")]
-position = Vector2(1467, 977)
+offset_left = 1478.0
+offset_top = 974.0
+offset_right = 1606.0
+offset_bottom = 1102.0
+Velocity = 0.1

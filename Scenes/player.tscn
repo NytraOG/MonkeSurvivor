@@ -1,12 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://cemssp4v0a7o7"]
+[gd_scene load_steps=3 format=3 uid="uid://cemssp4v0a7o7"]
 
 [ext_resource type="Texture2D" uid="uid://d0h018n0q1lav" path="res://Images/OrangUtan.png" id="1_26e1i"]
+[ext_resource type="Script" path="res://Scripts/Player.cs" id="1_dxo5q"]
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="PanelContainer"]
+self_modulate = Color(1, 1, 1, 0)
+script = ExtResource("1_dxo5q")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(128, 128)
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 2
 texture = ExtResource("1_26e1i")
 expand_mode = 1
