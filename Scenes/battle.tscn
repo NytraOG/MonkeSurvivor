@@ -17,16 +17,13 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_tlb5t")
 
-[node name="CameraPivot" type="Marker2D" parent="."]
-position = Vector2(1388, -435)
-
-[node name="Camera2D" type="Camera2D" parent="CameraPivot"]
-position = Vector2(434, 1570)
-zoom = Vector2(1.1, 1.1)
-
 [node name="Player" parent="." instance=ExtResource("2_cqqse")]
 offset_left = 1478.0
 offset_top = 974.0
 offset_right = 1606.0
 offset_bottom = 1102.0
 Velocity = 300.0
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(74, 63)
+zoom = Vector2(1.1, 1.1)
