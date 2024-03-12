@@ -10,6 +10,7 @@ public abstract partial class Enemy : Unit
     [Export]
     public float Speed { get; set; } = 300;
 
+    [Export]
     public float DealtDamage { get; set; } = 10;
 
     public override void _PhysicsProcess(double delta) => ChasePlayer();
@@ -24,6 +25,18 @@ public abstract partial class Enemy : Unit
 
         LookAt(chasedPlayer.Position);
         MoveAndSlide();
+
+        for (var i = 0; i < GetSlideCollisionCount(); i++)
+        {
+            var collision = GetSlideCollision(i);
+
+            var collidedObject = (Node)collision.GetCollider();
+
+            if (collidedObject.Name == nameof(Player))
+            {
+                chasedPlayer.HealthCurrent -= DealtDamage;
+            }
+        }
     }
 
     public void StartChasingPlayer(Player player)

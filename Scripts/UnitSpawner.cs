@@ -54,6 +54,7 @@ public partial class UnitSpawner : Control
 
         battleScene.AddChild(enemyInstance);
 
+        enemyInstance.Position = player.Position + new Vector2(offset * 50, -400);
         enemyInstance.StartChasingPlayer(player);
     }
 }

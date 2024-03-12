@@ -5,8 +5,8 @@ namespace MonkeSurvivor.Scripts;
 
 public partial class Player : Unit
 {
-    private TextureRect texture;
     private int         millisecondsSinceLastHit;
+    private TextureRect texture;
 
     [Export]
     public float Speed { get; set; } = 100;
@@ -17,8 +17,6 @@ public partial class Player : Unit
     public float DiagonalSpeed => (float)Math.Sqrt(Math.Pow(Speed, 2) / 2);
 
     public override void _Ready() => texture = GetNode<TextureRect>(nameof(TextureRect));
-
-    public override void _Process(double delta) { }
 
     public override void _PhysicsProcess(double delta)
     {
