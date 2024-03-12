@@ -1,6 +1,6 @@
 using Godot;
 
-namespace MonkeSurvivor.Scripts;
+namespace MonkeSurvivor.Scripts.Ui;
 
 public partial class Battle : Node
 {

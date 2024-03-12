@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_dxo5q"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dj1h8"]
-radius = 14.0034
-height = 120.006
+radius = 26.9963
+height = 96.0065
 
 [node name="Player" type="CharacterBody2D"]
 self_modulate = Color(1, 1, 1, 0)
@@ -19,7 +19,6 @@ texture = ExtResource("1_26e1i")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(65, 113)
+position = Vector2(65, 99)
 rotation = 1.56726
 shape = SubResource("CapsuleShape2D_dj1h8")

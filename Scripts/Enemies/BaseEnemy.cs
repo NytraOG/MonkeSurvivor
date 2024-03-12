@@ -1,8 +1,8 @@
 ﻿using Godot;
 
-namespace MonkeSurvivor.Scripts;
+namespace MonkeSurvivor.Scripts.Enemies;
 
-public abstract partial class Enemy : Unit
+public abstract partial class BaseEnemy : BaseUnit
 {
     private Player chasedPlayer;
     private bool   isAggressive;

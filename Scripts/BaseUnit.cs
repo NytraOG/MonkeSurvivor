@@ -5,8 +5,8 @@ using Godot;
 
 namespace MonkeSurvivor.Scripts;
 
-public abstract partial class Unit : CharacterBody2D,
-                                     INotifyPropertyChanged
+public abstract partial class BaseUnit : CharacterBody2D,
+                                         INotifyPropertyChanged
 {
     private float healthCurrent;
 
@@ -27,7 +27,17 @@ public abstract partial class Unit : CharacterBody2D,
     public bool                              IsDead => HealthCurrent <= 0;
     public event PropertyChangedEventHandler PropertyChanged;
 
-    public override void _Draw() => HealthCurrent = HealthMaximum;
+    public override void _Draw()
+    {
+        HealthCurrent   =  HealthMaximum;
+        PropertyChanged += OnPropertyChanged;
+    }
+
+    private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName != nameof(HealthCurrent))
+            return;
+    }
 
     public override void _Process(double delta)
     {

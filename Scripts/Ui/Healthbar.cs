@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using Godot;
 
-namespace MonkeSurvivor.Scripts;
+namespace MonkeSurvivor.Scripts.Ui;
 
 public partial class Healthbar : PanelContainer
 {
@@ -23,7 +23,7 @@ public partial class Healthbar : PanelContainer
 
     private void PlayerOnPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName != nameof(Unit.HealthCurrent))
+        if (e.PropertyName != nameof(BaseUnit.HealthCurrent))
             return;
 
         SetHealthbarValue();

@@ -4,7 +4,7 @@ using Godot;
 
 namespace MonkeSurvivor.Scripts;
 
-public partial class Player : Unit
+public partial class Player : BaseUnit
 {
     private bool        invincibilityRunning;
     private double      millisecondsSinceLastHit;

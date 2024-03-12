@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dg7lftgbhe2ux" path="res://Images/Bananaspider.png" id="1_uqplb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_elduo"]
-radius = 28.0
-height = 62.0
+radius = 24.8387
+height = 49.6775
 
 [node name="Spider" type="CharacterBody2D"]
 self_modulate = Color(1, 1, 1, 0)
@@ -21,7 +21,6 @@ texture = ExtResource("1_uqplb")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(31, 37)
+position = Vector2(31, 32)
 rotation = -0.692085
 shape = SubResource("CapsuleShape2D_elduo")
