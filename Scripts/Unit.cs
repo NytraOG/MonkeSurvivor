@@ -2,7 +2,7 @@
 
 namespace MonkeSurvivor.Scripts;
 
-public abstract class Unit : PanelContainer
+public  abstract partial class Unit : PanelContainer
 {
     
 }

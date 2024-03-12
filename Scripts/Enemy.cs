@@ -1,6 +1,3 @@
 ﻿namespace MonkeSurvivor.Scripts;
 
-public class Enemy : Unit
-{
-    
-}
+public abstract partial class Enemy : Unit { }

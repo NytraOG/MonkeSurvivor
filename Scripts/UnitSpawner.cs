@@ -5,20 +5,23 @@ namespace MonkeSurvivor.Scripts;
 public partial class UnitSpawner : Control
 {
     private TextureRect background;
-    private Player      player;
     private Node        battleScene;
+    private Player      player;
+    private double      waveTimer;
 
     [Export]
     public PackedScene UnitToSpawn { get; set; }
 
     [Export]
-    public int AmountPerWave { get; set; }
+    public int AmountPerWave { get; set; } = 5;
 
     [Export]
-    public float WaveCooldown { get; set; }
+    public int WaveCooldown { get; set; } = 5;
 
     [Export]
-    public float WaveCooldownModifier { get; set; }
+    public float WaveCooldownModifier { get; set; } = 1;
+
+    private float ModifiedCooldown => WaveCooldown * WaveCooldownModifier;
 
     public override void _Ready()
     {
@@ -31,14 +34,26 @@ public partial class UnitSpawner : Control
 
     public override void _Process(double delta)
     {
-
+        if ((waveTimer += delta) >= ModifiedCooldown)
+            SpawnWave<Spider>();
     }
 
-    public void SpawnUnit<T>()
+    private void SpawnWave<T>()
+            where T : Enemy
+    {
+        for (var i = 0; i < AmountPerWave; i++)
+        {
+            SpawnUnit<T>(i);
+        }
+
+        waveTimer = 0;
+    }
+
+    private void SpawnUnit<T>(int offset)
             where T : Enemy
     {
         var enemyInstance = UnitToSpawn.Instantiate<T>();
-        enemyInstance.SetPosition(new Vector2(player.Position.X, player.Position.Y + (float)1 / 3));
+        enemyInstance.SetPosition(new Vector2(player.Position.X + offset*50, player.Position.Y ));
         battleScene.AddChild(enemyInstance);
     }
 }
