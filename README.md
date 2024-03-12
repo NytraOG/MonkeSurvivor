@@ -1,15 +1,15 @@
 # MonkeSurvivor
 
 Startmenü GUI
-	- Play
-		- Character selection
-			- Startweapon selection **
-				- Select Stage **
-					- Und dann gehts los
-	- Meta-Upgrades **
-	- NPCs **
-	- Settings
-	- Exit
+- Play
+	- Character selection
+		- Startweapon selection **
+			- Select Stage **
+				- Und dann gehts los
+- Meta-Upgrades **
+- NPCs **
+- Settings
+- Exit
 
 Battle - GUI
 
