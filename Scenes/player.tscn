@@ -7,19 +7,18 @@
 radius = 14.0034
 height = 120.006
 
-[node name="Player" type="PanelContainer"]
+[node name="Player" type="CharacterBody2D"]
 self_modulate = Color(1, 1, 1, 0)
 script = ExtResource("1_dxo5q")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
+offset_right = 128.0
+offset_bottom = 128.0
 texture = ExtResource("1_26e1i")
 expand_mode = 1
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2(65, 113)
 rotation = 1.56726

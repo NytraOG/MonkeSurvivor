@@ -25,11 +25,8 @@ offset_bottom = 1632.0
 texture = ExtResource("1_tlb5t")
 
 [node name="Player" parent="." instance=ExtResource("2_cqqse")]
-offset_left = 1478.0
-offset_top = 974.0
-offset_right = 1606.0
-offset_bottom = 1102.0
-Velocity = 300.0
+position = Vector2(809, 741)
+Speed = 500.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(74, 63)

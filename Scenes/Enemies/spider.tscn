@@ -7,21 +7,18 @@
 radius = 28.0
 height = 62.0
 
-[node name="Spider" type="PanelContainer"]
+[node name="Spider" type="CharacterBody2D"]
 self_modulate = Color(1, 1, 1, 0)
-offset_right = 64.0
-offset_bottom = 64.0
 script = ExtResource("1_8kykn")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
+offset_right = 64.0
+offset_bottom = 64.0
 texture = ExtResource("1_uqplb")
 expand_mode = 1
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2(31, 37)
 rotation = -0.692085

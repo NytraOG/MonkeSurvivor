@@ -53,7 +53,7 @@ public partial class UnitSpawner : Control
             where T : Enemy
     {
         var enemyInstance = UnitToSpawn.Instantiate<T>();
-        enemyInstance.SetPosition(new Vector2(player.Position.X + offset*50, player.Position.Y ));
+        enemyInstance.MoveAndSlide();
         battleScene.AddChild(enemyInstance);
     }
 }
