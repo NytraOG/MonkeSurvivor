@@ -4,28 +4,29 @@ namespace MonkeSurvivor.Scripts;
 
 public abstract partial class Enemy : Unit
 {
-    private Player player;
+    private Player chasedPlayer;
+    private bool   isAggressive;
+
     [Export]
-    public  double      Velocity { get; set; }
+    public float Speed { get; set; } = 300;
 
-    public override void _Draw()
+    public override void _PhysicsProcess(double delta) => ChasePlayer();
+
+    private void ChasePlayer()
     {
-        base._Draw();
+        if (!isAggressive)
+            return;
 
-        player = GetTree().CurrentScene.GetNode<Player>(nameof(Player));
+        var direction = (chasedPlayer.Position - Position).Normalized();
+        Velocity = Speed * direction;
+
+        LookAt(chasedPlayer.Position);
+        MoveAndSlide();
     }
 
-    public override void _PhysicsProcess(double delta)
+    public void StartChasingPlayer(Player player)
     {
-        base._PhysicsProcess(delta);
-
-
-    }
-
-    public override void _Process(double delta)
-    {
-        base._Process(delta);
-
-
+        chasedPlayer = player;
+        isAggressive = true;
     }
 }

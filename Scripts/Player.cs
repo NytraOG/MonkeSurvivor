@@ -83,9 +83,7 @@ public partial class Player : CharacterBody2D
             Velocity = direction * Speed;
         }
         else
-        {
             Velocity = Vector2.Zero;
-        }
 
         MoveAndSlide();
     }

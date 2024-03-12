@@ -2,7 +2,4 @@
 
 namespace MonkeSurvivor.Scripts;
 
-public  abstract partial class Unit : CharacterBody2D
-{
-    
-}
+public abstract partial class Unit : CharacterBody2D { }

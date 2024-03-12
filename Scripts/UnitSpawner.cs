@@ -42,9 +42,7 @@ public partial class UnitSpawner : Control
             where T : Enemy
     {
         for (var i = 0; i < AmountPerWave; i++)
-        {
             SpawnUnit<T>(i);
-        }
 
         waveTimer = 0;
     }
@@ -53,7 +51,9 @@ public partial class UnitSpawner : Control
             where T : Enemy
     {
         var enemyInstance = UnitToSpawn.Instantiate<T>();
-        enemyInstance.MoveAndSlide();
+
         battleScene.AddChild(enemyInstance);
+
+        enemyInstance.StartChasingPlayer(player);
     }
 }
