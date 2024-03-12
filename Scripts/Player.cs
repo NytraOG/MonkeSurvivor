@@ -18,6 +18,13 @@ public partial class Player : Unit
 
     public override void _Ready() => texture = GetNode<TextureRect>(nameof(TextureRect));
 
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+
+
+    }
+
     public override void _PhysicsProcess(double delta)
     {
         if (Input.IsKeyPressed(Key.A) && Input.IsKeyPressed(Key.W))
