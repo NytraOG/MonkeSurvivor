@@ -34,7 +34,8 @@ public abstract partial class Enemy : Unit
 
             if (collidedObject.Name == nameof(Player))
             {
-                chasedPlayer.HealthCurrent -= DealtDamage;
+                if(!chasedPlayer.IsInvicible)
+                    chasedPlayer.HealthCurrent -= DealtDamage;
             }
         }
     }

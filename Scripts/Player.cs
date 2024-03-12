@@ -1,11 +1,13 @@
 using System;
+using System.ComponentModel;
 using Godot;
 
 namespace MonkeSurvivor.Scripts;
 
 public partial class Player : Unit
 {
-    private int         millisecondsSinceLastHit;
+    private bool        invincibilityRunning;
+    private double      millisecondsSinceLastHit;
     private TextureRect texture;
 
     [Export]
@@ -14,15 +16,46 @@ public partial class Player : Unit
     [Export]
     public int InvicibilityTimeMilliseconds { get; set; } = 1000;
 
+    public bool IsInvicible
+    {
+        get
+        {
+            if (InvicibilityTimeMilliseconds > millisecondsSinceLastHit)
+                return true;
+
+            invincibilityRunning     = false;
+            millisecondsSinceLastHit = 0;
+
+            return false;
+        }
+    }
+
     public float DiagonalSpeed => (float)Math.Sqrt(Math.Pow(Speed, 2) / 2);
 
-    public override void _Ready() => texture = GetNode<TextureRect>(nameof(TextureRect));
+    public override void _Ready()
+    {
+        texture = GetNode<TextureRect>(nameof(TextureRect));
+
+        PropertyChanged += OnPropertyChanged;
+    }
+
+    private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName != nameof(HealthCurrent))
+            return;
+
+        invincibilityRunning = true;
+    }
 
     public override void _Process(double delta)
     {
         base._Process(delta);
 
+        if (millisecondsSinceLastHit > InvicibilityTimeMilliseconds)
+            invincibilityRunning = false;
 
+        if (invincibilityRunning)
+            millisecondsSinceLastHit += delta * 1000;
     }
 
     public override void _PhysicsProcess(double delta)
