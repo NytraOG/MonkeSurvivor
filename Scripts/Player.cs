@@ -1,6 +1,8 @@
 using System;
 using System.ComponentModel;
 using Godot;
+using MonkeSurvivor.Scripts.Monkeys;
+using MonkeSurvivor.Scripts.Weapons;
 
 namespace MonkeSurvivor.Scripts;
 
@@ -8,7 +10,9 @@ public partial class Player : BaseUnit
 {
     private bool        invincibilityRunning;
     private double      millisecondsSinceLastHit;
+    private float       swingTimer;
     private TextureRect texture;
+    public  BaseWeapon  WieldedWeapon { get; set; }
 
     [Export]
     public float Speed { get; set; } = 100;
@@ -47,10 +51,36 @@ public partial class Player : BaseUnit
         invincibilityRunning = true;
     }
 
+    public void SetMonkeyClass(BaseMonkey monkey) =>
+            //Apply Modifiers
+            WieldedWeapon = monkey.StartingWeapon.Instantiate<BaseWeapon>();
+
     public override void _Process(double delta)
     {
         base._Process(delta);
 
+        ResolveInvincibility(delta);
+        ProgressSwingtimer(delta);
+    }
+
+    private void ProgressSwingtimer(double delta)
+    {
+        if (swingTimer >= WieldedWeapon.SwingCooldown && WieldedWeapon.Duplicate() is BaseWeapon duplicateWeapon)
+        {
+            //Das kommt in die Waffe rein
+            duplicateWeapon.Position = Position;
+
+            // var target =
+            // var direction =
+
+            swingTimer = 0;
+        }
+
+        swingTimer += (float)delta;
+    }
+
+    private void ResolveInvincibility(double delta)
+    {
         if (millisecondsSinceLastHit > InvicibilityTimeMilliseconds)
             invincibilityRunning = false;
 
