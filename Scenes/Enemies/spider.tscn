@@ -10,6 +10,7 @@ height = 62.0
 [node name="Spider" type="CharacterBody2D"]
 self_modulate = Color(1, 1, 1, 0)
 script = ExtResource("1_8kykn")
+HealthMaximum = 30.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(64, 64)

@@ -3,18 +3,24 @@ using Godot;
 
 namespace MonkeSurvivor.Scripts;
 
-public partial class Player : CharacterBody2D
+public partial class Player : Unit
 {
     private TextureRect texture;
+    private int         millisecondsSinceLastHit;
 
     [Export]
     public float Speed { get; set; } = 100;
+
+    [Export]
+    public int InvicibilityTimeMilliseconds { get; set; } = 1000;
 
     public float DiagonalSpeed => (float)Math.Sqrt(Math.Pow(Speed, 2) / 2);
 
     public override void _Ready() => texture = GetNode<TextureRect>(nameof(TextureRect));
 
-    public override void _Process(double delta)
+    public override void _Process(double delta) { }
+
+    public override void _PhysicsProcess(double delta)
     {
         if (Input.IsKeyPressed(Key.A) && Input.IsKeyPressed(Key.W))
         {

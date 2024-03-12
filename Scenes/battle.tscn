@@ -18,11 +18,13 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("2_kwem6")
 UnitToSpawn = ExtResource("3_1lk7b")
+metadata/_edit_use_anchors_ = true
 
 [node name="Background" type="TextureRect" parent="."]
 offset_right = 2912.0
 offset_bottom = 1632.0
 texture = ExtResource("1_tlb5t")
+metadata/_edit_use_anchors_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_cqqse")]
 position = Vector2(809, 741)

@@ -10,6 +10,8 @@ public abstract partial class Enemy : Unit
     [Export]
     public float Speed { get; set; } = 300;
 
+    public float DealtDamage { get; set; } = 10;
+
     public override void _PhysicsProcess(double delta) => ChasePlayer();
 
     private void ChasePlayer()
