@@ -1,13 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0cu326xrrwqy"]
+[gd_scene load_steps=7 format=3 uid="uid://c0cu326xrrwqy"]
 
 [ext_resource type="Texture2D" uid="uid://cluta3sh7uc8p" path="res://Images/Background.png" id="1_tlb5t"]
 [ext_resource type="Script" path="res://Scripts/Battle.cs" id="1_u45iy"]
 [ext_resource type="PackedScene" uid="uid://cemssp4v0a7o7" path="res://Scenes/player.tscn" id="2_cqqse"]
+[ext_resource type="Script" path="res://Scripts/UnitSpawner.cs" id="2_kwem6"]
+[ext_resource type="PackedScene" uid="uid://c2wv5bys55p5a" path="res://Scenes/Enemies/spider.tscn" id="3_1lk7b"]
 [ext_resource type="PackedScene" uid="uid://pcuwiud4m1ds" path="res://Scenes/pause_menu.tscn" id="3_4a0fk"]
 
 [node name="Battle" type="Node" node_paths=PackedStringArray("PauseMenu")]
 script = ExtResource("1_u45iy")
 PauseMenu = NodePath("UI/PauseMenu")
+
+[node name="UnitSpawner" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_kwem6")
+UnitToSpawn = ExtResource("3_1lk7b")
 
 [node name="Background" type="TextureRect" parent="."]
 offset_right = 2912.0
