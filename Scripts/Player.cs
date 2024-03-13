@@ -11,19 +11,17 @@ namespace MonkeSurvivor.Scripts;
 
 public partial class Player : BaseUnit
 {
-    private Node                   battleScene;
+    private Node battleScene;
     private IEnumerable<BaseEnemy> enemies;
-    private bool                   invincibilityRunning;
-    private double                 millisecondsSinceLastHit;
-    private float                  swingTimer;
-    private TextureRect            texture;
-    public  RigidBody2D            WieldedWeapon { get; set; }
+    private bool invincibilityRunning;
+    private double millisecondsSinceLastHit;
+    private float swingTimer;
+    private TextureRect texture;
+    public RigidBody2D WieldedWeapon { get; set; }
 
-    [Export]
-    public float Speed { get; set; } = 100;
+    [Export] public float Speed { get; set; } = 100;
 
-    [Export]
-    public int InvicibilityTimeMilliseconds { get; set; } = 1000;
+    [Export] public int InvicibilityTimeMilliseconds { get; set; } = 1000;
 
     public bool IsInvicible
     {
@@ -32,7 +30,7 @@ public partial class Player : BaseUnit
             if (InvicibilityTimeMilliseconds > millisecondsSinceLastHit)
                 return true;
 
-            invincibilityRunning     = false;
+            invincibilityRunning = false;
             millisecondsSinceLastHit = 0;
 
             return false;
@@ -46,16 +44,20 @@ public partial class Player : BaseUnit
         battleScene = GetTree().CurrentScene;
         var unitSpawner = battleScene.GetNode<UnitSpawner>(nameof(UnitSpawner));
         unitSpawner.WaveSpawned += UnitSpawnerOnWaveSpawned;
-        texture                 =  GetNode<TextureRect>(nameof(TextureRect));
+        texture = GetNode<TextureRect>(nameof(TextureRect));
 
         PropertyChanged += OnPropertyChanged;
     }
 
     private void UnitSpawnerOnWaveSpawned()
-        => enemies = battleScene.GetChildren()
-                                .Where(c => c.Name == nameof(Spider))
-                                .Cast<BaseEnemy>()
-                                .ToList();
+    {
+        var allChildren = battleScene.GetChildren();
+        var allSPiders = allChildren.Where(c => c is Spider);
+
+        enemies = allSPiders
+            .Cast<BaseEnemy>()
+            .ToList();
+    }
 
     private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
@@ -96,7 +98,6 @@ public partial class Player : BaseUnit
 
             var duplicateWeapon = (BaseWeapon)wieldedWeapon.Duplicate();
 
-            //Das kommt in die Waffe rein
             duplicateWeapon.Position = Position;
             battleScene.AddChild(duplicateWeapon);
 
@@ -107,7 +108,10 @@ public partial class Player : BaseUnit
         }
     }
 
-    private BaseEnemy FindTargetOrDefault() => enemies?.FirstOrDefault();
+    private BaseEnemy FindTargetOrDefault()
+    {
+        return enemies?.Where(e => !e.IsDead).FirstOrDefault();
+    }
 
     private void ResolveInvincibility(double delta)
     {
@@ -187,7 +191,9 @@ public partial class Player : BaseUnit
             Velocity = direction * Speed;
         }
         else
+        {
             Velocity = Vector2.Zero;
+        }
 
         MoveAndSlide();
     }

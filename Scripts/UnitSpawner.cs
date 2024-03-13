@@ -4,7 +4,7 @@ namespace MonkeSurvivor.Scripts;
 
 public partial class UnitSpawner : Control
 {
-    public delegate void WaveSpawnedventHandler();
+    public delegate void WaveSpawnedEventHandler();
 
     private TextureRect background;
     private Node        battleScene;
@@ -24,7 +24,7 @@ public partial class UnitSpawner : Control
     public float WaveCooldownModifier { get; set; } = 1;
 
     private float                       ModifiedCooldown => WaveCooldown * WaveCooldownModifier;
-    public event WaveSpawnedventHandler WaveSpawned;
+    public event WaveSpawnedEventHandler WaveSpawned;
 
     public override void _Ready()
     {

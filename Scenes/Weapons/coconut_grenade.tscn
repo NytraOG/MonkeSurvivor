@@ -11,9 +11,11 @@ position = Vector2(0, 1)
 collision_layer = 2
 collision_mask = 2
 mass = 0.01
+max_contacts_reported = 1
+contact_monitor = true
 script = ExtResource("1_f8on5")
 DamageOnHit = 15
-SwingCooldown = 0.1
+SwingCooldown = 1.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 8
@@ -32,3 +34,5 @@ expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_v8gyg")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

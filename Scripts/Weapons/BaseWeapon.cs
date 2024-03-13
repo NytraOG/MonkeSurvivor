@@ -5,11 +5,22 @@ namespace MonkeSurvivor.Scripts.Weapons;
 
 public abstract partial class BaseWeapon : RigidBody2D
 {
-    [Export]
-    public int DamageOnHit { get; set; } = 10;
+    [Export] public int DamageOnHit { get; set; } = 10;
 
-    [Export]
-    public float SwingCooldown { get; set; }
+    [Export] public float SwingCooldown { get; set; }
 
-    public void DealDamageTo(BaseEnemy enemy) => enemy.HealthCurrent -= DamageOnHit;
+    public void DealDamageTo(BaseEnemy enemy)
+    {
+        enemy.HealthCurrent -= DamageOnHit;
+    }
+
+    public void _on_body_entered(Node node)
+    {
+        if (node is BaseEnemy enemy)
+        {
+            DealDamageTo(enemy);
+            ContactMonitor = false;
+            ConstantForce = Vector2.Zero;
+        }
+    }
 }
