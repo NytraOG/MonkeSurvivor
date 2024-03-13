@@ -12,7 +12,7 @@ public partial class Player : BaseUnit
     private double      millisecondsSinceLastHit;
     private float       swingTimer;
     private TextureRect texture;
-    public  BaseWeapon  WieldedWeapon { get; set; }
+    public  RigidBody2D WieldedWeapon { get; set; }
 
     [Export]
     public float Speed { get; set; } = 100;
@@ -51,9 +51,12 @@ public partial class Player : BaseUnit
         invincibilityRunning = true;
     }
 
-    public void SetMonkeyClass(BaseMonkey monkey) =>
-            //Apply Modifiers
-            WieldedWeapon = monkey.StartingWeapon.Instantiate<BaseWeapon>();
+    public void SetMonkeyClass(BaseMonkey monkey)
+    {
+        //Apply Modifiers
+        var kek = monkey.StartingWeapon.Instantiate<RigidBody2D>();
+        WieldedWeapon = kek;
+    }
 
     public override void _Process(double delta)
     {
@@ -65,18 +68,29 @@ public partial class Player : BaseUnit
 
     private void ProgressSwingtimer(double delta)
     {
-        if (swingTimer >= WieldedWeapon.SwingCooldown && WieldedWeapon.Duplicate() is BaseWeapon duplicateWeapon)
+        if (WieldedWeapon is null)
+            return;
+
+        swingTimer += (float)delta;
+
+        if ( WieldedWeapon is BaseWeapon wieldedWeapon && swingTimer >= wieldedWeapon.SwingCooldown)
         {
+            var duplicateWeapon = (BaseWeapon)wieldedWeapon.Duplicate();
             //Das kommt in die Waffe rein
             duplicateWeapon.Position = Position;
 
-            // var target =
-            // var direction =
+
+            var target = duplicateWeapon.FindTargetOrDefault();
+
+            if (target is null)
+                return;
+
+            var direction = (target.Position - duplicateWeapon.Position).Normalized();
+            duplicateWeapon.AngularVelocity = 600f;
+            duplicateWeapon.MoveAndCollide(direction);
 
             swingTimer = 0;
         }
-
-        swingTimer += (float)delta;
     }
 
     private void ResolveInvincibility(double delta)

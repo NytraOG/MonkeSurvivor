@@ -4,17 +4,26 @@
 [ext_resource type="Script" path="res://Scripts/Weapons/CoconutGrenade.cs" id="1_f8on5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v8gyg"]
+radius = 20.0
 
 [node name="CoconutGrenade" type="RigidBody2D"]
 position = Vector2(0, 1)
 script = ExtResource("1_f8on5")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(15, 15)
-shape = SubResource("CircleShape2D_v8gyg")
-
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_c7v6p")
 expand_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_v8gyg")
