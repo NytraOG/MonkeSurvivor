@@ -5,7 +5,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dj1h8"]
 radius = 26.9963
-height = 96.0065
+height = 111.992
 
 [node name="Player" type="CharacterBody2D"]
 self_modulate = Color(1, 1, 1, 0)
@@ -13,12 +13,23 @@ script = ExtResource("1_dxo5q")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(128, 128)
-offset_right = 128.0
-offset_bottom = 128.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture = ExtResource("1_26e1i")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(65, 99)
+position = Vector2(3, 34)
 rotation = 1.56726
 shape = SubResource("CapsuleShape2D_dj1h8")
