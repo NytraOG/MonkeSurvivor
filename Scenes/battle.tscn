@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://c0cu326xrrwqy"]
 
 [ext_resource type="Texture2D" uid="uid://cluta3sh7uc8p" path="res://Images/Background.png" id="1_tlb5t"]
-[ext_resource type="Script" path="res://Scripts/Battle.cs" id="1_u45iy"]
+[ext_resource type="Script" path="res://Scripts/Ui/Battle.cs" id="1_vvbst"]
 [ext_resource type="PackedScene" uid="uid://cemssp4v0a7o7" path="res://Scenes/player.tscn" id="2_cqqse"]
 [ext_resource type="Script" path="res://Scripts/UnitSpawner.cs" id="2_kwem6"]
 [ext_resource type="PackedScene" uid="uid://c2wv5bys55p5a" path="res://Scenes/Enemies/spider.tscn" id="3_1lk7b"]
@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bv6vuoocw2txk" path="res://Scenes/Healthbar.tscn" id="7_xa6r3"]
 
 [node name="Battle" type="Node" node_paths=PackedStringArray("PauseMenu")]
-script = ExtResource("1_u45iy")
+script = ExtResource("1_vvbst")
 PauseMenu = NodePath("UI/PauseMenu")
 
 [node name="UnitSpawner" type="Control" parent="."]
@@ -55,4 +55,4 @@ offset_left = 1465.0
 offset_top = 50.0
 offset_right = -55.0
 offset_bottom = -955.0
-Player = NodePath("../../Player")
+Player = NodePath("")

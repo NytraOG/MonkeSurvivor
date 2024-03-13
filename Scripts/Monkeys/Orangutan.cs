@@ -2,7 +2,7 @@
 
 namespace MonkeSurvivor.Scripts.Monkeys;
 
-public class Orangutan : BaseMonkey
+public partial class Orangutan : BaseMonkey
 {
     [Export]
     public Texture2D Sprite { get; set; }

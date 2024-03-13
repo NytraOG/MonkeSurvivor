@@ -1,12 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://bre2lf0vrxxs2"]
 
 [ext_resource type="Texture2D" uid="uid://ja0fekcerd5w" path="res://Images/Coconut.png" id="1_c7v6p"]
-[ext_resource type="Script" path="res://Scripts/CoconutGrenade.cs" id="1_pqogd"]
+[ext_resource type="Script" path="res://Scripts/Weapons/CoconutGrenade.cs" id="1_f8on5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v8gyg"]
 
 [node name="CoconutGrenade" type="RigidBody2D"]
-script = ExtResource("1_pqogd")
+position = Vector2(0, 1)
+script = ExtResource("1_f8on5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(15, 15)

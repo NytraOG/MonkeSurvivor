@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b550et8epspr4" path="res://Images/Hp_line.png" id="1_1up6e"]
 [ext_resource type="Texture2D" uid="uid://d17yj7bieuu72" path="res://Images/Hp_frame.png" id="1_an38s"]
-[ext_resource type="Script" path="res://Scripts/Healthbar.cs" id="1_yp876"]
+[ext_resource type="Script" path="res://Scripts/Ui/Healthbar.cs" id="1_fujb5"]
 
 [node name="Healthbar" type="PanelContainer"]
 anchors_preset = 15
@@ -12,7 +12,7 @@ offset_right = -1520.0
 offset_bottom = -1005.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_yp876")
+script = ExtResource("1_fujb5")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
 layout_mode = 2

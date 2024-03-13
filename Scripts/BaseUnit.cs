@@ -10,14 +10,13 @@ public abstract partial class BaseUnit : CharacterBody2D,
 {
     private float healthCurrent;
 
-    [Export]
     public float HealthCurrent
     {
         get => healthCurrent;
         set
         {
             if (SetField(ref healthCurrent, value))
-                OnPropertyChanged(nameof(IsDead));
+                OnPropertyChanged();
         }
     }
 
@@ -29,6 +28,8 @@ public abstract partial class BaseUnit : CharacterBody2D,
 
     public override void _Draw()
     {
+        base._Draw();
+
         HealthCurrent   =  HealthMaximum;
         PropertyChanged += OnPropertyChanged;
     }

@@ -11,7 +11,7 @@ public partial class Healthbar : PanelContainer
     [Export]
     public Player Player { get; set; }
 
-    public override void _Ready()
+    public override void _Draw()
     {
         progressBar = GetNode<TextureProgressBar>(nameof(TextureProgressBar));
         label       = GetNode<Label>(nameof(Label));
