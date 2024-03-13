@@ -9,6 +9,8 @@ height = 49.6775
 
 [node name="Spider" type="CharacterBody2D"]
 self_modulate = Color(1, 1, 1, 0)
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_pospj")
 DealtDamage = 7.0
 
@@ -29,6 +31,6 @@ texture = ExtResource("1_uqplb")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-3, 3)
+position = Vector2(-4, -10)
 rotation = -0.692085
 shape = SubResource("CapsuleShape2D_elduo")

@@ -8,7 +8,12 @@ radius = 20.0
 
 [node name="CoconutGrenade" type="RigidBody2D"]
 position = Vector2(0, 1)
+collision_layer = 2
+collision_mask = 2
+mass = 0.01
 script = ExtResource("1_f8on5")
+DamageOnHit = 15
+SwingCooldown = 0.1
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 8

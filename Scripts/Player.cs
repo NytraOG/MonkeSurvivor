@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using Godot;
+using MonkeSurvivor.Scripts.Enemies;
 using MonkeSurvivor.Scripts.Monkeys;
 using MonkeSurvivor.Scripts.Weapons;
 
@@ -8,11 +11,13 @@ namespace MonkeSurvivor.Scripts;
 
 public partial class Player : BaseUnit
 {
-    private bool        invincibilityRunning;
-    private double      millisecondsSinceLastHit;
-    private float       swingTimer;
-    private TextureRect texture;
-    public  RigidBody2D WieldedWeapon { get; set; }
+    private Node                   battleScene;
+    private IEnumerable<BaseEnemy> enemies;
+    private bool                   invincibilityRunning;
+    private double                 millisecondsSinceLastHit;
+    private float                  swingTimer;
+    private TextureRect            texture;
+    public  RigidBody2D            WieldedWeapon { get; set; }
 
     [Export]
     public float Speed { get; set; } = 100;
@@ -38,10 +43,19 @@ public partial class Player : BaseUnit
 
     public override void _Ready()
     {
-        texture = GetNode<TextureRect>(nameof(TextureRect));
+        battleScene = GetTree().CurrentScene;
+        var unitSpawner = battleScene.GetNode<UnitSpawner>(nameof(UnitSpawner));
+        unitSpawner.WaveSpawned += UnitSpawnerOnWaveSpawned;
+        texture                 =  GetNode<TextureRect>(nameof(TextureRect));
 
         PropertyChanged += OnPropertyChanged;
     }
+
+    private void UnitSpawnerOnWaveSpawned()
+        => enemies = battleScene.GetChildren()
+                                .Where(c => c.Name == nameof(Spider))
+                                .Cast<BaseEnemy>()
+                                .ToList();
 
     private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
@@ -73,25 +87,27 @@ public partial class Player : BaseUnit
 
         swingTimer += (float)delta;
 
-        if ( WieldedWeapon is BaseWeapon wieldedWeapon && swingTimer >= wieldedWeapon.SwingCooldown)
+        if (WieldedWeapon is BaseWeapon wieldedWeapon && swingTimer >= wieldedWeapon.SwingCooldown)
         {
-            var duplicateWeapon = (BaseWeapon)wieldedWeapon.Duplicate();
-            //Das kommt in die Waffe rein
-            duplicateWeapon.Position = Position;
-
-
-            var target = duplicateWeapon.FindTargetOrDefault();
+            var target = FindTargetOrDefault();
 
             if (target is null)
                 return;
 
+            var duplicateWeapon = (BaseWeapon)wieldedWeapon.Duplicate();
+
+            //Das kommt in die Waffe rein
+            duplicateWeapon.Position = Position;
+            battleScene.AddChild(duplicateWeapon);
+
             var direction = (target.Position - duplicateWeapon.Position).Normalized();
-            duplicateWeapon.AngularVelocity = 600f;
-            duplicateWeapon.MoveAndCollide(direction);
+            duplicateWeapon.ConstantForce = 300 * direction;
 
             swingTimer = 0;
         }
     }
+
+    private BaseEnemy FindTargetOrDefault() => enemies?.FirstOrDefault();
 
     private void ResolveInvincibility(double delta)
     {
