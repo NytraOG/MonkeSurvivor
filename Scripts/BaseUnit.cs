@@ -25,9 +25,8 @@ public abstract partial class BaseUnit : CharacterBody2D,
     [Export]
     public float HealthMaximum { get; set; } = 100;
 
-    public PackedScene FloatingCombatText => ResourceLoader.Load<PackedScene>("res://Scenes/floating_combat_text.tscn");
-
-    public bool                              IsDead => HealthCurrent <= 0;
+    public PackedScene                       FloatingCombatText => ResourceLoader.Load<PackedScene>("res://Scenes/floating_combat_text.tscn");
+    public bool                              IsDead             => HealthCurrent <= 0;
     public event PropertyChangedEventHandler PropertyChanged;
 
     public override void _Draw()
@@ -63,17 +62,16 @@ public abstract partial class BaseUnit : CharacterBody2D,
         return true;
     }
 
-    public virtual void InstatiateFloatingCombatText(int receivedDamage)
+    public virtual void InstatiateFloatingCombatText(int receivedDamage, Vector2 spawnPosition)
     {
         try
         {
-            var cameraUnposition           = GetViewport().GetCamera2D().Position;
             var floatingCombatTextInstance = FloatingCombatText.Instantiate<FloatingCombatText>();
 
             floatingCombatTextInstance.Display      = floatingCombatTextInstance.GetNode<Label>("Label");
             floatingCombatTextInstance.Display.Text = receivedDamage <= 0 ? "Miss" : receivedDamage.ToString();
             floatingCombatTextInstance.Damage       = receivedDamage;
-            floatingCombatTextInstance.Position     = cameraUnposition + new Vector2(0, -50);
+            floatingCombatTextInstance.Position     = spawnPosition;
             floatingCombatTextInstance.Show();
 
             // switch (hitResult)
@@ -88,7 +86,9 @@ public abstract partial class BaseUnit : CharacterBody2D,
             //         break;
             // }
 
-            AddChild(floatingCombatTextInstance);
+            GetTree()
+                   .CurrentScene
+                   .AddChild(floatingCombatTextInstance);
         }
         catch (Exception e)
         {

@@ -31,7 +31,7 @@ public abstract partial class BaseWeapon : RigidBody2D
     {
         var damage = DamageOnHit * multiplier;
         enemy.HealthCurrent -= damage;
-        enemy.InstatiateFloatingCombatText((int)damage);
+        enemy.InstatiateFloatingCombatText((int)damage, enemy.Position);
     }
 
     public void _on_body_entered(Node node)
@@ -45,7 +45,10 @@ public abstract partial class BaseWeapon : RigidBody2D
 
         //ContactMonitor = false;
         foreach (var hitEnemy in overlappingBodies.Cast<BaseEnemy>())
-            DealDamageTo(hitEnemy, SplashDamage);
+        {
+            if(hitEnemy != enemy)
+                DealDamageTo(hitEnemy, SplashDamage);
+        }
 
         QueueFree();
     }
