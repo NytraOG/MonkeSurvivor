@@ -22,6 +22,9 @@ public partial class Player : BaseUnit
     [Export]
     public float Speed { get; set; } = 100;
 
+    public int XpCurrent { get; set; }
+    public int XpSpent   { get; set; }
+
     [Export]
     public int InvicibilityTimeMilliseconds { get; set; } = 1000;
 

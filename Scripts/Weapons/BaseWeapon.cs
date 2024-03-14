@@ -40,6 +40,12 @@ public abstract partial class BaseWeapon : RigidBody2D
             return;
 
         DealDamageTo(enemy);
+        DealSplashDamageAround(enemy);
+        QueueFree();
+    }
+
+    private void DealSplashDamageAround(BaseEnemy enemy)
+    {
         var areaNode          = GetNode<Area2D>(nameof(Area2D));
         var overlappingBodies = areaNode.GetOverlappingBodies().Where(b => b.Name != nameof(Player));
 
@@ -49,7 +55,5 @@ public abstract partial class BaseWeapon : RigidBody2D
             if(hitEnemy != enemy)
                 DealDamageTo(hitEnemy, SplashDamage);
         }
-
-        QueueFree();
     }
 }
