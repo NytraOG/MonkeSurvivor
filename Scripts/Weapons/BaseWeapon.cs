@@ -49,8 +49,7 @@ public abstract partial class BaseWeapon : RigidBody2D
         var areaNode          = GetNode<Area2D>(nameof(Area2D));
         var overlappingBodies = areaNode.GetOverlappingBodies().Where(b => b.Name != nameof(Player));
 
-        //ContactMonitor = false;
-        foreach (var hitEnemy in overlappingBodies.Cast<BaseEnemy>())
+        foreach (var hitEnemy in overlappingBodies.Where(b => b is BaseEnemy).Cast<BaseEnemy>())
         {
             if(hitEnemy != enemy)
                 DealDamageTo(hitEnemy, SplashDamage);
