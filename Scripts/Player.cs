@@ -5,23 +5,23 @@ using System.Linq;
 using Godot;
 using MonkeSurvivor.Scripts.Enemies;
 using MonkeSurvivor.Scripts.Monkeys;
+using MonkeSurvivor.Scripts.Ui;
 using MonkeSurvivor.Scripts.Weapons;
 
 namespace MonkeSurvivor.Scripts;
 
 public partial class Player : BaseUnit
 {
-    private Node                   battleScene;
+    private Node battleScene;
     private IEnumerable<BaseEnemy> enemies;
-    private bool                   invincibilityRunning;
-    private double                 millisecondsSinceLastHit;
-    private float                  swingTimer;
-    private TextureRect            texture;
+    private bool invincibilityRunning;
+    private double millisecondsSinceLastHit;
+    private float swingTimer;
+    private TextureRect texture;
     private int xpCurrent;
-    public  RigidBody2D            WieldedWeapon { get; set; }
+    public RigidBody2D WieldedWeapon { get; set; }
 
-    [Export]
-    public float Speed { get; set; } = 100;
+    [Export] public float Speed { get; set; } = 100;
 
     public int XpCurrent
     {
@@ -29,10 +29,9 @@ public partial class Player : BaseUnit
         set => SetField(ref xpCurrent, value);
     }
 
-    public int XpSpent   { get; set; }
+    public int XpSpent { get; set; }
 
-    [Export]
-    public int InvicibilityTimeMilliseconds { get; set; } = 1000;
+    [Export] public int InvicibilityTimeMilliseconds { get; set; } = 1000;
 
     public bool IsInvicible
     {
@@ -41,7 +40,7 @@ public partial class Player : BaseUnit
             if (InvicibilityTimeMilliseconds > millisecondsSinceLastHit)
                 return true;
 
-            invincibilityRunning     = false;
+            invincibilityRunning = false;
             millisecondsSinceLastHit = 0;
 
             return false;
@@ -55,7 +54,7 @@ public partial class Player : BaseUnit
         battleScene = GetTree().CurrentScene;
         var unitSpawner = battleScene.GetNode<UnitSpawner>(nameof(UnitSpawner));
         unitSpawner.WaveSpawned += UnitSpawnerOnWaveSpawned;
-        texture                 =  GetNode<TextureRect>(nameof(TextureRect));
+        texture = GetNode<TextureRect>(nameof(TextureRect));
 
         PropertyChanged += OnPropertyChanged;
     }
@@ -63,11 +62,11 @@ public partial class Player : BaseUnit
     private void UnitSpawnerOnWaveSpawned()
     {
         var allChildren = battleScene.GetChildren();
-        var allEnemies  = allChildren.Where(c => c is BaseEnemy);
+        var allEnemies = allChildren.Where(c => c is BaseEnemy);
 
         enemies = allEnemies
-                 .Cast<BaseEnemy>()
-                 .ToList();
+            .Cast<BaseEnemy>()
+            .ToList();
     }
 
     private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -108,8 +107,12 @@ public partial class Player : BaseUnit
                 return;
 
             var duplicateWeapon = (BaseWeapon)wieldedWeapon.Duplicate();
-            duplicateWeapon.Enemies  = enemies;
+            duplicateWeapon.Enemies = enemies;
             duplicateWeapon.Position = Position;
+            duplicateWeapon.OnDamageDealt += damage =>
+            {
+                if (battleScene is Battle battle) battle.DamageDealtInTimeFrame += damage;
+            };
 
             battleScene.AddChild(duplicateWeapon);
         }
@@ -193,7 +196,9 @@ public partial class Player : BaseUnit
             Velocity = direction * Speed;
         }
         else
+        {
             Velocity = Vector2.Zero;
+        }
 
         MoveAndSlide();
     }
