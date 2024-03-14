@@ -91,27 +91,16 @@ public partial class Player : BaseUnit
 
         if (WieldedWeapon is BaseWeapon wieldedWeapon && swingTimer >= wieldedWeapon.SwingCooldown)
         {
-            var target = FindTargetOrDefault();
-
-            if (target is null)
-                return;
-
             var duplicateWeapon = (BaseWeapon)wieldedWeapon.Duplicate();
-
+            duplicateWeapon.Enemies = enemies;
             duplicateWeapon.Position = Position;
             battleScene.AddChild(duplicateWeapon);
-
-            var direction = (target.Position - duplicateWeapon.Position).Normalized();
-            duplicateWeapon.ConstantForce = 300 * direction;
 
             swingTimer = 0;
         }
     }
 
-    private BaseEnemy FindTargetOrDefault()
-    {
-        return enemies?.Where(e => !e.IsDead).FirstOrDefault();
-    }
+   
 
     private void ResolveInvincibility(double delta)
     {
