@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0cu326xrrwqy"]
+[gd_scene load_steps=10 format=3 uid="uid://c0cu326xrrwqy"]
 
 [ext_resource type="Texture2D" uid="uid://cluta3sh7uc8p" path="res://Images/Background.png" id="1_tlb5t"]
 [ext_resource type="Script" path="res://Scripts/Ui/Battle.cs" id="1_vvbst"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://pcuwiud4m1ds" path="res://Scenes/pause_menu.tscn" id="3_4a0fk"]
 [ext_resource type="PackedScene" uid="uid://bv6vuoocw2txk" path="res://Scenes/Healthbar.tscn" id="7_xa6r3"]
 [ext_resource type="PackedScene" uid="uid://djdwd0cq1i12" path="res://Scenes/xp_display.tscn" id="8_byico"]
+[ext_resource type="PackedScene" uid="uid://byg24jevou41s" path="res://Scenes/wave_count_display.tscn" id="9_ng8op"]
 
 [node name="Battle" type="Node" node_paths=PackedStringArray("PauseMenu")]
 script = ExtResource("1_vvbst")
@@ -66,7 +67,13 @@ offset_bottom = -955.0
 Player = NodePath("../../Player")
 
 [node name="XpDisplay" parent="UI" instance=ExtResource("8_byico")]
-offset_left = 1695.0
-offset_top = 142.0
-offset_right = 1863.0
-offset_bottom = 222.0
+offset_left = 1677.0
+offset_top = 144.0
+offset_right = 1865.0
+offset_bottom = 224.0
+
+[node name="WaveCountDisplay" parent="UI" instance=ExtResource("9_ng8op")]
+offset_left = 794.0
+offset_top = 35.0
+offset_right = 1126.0
+offset_bottom = 177.0
