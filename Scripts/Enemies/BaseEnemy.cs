@@ -5,16 +5,15 @@ namespace MonkeSurvivor.Scripts.Enemies;
 public abstract partial class BaseEnemy : BaseUnit
 {
     private Player chasedPlayer;
-    private bool isAggressive;
+    private bool   isAggressive;
 
-    [Export] public float Speed { get; set; } = 300;
+    [Export]
+    public float Speed { get; set; } = 300;
 
-    [Export] public float DealtDamage { get; set; } = 10;
+    [Export]
+    public float DealtDamage { get; set; } = 10;
 
-    public override void _PhysicsProcess(double delta)
-    {
-        ChasePlayer();
-    }
+    public override void _PhysicsProcess(double delta) => ChasePlayer();
 
     private void ChasePlayer()
     {
@@ -34,8 +33,10 @@ public abstract partial class BaseEnemy : BaseUnit
             var collidedObject = (Node)collision.GetCollider();
 
             if (collidedObject.Name == nameof(Player))
+            {
                 if (!chasedPlayer.IsInvicible)
                     chasedPlayer.HealthCurrent -= DealtDamage;
+            }
         }
     }
 
