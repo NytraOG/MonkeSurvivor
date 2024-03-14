@@ -36,6 +36,11 @@ InvicibilityTimeMilliseconds = 500
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(74, 63)
 zoom = Vector2(1.2, 1.2)
+limit_left = 0
+limit_top = 0
+limit_right = 2910
+limit_bottom = 1630
+editor_draw_limits = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
