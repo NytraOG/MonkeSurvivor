@@ -19,7 +19,7 @@ public partial class Player : BaseUnit
     private float swingTimer;
     private TextureRect texture;
     private int xpCurrent;
-    public RigidBody2D WieldedWeapon { get; set; }
+    public StaticBody2D WieldedWeapon { get; set; }
 
     [Export] public float Speed { get; set; } = 100;
 
@@ -80,8 +80,7 @@ public partial class Player : BaseUnit
     public void SetMonkeyClass(BaseMonkey monkey)
     {
         //Apply Modifiers
-        var kek = monkey.StartingWeapon.Instantiate<RigidBody2D>();
-        WieldedWeapon = kek;
+        WieldedWeapon = monkey.StartingWeapon.Instantiate<StaticBody2D>();;
     }
 
     public override void _Process(double delta)

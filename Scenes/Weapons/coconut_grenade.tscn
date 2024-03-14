@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bre2lf0vrxxs2"]
+[gd_scene load_steps=6 format=3 uid="uid://bre2lf0vrxxs2"]
 
 [ext_resource type="Texture2D" uid="uid://ja0fekcerd5w" path="res://Images/Coconut.png" id="1_c7v6p"]
 [ext_resource type="Script" path="res://Scripts/Weapons/CoconutGrenade.cs" id="1_f8on5"]
@@ -9,13 +9,13 @@ radius = 20.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_xfbba"]
 radius = 102.176
 
-[node name="CoconutGrenade" type="RigidBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_6t1pa"]
+radius = 21.0
+
+[node name="CoconutGrenade" type="StaticBody2D"]
 position = Vector2(0, 1)
 collision_layer = 2
 collision_mask = 2
-mass = 0.01
-max_contacts_reported = 1
-contact_monitor = true
 script = ExtResource("1_f8on5")
 DamageOnHit = 13
 SwingCooldown = 0.2
@@ -37,11 +37,16 @@ texture = ExtResource("1_c7v6p")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_v8gyg")
+disabled = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="SplashArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SplashArea"]
 shape = SubResource("CircleShape2D_xfbba")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="ImpactArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ImpactArea"]
+shape = SubResource("CircleShape2D_6t1pa")

@@ -5,11 +5,14 @@ using MonkeSurvivor.Scripts.Enemies;
 
 namespace MonkeSurvivor.Scripts.Weapons;
 
-public abstract partial class BaseWeapon : RigidBody2D
+public abstract partial class BaseWeapon : StaticBody2D
 {
     public delegate void DamageDealtEventHandler(float totalDamage);
 
+    private Area2D impactArea;
+
     public DamageDealtEventHandler OnDamageDealt;
+    private Area2D splashArea;
     public IEnumerable<BaseEnemy> Enemies { get; set; }
 
     [Export] public int DamageOnHit { get; set; } = 10;
@@ -25,6 +28,19 @@ public abstract partial class BaseWeapon : RigidBody2D
     public override void _PhysicsProcess(double delta)
     {
         ExecuteBehaviour();
+
+        splashArea ??= GetNode<Area2D>("SplashArea");
+        impactArea ??= GetNode<Area2D>("ImpactArea");
+
+        var overlappingBodies = impactArea.GetOverlappingBodies()
+            .Where(b => b.Name != nameof(Player))
+            .ToList();
+
+        if (!overlappingBodies.Any()) return;
+
+        var luckyBastard = overlappingBodies.First();
+
+        ExecuteAttack(luckyBastard);
     }
 
     protected abstract void ExecuteBehaviour();
@@ -42,7 +58,7 @@ public abstract partial class BaseWeapon : RigidBody2D
         enemy.InstatiateFloatingCombatText((int)damage, enemy.Position);
     }
 
-    public void _on_body_entered(Node node)
+    private void ExecuteAttack(Node node)
     {
         if (node is not BaseEnemy enemy)
             return;
@@ -57,8 +73,7 @@ public abstract partial class BaseWeapon : RigidBody2D
 
     private void DealSplashDamageAround(BaseEnemy enemy)
     {
-        var areaNode = GetNode<Area2D>(nameof(Area2D));
-        var overlappingBodies = areaNode.GetOverlappingBodies().Where(b => b.Name != nameof(Player));
+        var overlappingBodies = splashArea.GetOverlappingBodies().Where(b => b.Name != nameof(Player));
 
         foreach (var hitEnemy in overlappingBodies.Where(b => b is BaseEnemy).Cast<BaseEnemy>())
             if (hitEnemy != enemy)
