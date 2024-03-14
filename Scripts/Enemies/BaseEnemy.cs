@@ -1,4 +1,6 @@
-﻿using Godot;
+﻿using System.Linq;
+using Godot;
+using MonkeSurvivor.Scripts.Ui;
 
 namespace MonkeSurvivor.Scripts.Enemies;
 
@@ -23,7 +25,6 @@ public abstract partial class BaseEnemy : BaseUnit
             return xpTokenScene;
         }
     }
-
     public override void _PhysicsProcess(double delta)
     {
         ChasePlayer();
@@ -31,9 +32,14 @@ public abstract partial class BaseEnemy : BaseUnit
 
     protected override void DieProperly()
     {
-        var xpToken = XpTokenScene.Instantiate<XpToken>();
-        xpToken.Position = Position;
-        GetTree().CurrentScene.AddChild(xpToken);
+        if(GetTree().CurrentScene is Battle battle)
+        {
+            var xpToken = XpTokenScene.Instantiate<XpToken>();
+            xpToken.Position = Position;
+            battle.AddChild(xpToken);
+
+            chasedPlayer.Enemies.Remove(this);
+        }
                 
         base.DieProperly();
     }

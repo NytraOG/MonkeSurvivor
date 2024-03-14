@@ -13,12 +13,12 @@ namespace MonkeSurvivor.Scripts;
 public partial class Player : BaseUnit
 {
     private Node battleScene;
-    private IEnumerable<BaseEnemy> enemies;
     private bool invincibilityRunning;
     private double millisecondsSinceLastHit;
     private float swingTimer;
     private TextureRect texture;
     private int xpCurrent;
+    public List<BaseEnemy> Enemies { get; set; }
     public StaticBody2D WieldedWeapon { get; set; }
 
     [Export] public float Speed { get; set; } = 100;
@@ -64,7 +64,7 @@ public partial class Player : BaseUnit
         var allChildren = battleScene.GetChildren();
         var allEnemies = allChildren.Where(c => c is BaseEnemy);
 
-        enemies = allEnemies
+        Enemies = allEnemies
             .Cast<BaseEnemy>()
             .ToList();
     }
@@ -80,7 +80,8 @@ public partial class Player : BaseUnit
     public void SetMonkeyClass(BaseMonkey monkey)
     {
         //Apply Modifiers
-        WieldedWeapon = monkey.StartingWeapon.Instantiate<StaticBody2D>();;
+        WieldedWeapon = monkey.StartingWeapon.Instantiate<StaticBody2D>();
+        ;
     }
 
     public override void _Process(double delta)
@@ -102,16 +103,17 @@ public partial class Player : BaseUnit
         {
             swingTimer = 0;
 
-            if (enemies is null || !enemies.Any())
+            if (Enemies is null || !Enemies.Any())
                 return;
 
             var duplicateWeapon = (BaseWeapon)wieldedWeapon.Duplicate();
-            duplicateWeapon.Enemies = enemies;
+            duplicateWeapon.Enemies = Enemies;
             duplicateWeapon.Position = Position;
             duplicateWeapon.OnDamageDealt += damage =>
             {
-                if (battleScene is Battle battle) battle.GetNode<CanvasLayer>("UI")
-                    .GetNode<DpsDisplay>("DpsDisplay").DamageDealtInTimeFrame += damage;
+                if (battleScene is Battle battle)
+                    battle.GetNode<CanvasLayer>("UI")
+                        .GetNode<DpsDisplay>("DpsDisplay").DamageDealtInTimeFrame += damage;
             };
 
             battleScene.AddChild(duplicateWeapon);
