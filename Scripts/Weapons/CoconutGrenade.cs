@@ -12,6 +12,7 @@ public partial class CoconutGrenade : BaseWeapon
             return;
 
         var direction = (target.Position - Position).Normalized();
-        var collisions = MoveAndCollide(direction * 300);
+
+        MoveAndCollide(direction * Speed);
     }
 }
