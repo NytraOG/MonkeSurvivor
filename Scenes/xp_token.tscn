@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bo3xk0bs4a7af" path="res://Images/XpToken.png" id="2_s1b7p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p8gvj"]
-radius = 66.0681
+radius = 178.101
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2rp1f"]
 radius = 14.0357
