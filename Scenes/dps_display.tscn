@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqr0tpx7cqojt"]
+
+[ext_resource type="Script" path="res://Scripts/Ui/DpsDisplay.cs" id="1_ijtm6"]
+
+[node name="DpsDisplay" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ijtm6")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="DpsValue" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(108, 70)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 6
+theme_override_font_sizes/font_size = 48
+text = "9999"
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 6
+theme_override_font_sizes/font_size = 48
+text = "DPS "

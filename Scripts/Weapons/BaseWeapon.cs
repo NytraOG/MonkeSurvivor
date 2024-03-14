@@ -19,7 +19,10 @@ public abstract partial class BaseWeapon : RigidBody2D
     public float SplashDamage { get; set; } = 0.75f;
 
     [Export]
-    public float Speed { get; set; } = 50;
+    public float Speed { get; set; } = 50;    [Export]
+    public int DpsCaptureFrameTimeMilliseconds { get; set; }
+
+    public int AccumulatedDamageInDpsCaptureFrame { get; set; }
 
     public override void _PhysicsProcess(double delta) => ExecuteBehaviour();
 

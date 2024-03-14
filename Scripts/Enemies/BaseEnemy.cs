@@ -46,7 +46,6 @@ public abstract partial class BaseEnemy : BaseUnit
         var direction = (chasedPlayer.Position - Position).Normalized();
         Velocity = Speed * direction;
 
-        LookAt(chasedPlayer.Position);
         MoveAndSlide();
 
         for (var i = 0; i < GetSlideCollisionCount(); i++)
