@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c0cu326xrrwqy"]
+[gd_scene load_steps=9 format=3 uid="uid://c0cu326xrrwqy"]
 
 [ext_resource type="Texture2D" uid="uid://cluta3sh7uc8p" path="res://Images/Background.png" id="1_tlb5t"]
 [ext_resource type="Script" path="res://Scripts/Ui/Battle.cs" id="1_vvbst"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c2wv5bys55p5a" path="res://Scenes/Enemies/spider.tscn" id="3_1lk7b"]
 [ext_resource type="PackedScene" uid="uid://pcuwiud4m1ds" path="res://Scenes/pause_menu.tscn" id="3_4a0fk"]
 [ext_resource type="PackedScene" uid="uid://bv6vuoocw2txk" path="res://Scenes/Healthbar.tscn" id="7_xa6r3"]
+[ext_resource type="PackedScene" uid="uid://djdwd0cq1i12" path="res://Scenes/xp_display.tscn" id="8_byico"]
 
 [node name="Battle" type="Node" node_paths=PackedStringArray("PauseMenu")]
 script = ExtResource("1_vvbst")
@@ -63,3 +64,9 @@ offset_top = 50.0
 offset_right = -55.0
 offset_bottom = -955.0
 Player = NodePath("../../Player")
+
+[node name="XpDisplay" parent="UI" instance=ExtResource("8_byico")]
+offset_left = 1695.0
+offset_top = 142.0
+offset_right = 1863.0
+offset_bottom = 222.0

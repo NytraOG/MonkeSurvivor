@@ -17,12 +17,18 @@ public partial class Player : BaseUnit
     private double                 millisecondsSinceLastHit;
     private float                  swingTimer;
     private TextureRect            texture;
+    private int xpCurrent;
     public  RigidBody2D            WieldedWeapon { get; set; }
 
     [Export]
     public float Speed { get; set; } = 100;
 
-    public int XpCurrent { get; set; }
+    public int XpCurrent
+    {
+        get => xpCurrent;
+        set => SetField(ref xpCurrent, value);
+    }
+
     public int XpSpent   { get; set; }
 
     [Export]
