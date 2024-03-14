@@ -40,7 +40,7 @@ public abstract partial class BaseEnemy : BaseUnit
 
     private void ChasePlayer()
     {
-        if (!isAggressive)
+        if (!isAggressive || chasedPlayer.IsDead)
             return;
 
         var direction = (chasedPlayer.Position - Position).Normalized();

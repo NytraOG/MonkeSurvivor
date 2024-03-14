@@ -111,7 +111,8 @@ public partial class Player : BaseUnit
             duplicateWeapon.Position = Position;
             duplicateWeapon.OnDamageDealt += damage =>
             {
-                if (battleScene is Battle battle) battle.DamageDealtInTimeFrame += damage;
+                if (battleScene is Battle battle) battle.GetNode<CanvasLayer>("UI")
+                    .GetNode<DpsDisplay>("DpsDisplay").DamageDealtInTimeFrame += damage;
             };
 
             battleScene.AddChild(duplicateWeapon);
