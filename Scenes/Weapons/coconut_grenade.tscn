@@ -17,8 +17,9 @@ mass = 0.01
 max_contacts_reported = 1
 contact_monitor = true
 script = ExtResource("1_f8on5")
-DamageOnHit = 15
+DamageOnHit = 13
 SwingCooldown = 1.0
+Speed = 30.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 8
