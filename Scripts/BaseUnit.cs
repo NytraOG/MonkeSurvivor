@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Godot;
+using MonkeSurvivor.Scripts.Ui;
 
 namespace MonkeSurvivor.Scripts;
 
@@ -22,6 +24,8 @@ public abstract partial class BaseUnit : CharacterBody2D,
 
     [Export]
     public float HealthMaximum { get; set; } = 100;
+
+    public PackedScene FloatingCombatText => ResourceLoader.Load<PackedScene>("res://Scenes/floating_combat_text.tscn");
 
     public bool                              IsDead => HealthCurrent <= 0;
     public event PropertyChangedEventHandler PropertyChanged;
@@ -57,5 +61,38 @@ public abstract partial class BaseUnit : CharacterBody2D,
         field = value;
         OnPropertyChanged(propertyName);
         return true;
+    }
+
+    public virtual void InstatiateFloatingCombatText(int receivedDamage)
+    {
+        try
+        {
+            var cameraUnposition           = GetViewport().GetCamera2D().Position;
+            var floatingCombatTextInstance = FloatingCombatText.Instantiate<FloatingCombatText>();
+
+            floatingCombatTextInstance.Display      = floatingCombatTextInstance.GetNode<Label>("Label");
+            floatingCombatTextInstance.Display.Text = receivedDamage <= 0 ? "Miss" : receivedDamage.ToString();
+            floatingCombatTextInstance.Damage       = receivedDamage;
+            floatingCombatTextInstance.Position     = cameraUnposition + new Vector2(0, -50);
+            floatingCombatTextInstance.Show();
+
+            // switch (hitResult)
+            // {
+            //     case HitResult.Good:
+            //         floatingCombatTextInstance.Display.AddThemeColorOverride("font_color", Colors.Orange);
+            //         floatingCombatTextInstance.Display.Text += "!";
+            //         break;
+            //     case HitResult.Critical:
+            //         floatingCombatTextInstance.Display.AddThemeColorOverride("font_color", Colors.Red);
+            //         floatingCombatTextInstance.Display.Text += "!!";
+            //         break;
+            // }
+
+            AddChild(floatingCombatTextInstance);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
     }
 }

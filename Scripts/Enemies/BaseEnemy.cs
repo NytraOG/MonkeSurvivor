@@ -35,9 +35,15 @@ public abstract partial class BaseEnemy : BaseUnit
             if (collidedObject.Name == nameof(Player))
             {
                 if (!chasedPlayer.IsInvicible)
-                    chasedPlayer.HealthCurrent -= DealtDamage;
+                    DealDamageToPlayer();
             }
         }
+    }
+
+    private void DealDamageToPlayer()
+    {
+        chasedPlayer.HealthCurrent -= DealtDamage;
+        chasedPlayer.InstatiateFloatingCombatText((int)DealtDamage);
     }
 
     public void StartChasingPlayer(Player player)
