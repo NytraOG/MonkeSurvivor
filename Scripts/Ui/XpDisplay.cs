@@ -8,7 +8,8 @@ public partial class XpDisplay : PanelContainer
 
     public override void _Ready()
     {
-        xpDisplayValue = GetNode<Label>("%XpValue");
+        xpDisplayValue      = GetNode<Label>("%XpValue");
+        xpDisplayValue.Text = "000";
 
         GetTree()
             .CurrentScene
@@ -34,9 +35,5 @@ public partial class XpDisplay : PanelContainer
                 xpDisplayValue.Text = result;
             }
         };
-    }
-
-    public override void _Process(double delta)
-    {
     }
 }

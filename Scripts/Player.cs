@@ -81,7 +81,6 @@ public partial class Player : BaseUnit
     {
         //Apply Modifiers
         WieldedWeapon = monkey.StartingWeapon.Instantiate<StaticBody2D>();
-        ;
     }
 
     public override void _Process(double delta)
