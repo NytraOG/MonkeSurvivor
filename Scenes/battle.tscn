@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c0cu326xrrwqy"]
+[gd_scene load_steps=12 format=3 uid="uid://c0cu326xrrwqy"]
 
 [ext_resource type="Texture2D" uid="uid://cluta3sh7uc8p" path="res://Images/Background.png" id="1_tlb5t"]
 [ext_resource type="Script" path="res://Scripts/Ui/Battle.cs" id="1_vvbst"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://djdwd0cq1i12" path="res://Scenes/xp_display.tscn" id="8_byico"]
 [ext_resource type="PackedScene" uid="uid://byg24jevou41s" path="res://Scenes/wave_count_display.tscn" id="9_ng8op"]
 [ext_resource type="PackedScene" uid="uid://dqr0tpx7cqojt" path="res://Scenes/dps_display.tscn" id="10_i1e05"]
+[ext_resource type="PackedScene" uid="uid://cxjdev6p4pck2" path="res://Scenes/wave_timer.tscn" id="11_sfg61"]
 
 [node name="Battle" type="Node" node_paths=PackedStringArray("PauseMenu")]
 script = ExtResource("1_vvbst")
@@ -23,6 +24,7 @@ offset_bottom = 40.0
 script = ExtResource("2_kwem6")
 UnitToSpawn = ExtResource("3_1lk7b")
 AmountPerWave = 10
+WaveCooldown = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="Background" type="TextureRect" parent="."]
@@ -85,3 +87,9 @@ offset_left = 1608.0
 offset_top = 243.0
 offset_right = 1864.0
 offset_bottom = 313.0
+
+[node name="WaveTimer" parent="UI" instance=ExtResource("11_sfg61")]
+offset_left = 893.0
+offset_top = 959.0
+offset_right = 995.0
+offset_bottom = 1071.0

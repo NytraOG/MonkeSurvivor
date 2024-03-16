@@ -12,7 +12,7 @@ public partial class Battle : Node
     public PauseMenu PauseMenu { get; set; }
 
     [Export]
-    public int WaveTimeSeconds { get; set; }
+    public WaveTimer WaveTimer { get; set; }
 
     public override void _Ready()
     {
@@ -22,6 +22,8 @@ public partial class Battle : Node
 
         player = GetNode<Player>(nameof(Player));
         player.SetMonkeyClass(monkey);
+
+        WaveTimer.OnWaveEnded += WaveTimerOnOnWaveEnded;
     }
 
     public override void _Process(double delta)
@@ -31,5 +33,13 @@ public partial class Battle : Node
             PauseMenu.Visible = true;
             GetTree().Paused  = true;
         }
+    }
+
+    private void WaveTimerOnOnWaveEnded() => EndRound();
+
+    private void EndRound()
+    {
+        //Show "Wave slaughtered" Label
+        //Show "Continue" Button
     }
 }

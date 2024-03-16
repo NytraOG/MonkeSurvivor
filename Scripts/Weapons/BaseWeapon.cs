@@ -32,6 +32,7 @@ public abstract partial class BaseWeapon : StaticBody2D
     public float Speed { get; set; } = 50;
 
     public float TotalDamageDealt { get; set; }
+    public int   EnemyCount       { get; set; }
 
     public override void _PhysicsProcess(double delta)
     {
@@ -64,11 +65,11 @@ public abstract partial class BaseWeapon : StaticBody2D
         if (eligebleTargets == null)
             return null;
 
-        var enemyCount   = eligebleTargets.Count();
+        EnemyCount = eligebleTargets.Count();
         var rng          = new Random();
-        var randomNumber = rng.Next(enemyCount);
+        var randomNumber = rng.Next(EnemyCount);
 
-        if (eligebleTargets.Count == enemyCount)
+        if (eligebleTargets.Count == EnemyCount)
             target = eligebleTargets[randomNumber];
 
         return target;
@@ -89,7 +90,7 @@ public abstract partial class BaseWeapon : StaticBody2D
 
         DealDamageTo(enemy);
 
-        if(DealsSplashDamag)
+        if (DealsSplashDamag)
             DealSplashDamageAround(enemy);
 
         OnDamageDealt?.Invoke(TotalDamageDealt);

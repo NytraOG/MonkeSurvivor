@@ -1,20 +1,24 @@
 ﻿using System.Linq;
 using Godot;
 using MonkeSurvivor.Scripts.Ui;
+using MonkeSurvivor.Scripts.Weapons;
 
 namespace MonkeSurvivor.Scripts.Enemies;
 
 public abstract partial class BaseEnemy : BaseUnit
 {
-    private Player chasedPlayer;
-    private bool isAggressive;
+    private Player      chasedPlayer;
+    private bool        isAggressive;
     private PackedScene xpTokenScene;
 
-    [Export] public float Speed { get; set; } = 300;
+    [Export]
+    public float Speed { get; set; } = 300;
 
-    [Export] public float DealtDamage { get; set; } = 10;
+    [Export]
+    public float DealtDamage { get; set; } = 10;
 
-    [Export] public int XpOnKill { get; set; } = 1;
+    [Export]
+    public int XpOnKill { get; set; } = 1;
 
     public PackedScene XpTokenScene
     {
@@ -25,22 +29,25 @@ public abstract partial class BaseEnemy : BaseUnit
             return xpTokenScene;
         }
     }
-    public override void _PhysicsProcess(double delta)
-    {
-        ChasePlayer();
-    }
+
+    public override void _PhysicsProcess(double delta) => ChasePlayer();
 
     protected override void DieProperly()
     {
-        if(GetTree().CurrentScene is Battle battle)
+        if (GetTree().CurrentScene is Battle battle)
         {
             var xpToken = XpTokenScene.Instantiate<XpToken>();
             xpToken.Position = Position;
             battle.AddChild(xpToken);
 
             chasedPlayer.Enemies.Remove(this);
+
+            // var kek = (CoconutGrenade)battle.GetChildren().FirstOrDefault(c => c is CoconutGrenade);
+            //
+            // if (kek is not null)
+            //     kek.EnemyCount--;
         }
-                
+
         base.DieProperly();
     }
 
@@ -61,8 +68,10 @@ public abstract partial class BaseEnemy : BaseUnit
             var collidedObject = (Node)collision.GetCollider();
 
             if (collidedObject.Name == nameof(Player))
+            {
                 if (!chasedPlayer.IsInvicible)
                     DealDamageToPlayer();
+            }
         }
     }
 

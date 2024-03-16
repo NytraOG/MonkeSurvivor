@@ -8,7 +8,7 @@ using MonkeSurvivor.Scripts.Ui;
 namespace MonkeSurvivor.Scripts;
 
 public abstract partial class BaseUnit : CharacterBody2D,
-    INotifyPropertyChanged
+                                         INotifyPropertyChanged
 {
     private float healthCurrent;
 
@@ -22,17 +22,18 @@ public abstract partial class BaseUnit : CharacterBody2D,
         }
     }
 
-    [Export] public float HealthMaximum { get; set; } = 100;
+    [Export]
+    public float HealthMaximum { get; set; } = 100;
 
-    public PackedScene FloatingCombatText => ResourceLoader.Load<PackedScene>("res://Scenes/floating_combat_text.tscn");
-    public bool IsDead => HealthCurrent <= 0;
+    public PackedScene                       FloatingCombatText => ResourceLoader.Load<PackedScene>("res://Scenes/floating_combat_text.tscn");
+    public bool                              IsDead             => HealthCurrent <= 0;
     public event PropertyChangedEventHandler PropertyChanged;
 
     public override void _Draw()
     {
         base._Draw();
 
-        HealthCurrent = HealthMaximum;
+        HealthCurrent   =  HealthMaximum;
         PropertyChanged += OnPropertyChanged;
     }
 
@@ -48,15 +49,9 @@ public abstract partial class BaseUnit : CharacterBody2D,
             DieProperly();
     }
 
-    protected virtual void DieProperly()
-    {
-        QueueFree();
-    }
+    protected virtual void DieProperly() => QueueFree();
 
-    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
+    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
     protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
     {
@@ -74,10 +69,10 @@ public abstract partial class BaseUnit : CharacterBody2D,
         {
             var floatingCombatTextInstance = FloatingCombatText.Instantiate<FloatingCombatText>();
 
-            floatingCombatTextInstance.Display = floatingCombatTextInstance.GetNode<Label>("Label");
+            floatingCombatTextInstance.Display      = floatingCombatTextInstance.GetNode<Label>("Label");
             floatingCombatTextInstance.Display.Text = receivedDamage <= 0 ? "Miss" : receivedDamage.ToString();
-            floatingCombatTextInstance.Damage = receivedDamage;
-            floatingCombatTextInstance.Position = spawnPosition;
+            floatingCombatTextInstance.Damage       = receivedDamage;
+            floatingCombatTextInstance.Position     = spawnPosition;
             floatingCombatTextInstance.Show();
 
             // switch (hitResult)
@@ -93,8 +88,8 @@ public abstract partial class BaseUnit : CharacterBody2D,
             // }
 
             GetTree()
-                .CurrentScene
-                .AddChild(floatingCombatTextInstance);
+                   .CurrentScene
+                   .AddChild(floatingCombatTextInstance);
         }
         catch (Exception e)
         {

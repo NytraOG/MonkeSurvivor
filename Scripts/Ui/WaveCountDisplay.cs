@@ -12,8 +12,5 @@ public partial class WaveCountDisplay : PanelContainer
         SetWaveCount(1);
     }
 
-    public void SetWaveCount(int value)
-    {
-        waveCountDisplayLabel.Text = value.ToString();
-    }
+    public void SetWaveCount(int value) => waveCountDisplayLabel.Text = value.ToString();
 }

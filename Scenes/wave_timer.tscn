@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxjdev6p4pck2"]
+
+[ext_resource type="Script" path="res://Scripts/Ui/WaveTimer.cs" id="1_knl02"]
+
+[node name="WaveTimer" type="PanelContainer"]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_knl02")
+WaveTimeSeconds = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 6
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/outline_size = 15
+theme_override_constants/shadow_outline_size = 9
+theme_override_font_sizes/font_size = 72
+text = "99"

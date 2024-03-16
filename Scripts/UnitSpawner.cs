@@ -1,4 +1,5 @@
 using Godot;
+using MonkeSurvivor.Scripts.Enemies;
 
 namespace MonkeSurvivor.Scripts;
 
@@ -23,7 +24,7 @@ public partial class UnitSpawner : Control
     [Export]
     public float WaveCooldownModifier { get; set; } = 1;
 
-    private float                       ModifiedCooldown => WaveCooldown * WaveCooldownModifier;
+    private float                        ModifiedCooldown => WaveCooldown * WaveCooldownModifier;
     public event WaveSpawnedEventHandler WaveSpawned;
 
     public override void _Ready()
@@ -38,11 +39,11 @@ public partial class UnitSpawner : Control
     public override void _Process(double delta)
     {
         if ((waveTimer += delta) >= ModifiedCooldown)
-            SpawnWave<Enemies.Spider>();
+            SpawnWave<Spider>();
     }
 
     private void SpawnWave<T>()
-            where T : Enemies.BaseEnemy
+            where T : BaseEnemy
     {
         for (var i = 0; i < AmountPerWave; i++)
             SpawnUnit<T>(i);
@@ -53,7 +54,7 @@ public partial class UnitSpawner : Control
     }
 
     private void SpawnUnit<T>(int offset)
-            where T : Enemies.BaseEnemy
+            where T : BaseEnemy
     {
         var enemyInstance = UnitToSpawn.Instantiate<T>();
 
