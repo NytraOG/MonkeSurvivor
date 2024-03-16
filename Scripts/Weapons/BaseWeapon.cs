@@ -22,6 +22,9 @@ public abstract partial class BaseWeapon : StaticBody2D
     [Export]
     public float SwingCooldown { get; set; }
 
+    [Export]
+    public bool DealsSplashDamag { get; set; }
+
     [Export(PropertyHint.Range, "0, 1")]
     public float SplashDamage { get; set; } = 0.75f;
 
@@ -65,7 +68,7 @@ public abstract partial class BaseWeapon : StaticBody2D
         var rng          = new Random();
         var randomNumber = rng.Next(enemyCount);
 
-        if(eligebleTargets.Count == enemyCount)
+        if (eligebleTargets.Count == enemyCount)
             target = eligebleTargets[randomNumber];
 
         return target;
@@ -85,7 +88,9 @@ public abstract partial class BaseWeapon : StaticBody2D
             return;
 
         DealDamageTo(enemy);
-        DealSplashDamageAround(enemy);
+
+        if(DealsSplashDamag)
+            DealSplashDamageAround(enemy);
 
         OnDamageDealt?.Invoke(TotalDamageDealt);
 

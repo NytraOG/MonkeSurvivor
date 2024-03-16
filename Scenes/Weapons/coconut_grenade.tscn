@@ -19,6 +19,7 @@ collision_mask = 2
 script = ExtResource("1_f8on5")
 DamageOnHit = 13
 SwingCooldown = 0.2
+DealsSplashDamag = true
 Speed = 30.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
