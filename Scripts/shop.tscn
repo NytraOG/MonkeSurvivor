@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://clg0ty083tgn7"]
+[gd_scene load_steps=4 format=3 uid="uid://clg0ty083tgn7"]
 
 [ext_resource type="Script" path="res://Scenes/Shop.cs" id="1_i2oyi"]
 [ext_resource type="Texture2D" uid="uid://cx5mg032n4geg" path="res://Images/ShopBackground.png" id="2_sktvq"]
+[ext_resource type="PackedScene" uid="uid://dbdaxolwu0uyn" path="res://Scenes/start_wave_button.tscn" id="3_kjhhr"]
 
 [node name="Shop" type="Node"]
 script = ExtResource("1_i2oyi")
@@ -11,3 +12,9 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 texture = ExtResource("2_sktvq")
 expand_mode = 1
+
+[node name="StartWaveButton" parent="." instance=ExtResource("3_kjhhr")]
+offset_left = 1620.0
+offset_top = 985.0
+offset_right = 1920.0
+offset_bottom = 1080.0

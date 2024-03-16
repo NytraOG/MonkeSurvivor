@@ -1,10 +1,19 @@
 using Godot;
+using MonkeSurvivor.Scripts.Utils;
 
 namespace MonkeSurvivor.Scenes;
 
 public partial class Shop : Node
 {
-    public override void _Ready() { }
+    private PackedScene BattleScene => ResourceLoader.Load<PackedScene>("res://Scenes/battle.tscn");
+
+    public override void _Ready() => GetTree().Paused = false;
 
     public override void _Process(double delta) { }
+
+    public void _on_button_pressed()
+    {
+        StaticMemory.StaticString = "blblblblblblbl";
+        GetTree().ChangeSceneToPacked(BattleScene);
+    }
 }

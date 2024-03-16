@@ -1,4 +1,5 @@
 using Godot;
+using MonkeSurvivor.Scripts.Utils;
 
 namespace MonkeSurvivor.Scripts.Ui;
 
@@ -10,5 +11,9 @@ public partial class EndOfWavePanel : PanelContainer
 
     public override void _Process(double delta) { }
 
-    public void _on_button_pressed() => GetTree().ChangeSceneToPacked(PostBattleScene);
+    public void _on_button_pressed()
+    {
+        StaticMemory.StaticString = "hihi";
+        GetTree().ChangeSceneToPacked(PostBattleScene);
+    }
 }
