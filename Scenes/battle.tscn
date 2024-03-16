@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c0cu326xrrwqy"]
+[gd_scene load_steps=13 format=3 uid="uid://c0cu326xrrwqy"]
 
 [ext_resource type="Texture2D" uid="uid://cluta3sh7uc8p" path="res://Images/Background.png" id="1_tlb5t"]
 [ext_resource type="Script" path="res://Scripts/Ui/Battle.cs" id="1_vvbst"]
@@ -11,10 +11,13 @@
 [ext_resource type="PackedScene" uid="uid://byg24jevou41s" path="res://Scenes/wave_count_display.tscn" id="9_ng8op"]
 [ext_resource type="PackedScene" uid="uid://dqr0tpx7cqojt" path="res://Scenes/dps_display.tscn" id="10_i1e05"]
 [ext_resource type="PackedScene" uid="uid://cxjdev6p4pck2" path="res://Scenes/wave_timer.tscn" id="11_sfg61"]
+[ext_resource type="PackedScene" uid="uid://o2krirg1072s" path="res://Scenes/end_of_wave_panel.tscn" id="12_etiq2"]
 
-[node name="Battle" type="Node" node_paths=PackedStringArray("PauseMenu")]
+[node name="Battle" type="Node" node_paths=PackedStringArray("PauseMenu", "WaveTimer", "EndOfWavePanel")]
 script = ExtResource("1_vvbst")
 PauseMenu = NodePath("UI/PauseMenu")
+WaveTimer = NodePath("UI/WaveTimer")
+EndOfWavePanel = NodePath("UI/EndOfWavePanel")
 
 [node name="UnitSpawner" type="Control" parent="."]
 layout_mode = 3
@@ -34,7 +37,7 @@ texture = ExtResource("1_tlb5t")
 metadata/_edit_use_anchors_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_cqqse")]
-position = Vector2(809, 741)
+position = Vector2(960, 741)
 scale = Vector2(0.99888, 1)
 Speed = 500.0
 InvicibilityTimeMilliseconds = 500
@@ -89,7 +92,14 @@ offset_right = 1864.0
 offset_bottom = 313.0
 
 [node name="WaveTimer" parent="UI" instance=ExtResource("11_sfg61")]
-offset_left = 893.0
+offset_left = 909.0
 offset_top = 959.0
-offset_right = 995.0
+offset_right = 1011.0
 offset_bottom = 1071.0
+
+[node name="EndOfWavePanel" parent="UI" instance=ExtResource("12_etiq2")]
+visible = false
+offset_left = 379.0
+offset_top = 420.0
+offset_right = 1540.0
+offset_bottom = 739.0

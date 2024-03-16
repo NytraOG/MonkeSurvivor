@@ -14,6 +14,9 @@ public partial class Battle : Node
     [Export]
     public WaveTimer WaveTimer { get; set; }
 
+    [Export]
+    public EndOfWavePanel EndOfWavePanel { get; set; }
+
     public override void _Ready()
     {
         base._Ready();
@@ -39,7 +42,7 @@ public partial class Battle : Node
 
     private void EndRound()
     {
-        //Show "Wave slaughtered" Label
-        //Show "Continue" Button
+        EndOfWavePanel.Visible = true;
+        GetTree().Paused       = true;
     }
 }

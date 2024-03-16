@@ -41,11 +41,6 @@ public abstract partial class BaseEnemy : BaseUnit
             battle.AddChild(xpToken);
 
             chasedPlayer.Enemies.Remove(this);
-
-            // var kek = (CoconutGrenade)battle.GetChildren().FirstOrDefault(c => c is CoconutGrenade);
-            //
-            // if (kek is not null)
-            //     kek.EnemyCount--;
         }
 
         base.DieProperly();
