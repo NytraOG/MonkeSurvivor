@@ -12,11 +12,11 @@ public partial class XpToken : StaticBody2D
     public int GrantedXp { get; set; } = 1;
 
     [Export]
-    public float Speed { get; set; } = 20;
+    public float Speed { get; set; } = 10;
 
     public override void _Ready() { }
 
-    public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
     {
         attractArea    ??= GetNode<Area2D>("AttractArea");
         collectionArea ??= GetNode<Area2D>("CollectionArea");

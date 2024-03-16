@@ -19,7 +19,7 @@ public partial class UnitSpawner : Control
     public int AmountPerWave { get; set; } = 5;
 
     [Export]
-    public int WaveCooldown { get; set; } = 5;
+    public float WaveCooldown { get; set; } = 5;
 
     [Export]
     public float WaveCooldownModifier { get; set; } = 1;

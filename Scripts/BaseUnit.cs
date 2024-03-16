@@ -63,7 +63,7 @@ public abstract partial class BaseUnit : CharacterBody2D,
         return true;
     }
 
-    public virtual void InstatiateFloatingCombatText(int receivedDamage, Vector2 spawnPosition)
+    public virtual void InstatiateFloatingCombatText(int receivedDamage, Vector2 spawnPosition, bool isCritical)
     {
         try
         {
@@ -75,17 +75,11 @@ public abstract partial class BaseUnit : CharacterBody2D,
             floatingCombatTextInstance.Position     = spawnPosition;
             floatingCombatTextInstance.Show();
 
-            // switch (hitResult)
-            // {
-            //     case HitResult.Good:
-            //         floatingCombatTextInstance.Display.AddThemeColorOverride("font_color", Colors.Orange);
-            //         floatingCombatTextInstance.Display.Text += "!";
-            //         break;
-            //     case HitResult.Critical:
-            //         floatingCombatTextInstance.Display.AddThemeColorOverride("font_color", Colors.Red);
-            //         floatingCombatTextInstance.Display.Text += "!!";
-            //         break;
-            // }
+            if (isCritical)
+            {
+                floatingCombatTextInstance.Display.AddThemeColorOverride("font_color", Colors.DarkOrange);
+                floatingCombatTextInstance.Display.AddThemeFontSizeOverride("font_size", 42);
+            }
 
             GetTree()
                    .CurrentScene

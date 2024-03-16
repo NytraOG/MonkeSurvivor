@@ -10,6 +10,8 @@ height = 63.9855
 [node name="Player" type="CharacterBody2D"]
 self_modulate = Color(1, 1, 1, 0)
 script = ExtResource("1_dxo5q")
+CriticalHitChance = 60.0
+CriticalHitDamage = 200.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(128, 128)

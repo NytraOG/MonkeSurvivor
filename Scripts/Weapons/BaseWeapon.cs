@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using MonkeSurvivor.Scripts.Enemies;
+using MonkeSurvivor.Scripts.Utils;
 
 namespace MonkeSurvivor.Scripts.Weapons;
 
@@ -12,12 +13,35 @@ public abstract partial class BaseWeapon : StaticBody2D
 
     private Area2D                  impactArea;
     public  DamageDealtEventHandler OnDamageDealt;
+    private Player                  player;
+    private Random                  rng;
     private Area2D                  splashArea;
     private BaseEnemy               target;
     public  IEnumerable<BaseEnemy>  Enemies { get; set; }
 
     [Export]
     public int DamageOnHit { get; set; } = 10;
+
+    public HitResult FinalDamage
+    {
+        get
+        {
+            rng ??= new Random();
+
+            player ??= GetTree()
+                      .CurrentScene
+                      .GetNode<Player>(nameof(Player));
+
+            var roll   = rng.Next(0, 101);
+            var isCrit = player.CriticalHitChance >= roll;
+
+            var dealtDamage = isCrit ?
+                    DamageOnHit * (1 + player.CriticalHitDamage / 100) :
+                    DamageOnHit;
+
+            return new HitResult(dealtDamage, isCrit);
+        }
+    }
 
     [Export]
     public float SwingCooldown { get; set; }
@@ -65,8 +89,8 @@ public abstract partial class BaseWeapon : StaticBody2D
         if (eligebleTargets == null)
             return null;
 
-        EnemyCount = eligebleTargets.Count();
-        var rng          = new Random();
+        EnemyCount =   eligebleTargets.Count();
+        rng        ??= new Random();
         var randomNumber = rng.Next(EnemyCount);
 
         if (eligebleTargets.Count == EnemyCount)
@@ -77,10 +101,10 @@ public abstract partial class BaseWeapon : StaticBody2D
 
     public void DealDamageTo(BaseEnemy enemy, float multiplier = 1)
     {
-        var damage = DamageOnHit * multiplier;
+        var damage = FinalDamage.DamageDealt * multiplier;
         TotalDamageDealt    += damage;
         enemy.HealthCurrent -= damage;
-        enemy.InstatiateFloatingCombatText((int)damage, enemy.Position);
+        enemy.InstatiateFloatingCombatText((int)damage, enemy.Position, FinalDamage.IsCritical);
     }
 
     private void ExecuteAttack(Node node)

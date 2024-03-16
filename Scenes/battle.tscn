@@ -27,7 +27,7 @@ offset_bottom = 40.0
 script = ExtResource("2_kwem6")
 UnitToSpawn = ExtResource("3_1lk7b")
 AmountPerWave = 10
-WaveCooldown = 3
+WaveCooldown = 2.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Background" type="TextureRect" parent="."]
@@ -96,6 +96,7 @@ offset_left = 909.0
 offset_top = 959.0
 offset_right = 1011.0
 offset_bottom = 1071.0
+WaveTimeSeconds = 20
 
 [node name="EndOfWavePanel" parent="UI" instance=ExtResource("12_etiq2")]
 visible = false

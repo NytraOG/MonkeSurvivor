@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://clg0ty083tgn7"]
+
+[ext_resource type="Script" path="res://Scenes/Shop.cs" id="1_i2oyi"]
+[ext_resource type="Texture2D" uid="uid://cx5mg032n4geg" path="res://Images/ShopBackground.png" id="2_sktvq"]
+
+[node name="Shop" type="Node"]
+script = ExtResource("1_i2oyi")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_sktvq")
+expand_mode = 1

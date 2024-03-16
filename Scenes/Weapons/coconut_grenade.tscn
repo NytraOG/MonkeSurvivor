@@ -18,7 +18,7 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_f8on5")
 DamageOnHit = 13
-SwingCooldown = 0.2
+SwingCooldown = 0.34
 DealsSplashDamag = true
 Speed = 30.0
 

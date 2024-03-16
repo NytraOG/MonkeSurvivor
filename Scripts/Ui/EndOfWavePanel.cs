@@ -4,7 +4,7 @@ namespace MonkeSurvivor.Scripts.Ui;
 
 public partial class EndOfWavePanel : PanelContainer
 {
-    private PackedScene PostBattleScene => ResourceLoader.Load<PackedScene>("res://Scenes/player.tscn");
+    private PackedScene PostBattleScene => ResourceLoader.Load<PackedScene>("res://Scripts/shop.tscn");
 
     public override void _Ready() { }
 
