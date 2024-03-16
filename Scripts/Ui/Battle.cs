@@ -5,14 +5,23 @@ namespace MonkeSurvivor.Scripts.Ui;
 
 public partial class Battle : Node
 {
-    [Export] public PauseMenu PauseMenu { get; set; }
+    private Player      player;
+    public  PackedScene MonkeyType => ResourceLoader.Load<PackedScene>("res://Scenes/Classes/orangutan.tscn");
+
+    [Export]
+    public PauseMenu PauseMenu { get; set; }
+
+    [Export]
+    public int WaveTimeSeconds { get; set; }
 
     public override void _Ready()
     {
         base._Ready();
 
-        var orangutan = new Orangutan();
-        GetNode<Player>(nameof(Player)).SetMonkeyClass(orangutan);
+        var monkey = MonkeyType.Instantiate<BaseMonkey>();
+
+        player = GetNode<Player>(nameof(Player));
+        player.SetMonkeyClass(monkey);
     }
 
     public override void _Process(double delta)
@@ -20,7 +29,7 @@ public partial class Battle : Node
         if (Input.IsKeyPressed(Key.Escape))
         {
             PauseMenu.Visible = true;
-            GetTree().Paused = true;
+            GetTree().Paused  = true;
         }
     }
 }
