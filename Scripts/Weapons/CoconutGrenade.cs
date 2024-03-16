@@ -8,7 +8,7 @@ public partial class CoconutGrenade : BaseWeapon
     {
         var target = FindTargetOrDefault();
 
-        if (target is null)
+        if (target is null || target.IsDead)
             return;
 
         var direction = (target.Position - Position).Normalized();
