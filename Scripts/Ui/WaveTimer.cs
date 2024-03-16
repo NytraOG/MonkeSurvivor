@@ -28,5 +28,7 @@ public partial class WaveTimer : PanelContainer
             Visible     = false;
             OnWaveEnded = null;
         }
+
+        //Todo: Die letzten 5 Sekunden die Zahlen groß und Rot machen
     }
 }

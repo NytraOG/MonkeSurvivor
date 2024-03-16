@@ -33,3 +33,5 @@ text = "Wave Slaughtered!"
 layout_mode = 2
 theme_override_font_sizes/font_size = 72
 text = "Continue"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
