@@ -13,7 +13,8 @@ public partial class EndOfWavePanel : PanelContainer
 
     public void _on_button_pressed()
     {
-        StaticMemory.StaticString = "hihi";
+        StaticMemory.WaveNumber++;
+
         GetTree().ChangeSceneToPacked(PostBattleScene);
     }
 }
