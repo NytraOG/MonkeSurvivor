@@ -23,7 +23,31 @@ public abstract partial class BaseUnit : CharacterBody2D,
     }
 
     [Export]
-    public float HealthMaximum { get; set; } = 100;
+    public float HealthMaximum { get; set; } = 12;
+
+    [Export]
+    public float IncreasedHealth { get; set; }
+
+    [Export]
+    public float DecreasedHealth { get; set; }
+
+    [Export]
+    public float IncreasedHealthregeneration { get; set; }
+
+    [Export]
+    public float DecreasedHealthregeneration { get; set; }
+
+    [Export]
+    public float IncreasedDamage { get; set; }
+
+    [Export]
+    public float DecreasedDamage { get; set; }
+
+    [Export]
+    public float IncreasedAttackspeed { get; set; }
+
+    [Export]
+    public float DecreasedAttackspeed { get; set; }
 
     public PackedScene                       FloatingCombatText => ResourceLoader.Load<PackedScene>("res://Scenes/floating_combat_text.tscn");
     public bool                              IsDead             => HealthCurrent <= 0;
