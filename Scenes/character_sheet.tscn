@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b02nultf4hf0k"]
+[gd_scene load_steps=5 format=3 uid="uid://b02nultf4hf0k"]
 
 [ext_resource type="Script" path="res://Scripts/Ui/CharacterSheet.cs" id="1_gp176"]
 [ext_resource type="Texture2D" uid="uid://bim4hoecoiyq" path="res://Images/Mini_add.png" id="2_f7vum"]
 [ext_resource type="Texture2D" uid="uid://dbloiysgyga3b" path="res://Images/Mini_add_t.png" id="3_6wfv6"]
+[ext_resource type="Texture2D" uid="uid://c3ggvs77g78cu" path="res://Images/Mini_add_l.png" id="4_m72he"]
 
 [node name="CharacterSheet" type="PanelContainer"]
 custom_minimum_size = Vector2(625, 0)
@@ -46,6 +47,7 @@ custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 texture_normal = ExtResource("2_f7vum")
 texture_pressed = ExtResource("3_6wfv6")
+texture_hover = ExtResource("4_m72he")
 texture_disabled = ExtResource("3_6wfv6")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
@@ -74,6 +76,7 @@ custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 texture_normal = ExtResource("2_f7vum")
 texture_pressed = ExtResource("3_6wfv6")
+texture_hover = ExtResource("4_m72he")
 texture_disabled = ExtResource("3_6wfv6")
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
@@ -102,6 +105,7 @@ custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 texture_normal = ExtResource("2_f7vum")
 texture_pressed = ExtResource("3_6wfv6")
+texture_hover = ExtResource("4_m72he")
 texture_disabled = ExtResource("3_6wfv6")
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
@@ -132,6 +136,7 @@ size_flags_horizontal = 6
 size_flags_vertical = 4
 texture_normal = ExtResource("2_f7vum")
 texture_pressed = ExtResource("3_6wfv6")
+texture_hover = ExtResource("4_m72he")
 texture_disabled = ExtResource("3_6wfv6")
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/RaiseAttributeButton" to="." method="_on_Vigor_Raised"]
