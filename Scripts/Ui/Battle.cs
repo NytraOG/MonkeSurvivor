@@ -1,5 +1,6 @@
 using Godot;
 using MonkeSurvivor.Scripts.Monkeys;
+using MonkeSurvivor.Scripts.Utils;
 
 namespace MonkeSurvivor.Scripts.Ui;
 
@@ -25,6 +26,11 @@ public partial class Battle : Node
 
         player = GetNode<Player>(nameof(Player));
         player.SetMonkeyClass(monkey);
+
+        player.Vigor        = StaticMemory.Vigor;
+        player.Strength     = StaticMemory.Strength;
+        player.Dexterity    = StaticMemory.Dexterity;
+        player.Intelligence = StaticMemory.Intelligence;
 
         WaveTimer.OnWaveEnded += WaveTimerOnOnWaveEnded;
     }

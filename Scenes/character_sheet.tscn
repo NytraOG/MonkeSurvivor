@@ -1,0 +1,140 @@
+[gd_scene load_steps=4 format=3 uid="uid://b02nultf4hf0k"]
+
+[ext_resource type="Script" path="res://Scripts/Ui/CharacterSheet.cs" id="1_gp176"]
+[ext_resource type="Texture2D" uid="uid://bim4hoecoiyq" path="res://Images/Mini_add.png" id="2_f7vum"]
+[ext_resource type="Texture2D" uid="uid://dbloiysgyga3b" path="res://Images/Mini_add_t.png" id="3_6wfv6"]
+
+[node name="CharacterSheet" type="PanelContainer"]
+custom_minimum_size = Vector2(625, 0)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_gp176")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 70
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(214, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 38
+text = "Vigor"
+
+[node name="TextureButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+
+[node name="VigorValue" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 38
+text = "99"
+
+[node name="RaiseAttributeButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+texture_normal = ExtResource("2_f7vum")
+texture_pressed = ExtResource("3_6wfv6")
+texture_disabled = ExtResource("3_6wfv6")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 70
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(214, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 38
+text = "Strength"
+
+[node name="TextureButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+
+[node name="StrengthValue" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 38
+text = "99"
+
+[node name="RaiseAttributeButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+texture_normal = ExtResource("2_f7vum")
+texture_pressed = ExtResource("3_6wfv6")
+texture_disabled = ExtResource("3_6wfv6")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 70
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(214, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 38
+text = "Dexterity"
+
+[node name="TextureButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+
+[node name="DexterityValue" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 38
+text = "99"
+
+[node name="RaiseAttributeButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+texture_normal = ExtResource("2_f7vum")
+texture_pressed = ExtResource("3_6wfv6")
+texture_disabled = ExtResource("3_6wfv6")
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 70
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 38
+text = "Intelligence
+"
+
+[node name="TextureButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+
+[node name="IntelligenceValue" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 38
+text = "99"
+
+[node name="RaiseAttributeButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture_normal = ExtResource("2_f7vum")
+texture_pressed = ExtResource("3_6wfv6")
+texture_disabled = ExtResource("3_6wfv6")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/RaiseAttributeButton" to="." method="_on_Vigor_Raised"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/RaiseAttributeButton" to="." method="_on_Strength_Raised"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer3/RaiseAttributeButton" to="." method="_on_Dexterity_Raised"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer4/RaiseAttributeButton" to="." method="_on_Intelligence_Raised"]

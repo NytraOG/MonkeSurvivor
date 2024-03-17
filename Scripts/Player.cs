@@ -23,6 +23,18 @@ public partial class Player : BaseUnit
     public  StaticBody2D    WieldedWeapon { get; set; }
 
     [Export]
+    public int Vigor { get; set; } = 1;
+
+    [Export]
+    public int Strength { get; set; } = 1;
+
+    [Export]
+    public int Dexterity { get; set; } = 1;
+
+    [Export]
+    public int Intelligence { get; set; } = 1;
+
+    [Export]
     public float Speed { get; set; } = 100;
 
     [Export(PropertyHint.Range, "1, 100")]
@@ -64,8 +76,8 @@ public partial class Player : BaseUnit
         var unitSpawner = battleScene.GetNode<UnitSpawner>(nameof(UnitSpawner));
         unitSpawner.WaveSpawned += UnitSpawnerOnWaveSpawned;
 
-        texture                 =  GetNode<TextureRect>(nameof(TextureRect));
-        XpCurrent               =  StaticMemory.HeldXp;
+        texture   = GetNode<TextureRect>(nameof(TextureRect));
+        XpCurrent = StaticMemory.HeldXp;
 
         PropertyChanged += OnPropertyChanged;
     }

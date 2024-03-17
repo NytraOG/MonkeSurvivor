@@ -14,8 +14,11 @@ public partial class EndOfWavePanel : PanelContainer
 
     public void _on_button_pressed()
     {
+        StaticMemory.Vigor        = player.Vigor;
+        StaticMemory.Strength     = player.Strength;
+        StaticMemory.Dexterity    = player.Dexterity;
+        StaticMemory.Intelligence = player.Intelligence;
         StaticMemory.WaveNumber++;
-        StaticMemory.HeldXp = player.XpCurrent;
 
         GetTree().ChangeSceneToPacked(PostBattleScene);
     }

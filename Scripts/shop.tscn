@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://clg0ty083tgn7"]
+[gd_scene load_steps=5 format=3 uid="uid://clg0ty083tgn7"]
 
 [ext_resource type="Script" path="res://Scenes/Shop.cs" id="1_i2oyi"]
 [ext_resource type="Texture2D" uid="uid://cx5mg032n4geg" path="res://Images/ShopBackground.png" id="2_sktvq"]
 [ext_resource type="PackedScene" uid="uid://dbdaxolwu0uyn" path="res://Scenes/start_wave_button.tscn" id="3_kjhhr"]
+[ext_resource type="PackedScene" uid="uid://b02nultf4hf0k" path="res://Scenes/character_sheet.tscn" id="4_axdm2"]
 
 [node name="Shop" type="Node"]
 script = ExtResource("1_i2oyi")
@@ -16,7 +17,27 @@ expand_mode = 1
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="StartWaveButton" parent="UI" instance=ExtResource("3_kjhhr")]
-offset_left = 1620.0
-offset_top = 985.0
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -95.0
+offset_right = 150.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="CharacterSheet" parent="UI" instance=ExtResource("4_axdm2")]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -809.0
+offset_top = -538.0
+offset_right = 0.0
+offset_bottom = 538.0
+grow_horizontal = 0
+grow_vertical = 2
