@@ -27,7 +27,7 @@ offset_bottom = 40.0
 script = ExtResource("2_kwem6")
 UnitToSpawn = ExtResource("3_1lk7b")
 AmountPerWave = 10
-WaveCooldown = 2.0
+WaveCooldown = 0.3
 metadata/_edit_use_anchors_ = true
 
 [node name="Background" type="TextureRect" parent="."]
@@ -40,7 +40,7 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(960, 741)
 scale = Vector2(0.99888, 1)
 Speed = 500.0
-InvicibilityTimeMilliseconds = 500
+HealthMaximum = 100.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(74, 63)

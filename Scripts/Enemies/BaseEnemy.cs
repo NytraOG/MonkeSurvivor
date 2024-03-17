@@ -1,7 +1,5 @@
-﻿using System.Linq;
-using Godot;
+﻿using Godot;
 using MonkeSurvivor.Scripts.Ui;
-using MonkeSurvivor.Scripts.Weapons;
 
 namespace MonkeSurvivor.Scripts.Enemies;
 
@@ -30,8 +28,6 @@ public abstract partial class BaseEnemy : BaseUnit
         }
     }
 
-    public override void _PhysicsProcess(double delta) => ChasePlayer();
-
     protected override void DieProperly()
     {
         if (GetTree().CurrentScene is Battle battle)
@@ -40,13 +36,16 @@ public abstract partial class BaseEnemy : BaseUnit
             xpToken.Position = Position;
             battle.AddChild(xpToken);
 
+            var unitspawner = battle.GetNode<UnitSpawner>(nameof(UnitSpawner));
+            unitspawner.SpawnedEnemies.Remove(this);
+
             chasedPlayer.Enemies.Remove(this);
         }
 
         base.DieProperly();
     }
 
-    private void ChasePlayer()
+    public void ChasePlayer()
     {
         if (!isAggressive || chasedPlayer.IsDead)
             return;
@@ -58,8 +57,7 @@ public abstract partial class BaseEnemy : BaseUnit
 
         for (var i = 0; i < GetSlideCollisionCount(); i++)
         {
-            var collision = GetSlideCollision(i);
-
+            var collision      = GetSlideCollision(i);
             var collidedObject = (Node)collision.GetCollider();
 
             if (collidedObject.Name == nameof(Player))

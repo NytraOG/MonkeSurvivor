@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 using MonkeSurvivor.Scripts.Enemies;
 
@@ -7,10 +8,11 @@ public partial class UnitSpawner : Control
 {
     public delegate void WaveSpawnedEventHandler();
 
-    private TextureRect background;
-    private Node        battleScene;
-    private Player      player;
-    private double      waveTimer;
+    private TextureRect     background;
+    private Node            battleScene;
+    private Player          player;
+    private double          waveTimer;
+    public  List<BaseEnemy> SpawnedEnemies { get; set; } = new();
 
     [Export]
     public PackedScene UnitToSpawn { get; set; }
@@ -36,6 +38,12 @@ public partial class UnitSpawner : Control
         background  = battleScene.GetNode<TextureRect>("Background");
     }
 
+    public override void _PhysicsProcess(double delta)
+    {
+        foreach (var enemy in SpawnedEnemies)
+            enemy.ChasePlayer();
+    }
+
     public override void _Process(double delta)
     {
         if ((waveTimer += delta) >= ModifiedCooldown)
@@ -59,6 +67,7 @@ public partial class UnitSpawner : Control
         var enemyInstance = UnitToSpawn.Instantiate<T>();
 
         battleScene.AddChild(enemyInstance);
+        SpawnedEnemies.Add(enemyInstance);
 
         enemyInstance.Position = player.Position + new Vector2(offset * 50, -400);
         enemyInstance.StartChasingPlayer(player);
