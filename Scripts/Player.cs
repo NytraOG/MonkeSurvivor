@@ -6,6 +6,7 @@ using Godot;
 using MonkeSurvivor.Scripts.Enemies;
 using MonkeSurvivor.Scripts.Monkeys;
 using MonkeSurvivor.Scripts.Ui;
+using MonkeSurvivor.Scripts.Utils;
 using MonkeSurvivor.Scripts.Weapons;
 
 namespace MonkeSurvivor.Scripts;
@@ -62,7 +63,9 @@ public partial class Player : BaseUnit
         battleScene = GetTree().CurrentScene;
         var unitSpawner = battleScene.GetNode<UnitSpawner>(nameof(UnitSpawner));
         unitSpawner.WaveSpawned += UnitSpawnerOnWaveSpawned;
+
         texture                 =  GetNode<TextureRect>(nameof(TextureRect));
+        XpCurrent               =  StaticMemory.HeldXp;
 
         PropertyChanged += OnPropertyChanged;
     }

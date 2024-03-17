@@ -1,4 +1,5 @@
 using Godot;
+using MonkeSurvivor.Scripts.Utils;
 
 namespace MonkeSurvivor.Scenes;
 
@@ -10,5 +11,10 @@ public partial class Shop : Node
 
     public override void _Process(double delta) { }
 
-    public void _on_button_pressed() => GetTree().ChangeSceneToPacked(BattleScene);
+    public void _on_button_pressed()
+    {
+        StaticMemory.HeldXp -= 20;
+
+        GetTree().ChangeSceneToPacked(BattleScene);
+    }
 }

@@ -7,13 +7,15 @@
 [node name="Shop" type="Node"]
 script = ExtResource("1_i2oyi")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 offset_right = 1920.0
 offset_bottom = 1080.0
 texture = ExtResource("2_sktvq")
 expand_mode = 1
 
-[node name="StartWaveButton" parent="." instance=ExtResource("3_kjhhr")]
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="StartWaveButton" parent="UI" instance=ExtResource("3_kjhhr")]
 offset_left = 1620.0
 offset_top = 985.0
 offset_right = 1920.0
