@@ -27,7 +27,7 @@ offset_bottom = 40.0
 script = ExtResource("2_kwem6")
 UnitToSpawn = ExtResource("3_1lk7b")
 AmountPerWave = 10
-WaveCooldown = 0.3
+WaveCooldown = 1.5
 metadata/_edit_use_anchors_ = true
 
 [node name="Background" type="TextureRect" parent="."]
