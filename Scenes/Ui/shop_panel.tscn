@@ -6,3 +6,7 @@
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_ao437")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(1920, 350)
+layout_mode = 2
