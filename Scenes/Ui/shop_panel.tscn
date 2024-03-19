@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cadv0kndeffaj"]
+
+[ext_resource type="Script" path="res://Scripts/Ui/ShopPanel.cs" id="1_ao437"]
+
+[node name="ShopPanel" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ao437")
