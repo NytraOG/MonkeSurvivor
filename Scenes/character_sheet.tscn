@@ -7,8 +7,8 @@
 
 [node name="CharacterSheet" type="PanelContainer"]
 custom_minimum_size = Vector2(625, 0)
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 681.0
+offset_bottom = 564.0
 script = ExtResource("1_gp176")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
