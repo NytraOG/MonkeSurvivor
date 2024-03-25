@@ -22,6 +22,23 @@ public abstract partial class BaseUnit : CharacterBody2D,
         }
     }
 
+    public int Level { get; set; }
+
+    [Export]
+    public int XpBaseAttribut { get; set; }
+
+    [Export]
+    public int Vigor { get; set; }
+
+    [Export]
+    public int Strength { get; set; }
+
+    [Export]
+    public int Dexterity { get; set; }
+
+    [Export]
+    public int Intelligence { get; set; }
+
     [Export]
     public float HealthMaximum { get; set; } = 12;
 
