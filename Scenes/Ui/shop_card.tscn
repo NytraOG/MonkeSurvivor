@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://y0xqeaih6b7p"]
+[gd_scene load_steps=6 format=3 uid="uid://y0xqeaih6b7p"]
 
 [ext_resource type="Script" path="res://Scripts/Ui/ShopCard.cs" id="1_4p47j"]
+[ext_resource type="Texture2D" uid="uid://crirvn27u8a47" path="res://Images/Mini_frame0.png" id="2_alkot"]
+[ext_resource type="Texture2D" uid="uid://csiudnf6hh1tj" path="res://Images/button_ready_on.png" id="2_dtwl8"]
+[ext_resource type="Texture2D" uid="uid://cy141eosjnq6y" path="res://Images/button_ready_off.png" id="3_437ub"]
+[ext_resource type="Texture2D" uid="uid://tm7rqar3ixal" path="res://Images/button_ready_hover.png" id="4_4hk60"]
 
 [node name="ShopCard" type="PanelContainer"]
 offset_right = 40.0
@@ -20,6 +24,67 @@ theme_override_constants/separation = 5
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+texture = ExtResource("2_alkot")
+patch_margin_left = 10
+patch_margin_top = 120
+patch_margin_right = 10
+patch_margin_bottom = 120
 
 [node name="TextureButton" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 110)
 layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("2_dtwl8")
+texture_pressed = ExtResource("3_437ub")
+texture_hover = ExtResource("4_4hk60")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TextureButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -21.5
+offset_right = 25.0
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TextureButton/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TextureButton/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_outline_size = 3
+theme_override_font_sizes/font_size = 48
+text = "Buy:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="MarginContainer/VBoxContainer/TextureButton/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_outline_size = 3
+theme_override_font_sizes/font_size = 48
+text = "99"
