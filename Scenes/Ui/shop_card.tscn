@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://tm7rqar3ixal" path="res://Images/button_ready_hover.png" id="4_4hk60"]
 
 [node name="ShopCard" type="PanelContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 270.0
+offset_bottom = 375.0
 script = ExtResource("1_4p47j")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -108,7 +108,7 @@ text = "Buy:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Cost" type="Label" parent="MarginContainer/VBoxContainer/TextureButton/MarginContainer/HBoxContainer"]
+[node name="ItemCost" type="Label" parent="MarginContainer/VBoxContainer/TextureButton/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -119,3 +119,5 @@ theme_override_constants/outline_size = 6
 theme_override_constants/shadow_outline_size = 3
 theme_override_font_sizes/font_size = 48
 text = "99"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/TextureButton" to="." method="_on_buy_pressed"]
