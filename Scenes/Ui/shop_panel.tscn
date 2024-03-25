@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cadv0kndeffaj"]
+[gd_scene load_steps=3 format=3 uid="uid://cadv0kndeffaj"]
 
 [ext_resource type="Script" path="res://Scripts/Ui/ShopPanel.cs" id="1_ao437"]
+[ext_resource type="PackedScene" uid="uid://y0xqeaih6b7p" path="res://Scenes/Ui/shop_card.tscn" id="2_at01t"]
 
 [node name="ShopPanel" type="PanelContainer"]
 custom_minimum_size = Vector2(1920, 390)
@@ -17,4 +18,23 @@ theme_override_constants/margin_bottom = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="ShopCard" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_at01t")]
+layout_mode = 2
+
+[node name="ShopCard2" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_at01t")]
+layout_mode = 2
+
+[node name="ShopCard3" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_at01t")]
+layout_mode = 2
+
+[node name="ShopCard4" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_at01t")]
+layout_mode = 2
+
+[node name="ShopCard5" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_at01t")]
+layout_mode = 2
+
+[node name="ShopCard6" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_at01t")]
+layout_mode = 2
