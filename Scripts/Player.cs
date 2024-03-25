@@ -77,7 +77,7 @@ public partial class Player : BaseUnit
         unitSpawner.WaveSpawned += UnitSpawnerOnWaveSpawned;
 
         texture   = GetNode<TextureRect>(nameof(TextureRect));
-        XpCurrent = StaticMemory.HeldXp;
+        XpCurrent = StaticMemory.HeldMoney;
 
         PropertyChanged += OnPropertyChanged;
     }

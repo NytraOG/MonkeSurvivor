@@ -1,5 +1,6 @@
 using Godot;
 using MonkeSurvivor.Scripts.Ui;
+using MonkeSurvivor.Scripts.Utils;
 
 namespace MonkeSurvivor.Scenes;
 
@@ -8,6 +9,7 @@ public partial class Shop : Node
     private CharacterSheet characterSheet;
     private Inventory      inventory;
     private ShopPanel      shopPanel;
+    private Label          moneyDisply;
     private PackedScene    BattleScene => ResourceLoader.Load<PackedScene>("res://Scenes/battle.tscn");
 
     public override void _Ready()
@@ -17,6 +19,9 @@ public partial class Shop : Node
         shopPanel      = GetNode<ShopPanel>("%" + nameof(ShopPanel));
         inventory      = GetNode<Inventory>("%" + nameof(Inventory));
         characterSheet = GetNode<CharacterSheet>("%" + nameof(CharacterSheet));
+        moneyDisply = shopPanel.GetNode<Label>("%PlayerMoney");
+
+        moneyDisply.Text = StaticMemory.HeldMoney.ToString();
     }
 
     public override void _Process(double delta) { }

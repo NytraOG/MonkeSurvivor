@@ -14,7 +14,7 @@ public partial class EndOfWavePanel : PanelContainer
 
     public void _on_button_pressed()
     {
-        StaticMemory.HeldXp       = player.XpCurrent;
+        StaticMemory.HeldMoney       = player.XpCurrent;
         StaticMemory.Vigor        = player.Vigor;
         StaticMemory.Strength     = player.Strength;
         StaticMemory.Dexterity    = player.Dexterity;
