@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://clg0ty083tgn7"]
+[gd_scene load_steps=6 format=3 uid="uid://clg0ty083tgn7"]
 
 [ext_resource type="Script" path="res://Scenes/Shop.cs" id="1_i2oyi"]
 [ext_resource type="Texture2D" uid="uid://cx5mg032n4geg" path="res://Images/ShopBackground.png" id="2_sktvq"]
 [ext_resource type="PackedScene" uid="uid://dbdaxolwu0uyn" path="res://Scenes/start_wave_button.tscn" id="3_kjhhr"]
+[ext_resource type="PackedScene" uid="uid://cadv0kndeffaj" path="res://Scenes/Ui/shop_panel.tscn" id="4_51st1"]
 [ext_resource type="PackedScene" uid="uid://b02nultf4hf0k" path="res://Scenes/character_sheet.tscn" id="4_axdm2"]
 
 [node name="Shop" type="Node"]
@@ -32,6 +33,9 @@ grow_vertical = 0
 [node name="VBoxContainer" type="VBoxContainer" parent="UI"]
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="ShopPanel" parent="UI/VBoxContainer" instance=ExtResource("4_51st1")]
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/VBoxContainer"]
 layout_mode = 2

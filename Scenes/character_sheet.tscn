@@ -43,12 +43,14 @@ theme_override_font_sizes/font_size = 38
 text = "99"
 
 [node name="RaiseAttributeButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(45, 0)
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture_normal = ExtResource("2_f7vum")
 texture_pressed = ExtResource("3_6wfv6")
 texture_hover = ExtResource("4_m72he")
 texture_disabled = ExtResource("3_6wfv6")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -72,12 +74,14 @@ theme_override_font_sizes/font_size = 38
 text = "99"
 
 [node name="RaiseAttributeButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(45, 0)
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture_normal = ExtResource("2_f7vum")
 texture_pressed = ExtResource("3_6wfv6")
 texture_hover = ExtResource("4_m72he")
 texture_disabled = ExtResource("3_6wfv6")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -101,12 +105,14 @@ theme_override_font_sizes/font_size = 38
 text = "99"
 
 [node name="RaiseAttributeButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
-custom_minimum_size = Vector2(45, 0)
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture_normal = ExtResource("2_f7vum")
 texture_pressed = ExtResource("3_6wfv6")
 texture_hover = ExtResource("4_m72he")
 texture_disabled = ExtResource("3_6wfv6")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -130,7 +136,7 @@ theme_override_font_sizes/font_size = 38
 text = "99"
 
 [node name="RaiseAttributeButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer4"]
-custom_minimum_size = Vector2(45, 0)
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
@@ -138,6 +144,8 @@ texture_normal = ExtResource("2_f7vum")
 texture_pressed = ExtResource("3_6wfv6")
 texture_hover = ExtResource("4_m72he")
 texture_disabled = ExtResource("3_6wfv6")
+ignore_texture_size = true
+stretch_mode = 0
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/RaiseAttributeButton" to="." method="_on_Vigor_Raised"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/RaiseAttributeButton" to="." method="_on_Strength_Raised"]
