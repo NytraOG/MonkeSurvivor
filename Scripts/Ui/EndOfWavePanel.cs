@@ -6,7 +6,8 @@ namespace MonkeSurvivor.Scripts.Ui;
 public partial class EndOfWavePanel : PanelContainer
 {
     private Player      player;
-    private PackedScene PostBattleScene => ResourceLoader.Load<PackedScene>("res://Scripts/shop.tscn");
+    private PackedScene PostBattleScene      => ResourceLoader.Load<PackedScene>("res://Scripts/shop.tscn");
+    public  PackedScene SceneTransitionScene => ResourceLoader.Load<PackedScene>("res://Scenes/Ui/scene_transition.tscn");
 
     public override void _Ready() => player = GetTree().CurrentScene.GetNode<Player>(nameof(Player));
 
