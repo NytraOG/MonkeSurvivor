@@ -9,10 +9,10 @@ public static class Extensions
 {
     public static int GetAttributeUpgradeCost(this BaseUnit unit, string attributeName) => attributeName switch
     {
-        nameof(BaseUnit.Vigor) => GetAttributeXpTotal(unit.XpBaseAttribut, unit.Vigor),
-        nameof(BaseUnit.Strength) => GetAttributeXpTotal(unit.XpBaseAttribut, unit.Strength),
-        nameof(BaseUnit.Dexterity) => GetAttributeXpTotal(unit.XpBaseAttribut, unit.Dexterity),
-        nameof(BaseUnit.Intelligence) => GetAttributeXpTotal(unit.XpBaseAttribut, unit.Intelligence),
+        nameof(BaseUnit.Vigor) => GetAttributeXpTotal(unit.XpBaseAttribut, unit.Vigor + 1),
+        nameof(BaseUnit.Strength) => GetAttributeXpTotal(unit.XpBaseAttribut, unit.Strength + 1),
+        nameof(BaseUnit.Dexterity) => GetAttributeXpTotal(unit.XpBaseAttribut, unit.Dexterity + 1),
+        nameof(BaseUnit.Intelligence) => GetAttributeXpTotal(unit.XpBaseAttribut, unit.Intelligence + 1),
         _ => throw new ArgumentOutOfRangeException(attributeName)
     };
 
@@ -20,28 +20,40 @@ public static class Extensions
 
     private static int GetAttributeXpTotal(int xpBase, int inputLevel)
     {
-        if (inputLevel == 0)
-            return inputLevel;
+        if (inputLevel == 1)
+            return 0;
 
         return GetAttributeXpTotal(xpBase, inputLevel - 1) + GetAttributeXpDelta(xpBase, inputLevel);
     }
 
     private static int GetAttributeXpDelta(int xpBase, int inputLevel)
     {
-        if (inputLevel == 0)
-            return inputLevel;
+        if (inputLevel == 1)
+            return 0;
 
         return GetAttributeXpDelta(xpBase, inputLevel - 1) + GetAttributeXpDeltaPlus(xpBase, inputLevel);
     }
 
     private static int GetAttributeXpDeltaPlus(int xpBase, int inputLevel)
     {
-        var deltaPlus = inputLevel * xpBase;
+        switch (inputLevel)
+        {
+            case 1: return 0;
+            case 2: return xpBase;
+        }
+
+        var thresholdAdditum = 150;
+        var deltaPlus        = inputLevel * xpBase;
 
         deltaPlus += inputLevel switch
         {
-            7 => 150,
-            12 or 17 or 22 or 27 or 32 or 37 or 42 => 150,
+            7 => thresholdAdditum,
+            12 => 2 * thresholdAdditum,
+            17 => 3 * thresholdAdditum,
+            22 => 4 * thresholdAdditum,
+            27 => 5 * thresholdAdditum,
+            32 => 6 * thresholdAdditum,
+            37 => 7 * thresholdAdditum,
             _ => 0
         };
 
