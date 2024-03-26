@@ -30,10 +30,5 @@ public partial class Shop : Node
 
     public void _on_button_pressed() => GetTree().ChangeSceneToPacked(BattleScene);
 
-    private void CharacterSheetOnOnAttributeRaised(string attributename)
-    {
-        var upgradeCost = StaticMemory.Player.GetAttributeUpgradeCost(attributename);
-
-
-    }
+    private void CharacterSheetOnOnAttributeRaised(string attributename) { }
 }

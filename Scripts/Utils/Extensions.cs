@@ -9,10 +9,10 @@ public static class Extensions
 {
     public static int GetAttributeUpgradeCost(this BaseUnit unit, string attributeName) => attributeName switch
     {
-        nameof(BaseUnit.Vigor) => GetAttributeXpTotal(unit.XpBaseAttribut, unit.Vigor + 1),
-        nameof(BaseUnit.Strength) => GetAttributeXpTotal(unit.XpBaseAttribut, unit.Strength + 1),
-        nameof(BaseUnit.Dexterity) => GetAttributeXpTotal(unit.XpBaseAttribut, unit.Dexterity + 1),
-        nameof(BaseUnit.Intelligence) => GetAttributeXpTotal(unit.XpBaseAttribut, unit.Intelligence + 1),
+        nameof(BaseUnit.Vigor) => GetAttributeXpTotal(unit.XpBaseAttribut, unit.Vigor),
+        nameof(BaseUnit.Strength) => GetAttributeXpTotal(unit.XpBaseAttribut, unit.Strength),
+        nameof(BaseUnit.Dexterity) => GetAttributeXpTotal(unit.XpBaseAttribut, unit.Dexterity),
+        nameof(BaseUnit.Intelligence) => GetAttributeXpTotal(unit.XpBaseAttribut, unit.Intelligence),
         _ => throw new ArgumentOutOfRangeException(attributeName)
     };
 
