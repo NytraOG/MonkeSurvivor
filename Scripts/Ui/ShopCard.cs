@@ -4,8 +4,10 @@ namespace MonkeSurvivor.Scripts.Ui;
 
 public partial class ShopCard : PanelContainer
 {
-    public delegate void MouseEventHandler(bool entered);
+    public delegate void MouseEventHandler(bool entered, ShopCard shopCard);
 
+    [Export]
+    public  int                      CardId { get; set; }
     private Label                  itemCostLabel;
     private Label                  itemDescriptionLabel;
     private Label                  itemNameLabel;
@@ -22,7 +24,7 @@ public partial class ShopCard : PanelContainer
 
     public void _on_buy_pressed() => Modulate = new Color(Modulate, 0);
 
-    public void _on_mouse_entered_shopCard() => OnMouseEvent?.Invoke(true);
+    public void _on_mouse_entered_shopCard() => OnMouseEvent?.Invoke(true, this);
 
-    public void _on_mouse_exited_shopCard() => OnMouseEvent?.Invoke(false);
+    public void _on_mouse_exited_shopCard() => OnMouseEvent?.Invoke(false, this);
 }
