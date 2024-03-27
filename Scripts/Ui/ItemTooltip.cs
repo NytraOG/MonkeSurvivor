@@ -1,3 +1,5 @@
+using Godot;
+
 namespace MonkeSurvivor.Scripts.Ui;
 
 public partial class ItemTooltip : BaseTooltip
@@ -15,23 +17,20 @@ public partial class ItemTooltip : BaseTooltip
         }
     }
 
-    private void ShopCardOnOnMouseEvent(bool entered, ShopCard shopcard) { }
+    private void ShopCardOnOnMouseEvent(bool entered, ShopCard shopcard)
+    {
+        if (entered)
+            SetPositionByShopCard(shopcard);
+        else
+            Position = new Vector2(-900, -900);
+    }
 
     public override void _Process(double delta) { }
 
     public void SetPositionByShopCard(ShopCard shopCard)
     {
-        var xPosition = shopCard.Position.X + Size.X;
+        var xPosition = shopCard.Position.X - Size.X + 10;
 
-        // Position = shopCardId switch
-        // {
-        //     1 => new Vector2(531, Position.Y),
-        //     2 => new Vector2(182, Position.Y),
-        //     3 => new Vector2(456, Position.Y),
-        //     4 => new Vector2(730, Position.Y),
-        //     5 => new Vector2(1003, Position.Y),
-        //     6 => new Vector2(1277, Position.Y),
-        //     _ => throw new ArgumentOutOfRangeException(nameof(shopCardId), shopCardId, null)
-        // };
+        Position = new Vector2(xPosition, 27);
     }
 }
