@@ -22,45 +22,6 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-texture = ExtResource("2_alkot")
-patch_margin_left = 10
-patch_margin_top = 120
-patch_margin_right = 10
-patch_margin_bottom = 120
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/NinePatchRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer"]
-layout_mode = 2
-
-[node name="ItemName" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 28
-text = "ItemName"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ItemDescription" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 168)
-layout_mode = 2
-theme_override_font_sizes/font_size = 15
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec commodo, libero a aliquam semper, sapien velit bibendum mauris, et placerat lectus orci ac nulla."
-autowrap_mode = 3
-
 [node name="TextureButton" type="TextureButton" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 110)
 layout_mode = 2
@@ -119,6 +80,45 @@ theme_override_font_sizes/font_size = 48
 text = "€"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_alkot")
+patch_margin_left = 10
+patch_margin_top = 120
+patch_margin_right = 10
+patch_margin_bottom = 120
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer"]
+layout_mode = 2
+
+[node name="ItemName" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "ItemName"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemDescription" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 168)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec commodo, libero a aliquam semper, sapien velit bibendum mauris, et placerat lectus orci ac nulla."
+autowrap_mode = 3
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered_shopCard"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited_shopCard"]

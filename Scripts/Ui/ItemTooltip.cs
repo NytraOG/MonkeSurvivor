@@ -19,7 +19,7 @@ public partial class ItemTooltip : BaseTooltip
 
     private void ShopCardOnOnMouseEvent(bool entered, ShopCard shopcard)
     {
-        if (entered)
+        if (entered && !shopcard.Disabled)
             SetPositionByShopCard(shopcard);
         else
             Position = new Vector2(-900, -900);
@@ -30,6 +30,11 @@ public partial class ItemTooltip : BaseTooltip
     public void SetPositionByShopCard(ShopCard shopCard)
     {
         var xPosition = shopCard.Position.X - Size.X + 10;
+
+        if (xPosition <= 0)
+        {
+            xPosition = shopCard.Position.X + shopCard.Size.X + 20;
+        }
 
         Position = new Vector2(xPosition, 27);
     }
