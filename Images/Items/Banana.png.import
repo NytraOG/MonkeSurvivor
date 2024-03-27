@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://213fl8qe2l3o"
-path="res://.godot/imported/Cheese.png-ba666945c8affb6d20cb16d69665335b.ctex"
+uid="uid://dsorcojpe6ll5"
+path="res://.godot/imported/Banana.png-17ed425e522b1a251d1553bea2d00b7e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/Cheese.png"
-dest_files=["res://.godot/imported/Cheese.png-ba666945c8affb6d20cb16d69665335b.ctex"]
+source_file="res://Images/Items/Banana.png"
+dest_files=["res://.godot/imported/Banana.png-17ed425e522b1a251d1553bea2d00b7e.ctex"]
 
 [params]
 
