@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using MonkeSurvivor.Scripts.Items;
 using MonkeSurvivor.Scripts.Ui;
 using MonkeSurvivor.Scripts.Utils;
 
@@ -19,8 +21,6 @@ public partial class Shop : Node
     {
         GetTree().Paused = false;
 
-        GenerateItems();
-
         shopPanel      = GetNode<ShopPanel>("%" + nameof(ShopPanel));
         inventory      = GetNode<Inventory>("%" + nameof(Inventory));
         characterSheet = GetNode<CharacterSheet>("%" + nameof(CharacterSheet));
@@ -29,11 +29,32 @@ public partial class Shop : Node
         moneyDisply.Text = StaticMemory.HeldMoney.ToString();
 
         characterSheet.OnAttributeRaised += CharacterSheetOnOnAttributeRaised;
+
+        GenerateItems();
     }
 
     public void _on_button_pressed() => GetTree().ChangeSceneToPacked(BattleScene);
 
     private void GenerateItems()
+    {
+        AssembleItemScenes();
+
+        var itemCount = itemScenes.Count;
+        var shopCards = shopPanel.GetShopCards();
+        var rng       = new Random();
+
+        for (int i = 0; i < shopCards.Length; i++)
+        {
+            var number    = rng.Next(0, itemCount);
+            var scenePath = itemScenes[number];
+            var scene     = ResourceLoader.Load<PackedScene>(scenePath);
+            var item      = scene.Instantiate<BaseItem>();
+
+            shopCards[i].SetItem(item);
+        }
+    }
+
+    private void AssembleItemScenes()
     {
         var itemDirectory = "res://Scenes/Items/";
 

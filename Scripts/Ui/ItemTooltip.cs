@@ -4,9 +4,21 @@ namespace MonkeSurvivor.Scripts.Ui;
 
 public partial class ItemTooltip : BaseTooltip
 {
+    private RichTextLabel itemNameLabel;
+    private RichTextLabel itemDescriptionLabel;
+
     public override void _Ready()
     {
         var shopScene = GetTree().CurrentScene;
+
+        SubscribeToShopCards(shopScene);
+
+        itemNameLabel        = GetNode<RichTextLabel>("%ItemName");
+        itemDescriptionLabel = GetNode<RichTextLabel>("%ItemDescription");
+    }
+
+    private void SubscribeToShopCards(Node shopScene)
+    {
         var shopPanel = shopScene.GetNode<ShopPanel>("%" + nameof(ShopPanel));
         var shopCards = shopPanel.GetShopCards();
 
@@ -20,12 +32,15 @@ public partial class ItemTooltip : BaseTooltip
     private void ShopCardOnOnMouseEvent(bool entered, ShopCard shopcard)
     {
         if (entered && !shopcard.Disabled)
+        {
+            itemNameLabel.Text        = shopcard.Item.Displayname;
+            itemDescriptionLabel.Text = shopcard.Item.GetTooltipDescription();
+
             SetPositionByShopCard(shopcard);
+        }
         else
             Position = new Vector2(-900, -900);
     }
-
-    public override void _Process(double delta) { }
 
     public void SetPositionByShopCard(ShopCard shopCard)
     {

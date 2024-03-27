@@ -7,3 +7,4 @@
 script = ExtResource("1_xfw0x")
 ItemImage = ExtResource("2_63g6v")
 Price = 12
+Displayname = "Cheese"
