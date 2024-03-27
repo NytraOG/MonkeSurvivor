@@ -55,7 +55,7 @@ custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
 
 [node name="ItemTooltip" parent="UI" instance=ExtResource("7_wjhwd")]
-offset_left = 1288.0
+offset_left = 1277.0
 offset_top = 27.0
-offset_right = 1638.0
+offset_right = 1627.0
 offset_bottom = 427.0
