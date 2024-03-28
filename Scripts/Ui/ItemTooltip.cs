@@ -33,13 +33,20 @@ public partial class ItemTooltip : BaseTooltip
     {
         if (entered && !shopcard.Disabled)
         {
-            itemNameLabel.Text        = shopcard.Item.Displayname;
-            itemDescriptionLabel.Text = shopcard.Item.GetTooltipDescription();
+            itemNameLabel.Text = itemNameLabel.Text.Replace("ItemName", $"[u]{shopcard.Item.Displayname}[/u]");
+
+            itemDescriptionLabel.Text = $"{System.Environment.NewLine}" +
+                                        $"{shopcard.Item.GetTooltipDescription()}{System.Environment.NewLine}" +
+                                        $"{System.Environment.NewLine}";
 
             SetPositionByShopCard(shopcard);
         }
         else
+        {
             Position = new Vector2(-900, -900);
+
+            itemNameLabel.Text = itemNameLabel.Text.Replace($"{shopcard.Item.Displayname}", "ItemName");
+        }
     }
 
     public void SetPositionByShopCard(ShopCard shopCard)

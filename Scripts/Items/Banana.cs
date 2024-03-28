@@ -1,5 +1,3 @@
-using System;
-
 namespace MonkeSurvivor.Scripts.Items;
 
 public partial class Banana : BaseItem
