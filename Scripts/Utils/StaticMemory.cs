@@ -2,6 +2,7 @@
 
 public static class StaticMemory
 {
+    public static bool AlreadyReadied { get; set; }
     public static int    WaveNumber   { get; set; } = 1;
     public static Player Player       { get; set; }
     public static int    HeldMoney    { get; set; }

@@ -19,6 +19,9 @@ public partial class Shop : Node
 
     public override void _Ready()
     {
+        if(StaticMemory.AlreadyReadied)
+            return;
+        
         GetTree().Paused = false;
 
         shopPanel      = GetNode<ShopPanel>("%" + nameof(ShopPanel));
@@ -29,12 +32,17 @@ public partial class Shop : Node
         moneyDisply.Text = StaticMemory.HeldMoney.ToString();
 
         characterSheet.OnAttributeRaised += CharacterSheetOnOnAttributeRaised;
-        
-        shopPanel.ItemBought -= ShopPanelOnItemBought;
+        shopPanel.ItemBought += ShopPanelOnItemBought;
 
         GenerateItems();
 
-        shopPanel.ItemBought += ShopPanelOnItemBought;
+
+        StaticMemory.AlreadyReadied = true;
+    }
+
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
     }
 
     private void ShopPanelOnItemBought(BaseItem boughtItem)
