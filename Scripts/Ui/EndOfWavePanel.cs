@@ -23,6 +23,6 @@ public partial class EndOfWavePanel : PanelContainer
         StaticMemory.Intelligence = player.Intelligence;
         StaticMemory.WaveNumber++;
 
-        GetTree().ChangeSceneToFile("res://Scripts/shop.tscn");
+        GetTree().ChangeSceneToPacked(PostBattleScene);
     }
 }

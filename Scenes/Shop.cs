@@ -40,17 +40,17 @@ public partial class Shop : Node
         StaticMemory.AlreadyReadied = true;
     }
 
-    public override void _Process(double delta)
-    {
-        base._Process(delta);
-    }
-
     private void ShopPanelOnItemBought(BaseItem boughtItem)
     {
         inventory.SetItem(boughtItem);
     }
 
-    public void _on_button_pressed() => GetTree().ChangeSceneToPacked(BattleScene);
+    public void _on_button_pressed()
+    {
+        StaticMemory.AlreadyReadied = false;
+        
+        GetTree().ChangeSceneToPacked(BattleScene);
+    }
 
     private void GenerateItems()
     {
