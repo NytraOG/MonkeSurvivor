@@ -45,7 +45,8 @@ public partial class ItemTooltip : BaseTooltip
         {
             Position = new Vector2(-900, -900);
 
-            itemNameLabel.Text = itemNameLabel.Text.Replace($"{shopcard.Item.Displayname}", "ItemName");
+            if(shopcard.Item is not null)
+                itemNameLabel.Text = itemNameLabel.Text.Replace($"{shopcard.Item.Displayname}", "ItemName");
         }
     }
 
