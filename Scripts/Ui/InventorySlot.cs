@@ -1,16 +1,30 @@
 using Godot;
+using MonkeSurvivor.Scripts.Items;
 
 namespace MonkeSurvivor.Scripts.Ui;
 
 public partial class InventorySlot : PanelContainer
 {
-    // Called when the node enters the scene tree for the first time.
+    private TextureRect itemImage;
+    public BaseItem ContainedItem { get; set; }
+
     public override void _Ready()
     {
+        itemImage = GetNode<TextureRect>("%ItemImage");
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
+    public void SetItem(BaseItem item)
     {
+        ContainedItem = item;
+        itemImage.Texture = item.ItemImage;
+    }
+
+    public BaseItem RetrieveItem()
+    {
+        var item = ContainedItem;
+        ContainedItem = null;
+        itemImage.Texture = null;
+
+        return item;
     }
 }

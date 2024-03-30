@@ -7,6 +7,8 @@ public partial class ShopCard : PanelContainer
 {
     public delegate void MouseEventHandler(bool entered, ShopCard shopCard);
 
+    public delegate void ItemBoughtEventHandler(BaseItem boughtItem);
+
     private Label       itemCostLabel;
     private TextureRect itemImage;
     private Label       itemNameLabel;
@@ -17,6 +19,7 @@ public partial class ShopCard : PanelContainer
     public bool                    Disabled { get; set; }
     public BaseItem                Item     { get; set; }
     public event MouseEventHandler OnMouseEvent;
+    public event ItemBoughtEventHandler ItemBought;
 
     public override void _Ready() => EnsureNodesExist();
 
@@ -40,6 +43,8 @@ public partial class ShopCard : PanelContainer
 
     public void _on_buy_pressed()
     {
+        ItemBought?.Invoke(Item);
+        
         Modulate = new Color(Modulate, 0);
         Disabled = true;
 
