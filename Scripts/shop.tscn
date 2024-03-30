@@ -43,7 +43,6 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-alignment = 1
 
 [node name="Inventory" parent="UI/VBoxContainer/HBoxContainer" instance=ExtResource("5_3qa3v")]
 unique_name_in_owner = true
