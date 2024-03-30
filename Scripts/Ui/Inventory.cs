@@ -37,9 +37,14 @@ public partial class Inventory : PanelContainer
         slot?.SetItem(item);
     }
 
+    public InventorySlot[] GetAllSlots()
+    {
+        return GetNode<GridContainer>("%ItemGrid").GetAllChildren<InventorySlot>();
+    }
+
     private InventorySlot FindFirstEmptySlot()
     {
-        var slots = GetNode<GridContainer>("%ItemGrid").GetAllChildren<InventorySlot>();
+        var slots = GetAllSlots();
         
         foreach (var slot in slots)
             if (slot.ContainedItem is null)

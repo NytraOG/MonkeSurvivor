@@ -1,20 +1,44 @@
 using Godot;
+using MonkeSurvivor.Scripts.Items;
+using Environment = System.Environment;
 
 namespace MonkeSurvivor.Scripts.Ui;
 
 public partial class ItemTooltip : BaseTooltip
 {
-    private RichTextLabel itemNameLabel;
     private RichTextLabel itemDescriptionLabel;
+    private RichTextLabel itemNameLabel;
 
     public override void _Ready()
     {
         var shopScene = GetTree().CurrentScene;
 
         SubscribeToShopCards(shopScene);
+        SubscribeToInventorySlots(shopScene);
 
-        itemNameLabel        = GetNode<RichTextLabel>("%ItemName");
+        itemNameLabel = GetNode<RichTextLabel>("%ItemName");
         itemDescriptionLabel = GetNode<RichTextLabel>("%ItemDescription");
+    }
+
+    private void SubscribeToInventorySlots(Node shopScene)
+    {
+        var inventory = shopScene.GetNode<Inventory>("%" + nameof(Inventory));
+        var inventorySlots = inventory.GetAllSlots();
+
+        foreach (var inventorySlot in inventorySlots) inventorySlot.MouseEntering += InventorySlotOnMouseEntering;
+    }
+
+    private void InventorySlotOnMouseEntering(bool entered, InventorySlot inventorySlot)
+    {
+        if (entered)
+        {
+            SetDisplayedDataByItem(inventorySlot.ContainedItem);
+            SetPositionByNode(inventorySlot);
+        }
+        else
+        {
+            ResetTooltip(inventorySlot);
+        }
     }
 
     private void SubscribeToShopCards(Node shopScene)
@@ -29,35 +53,44 @@ public partial class ItemTooltip : BaseTooltip
         }
     }
 
-    private void ShopCardOnOnMouseEvent(bool entered, ShopCard shopcard)
+    public void SetDisplayedDataByItem(BaseItem item)
     {
-        if (entered && !shopcard.Disabled)
+        itemNameLabel.Text = itemNameLabel.Text.Replace("ItemName", $"[u]{item.Displayname}[/u]");
+
+        itemDescriptionLabel.Text = $"{Environment.NewLine}" +
+                                    $"{item.GetTooltipDescription()}{Environment.NewLine}" +
+                                    $"{Environment.NewLine}";
+    }
+
+    private void ShopCardOnOnMouseEvent(bool entered, ShopCard shopCard)
+    {
+        if (entered && !shopCard.Disabled)
         {
-            itemNameLabel.Text = itemNameLabel.Text.Replace("ItemName", $"[u]{shopcard.Item.Displayname}[/u]");
-
-            itemDescriptionLabel.Text = $"{System.Environment.NewLine}" +
-                                        $"{shopcard.Item.GetTooltipDescription()}{System.Environment.NewLine}" +
-                                        $"{System.Environment.NewLine}";
-
-            SetPositionByShopCard(shopcard);
+            SetDisplayedDataByItem(shopCard.Item);
+            SetPositionByNode(shopCard);
         }
         else
         {
-            Position = new Vector2(-900, -900);
-
-            if(shopcard.Item is not null)
-                itemNameLabel.Text = itemNameLabel.Text.Replace($"{shopcard.Item.Displayname}", "ItemName");
+            ResetTooltip(shopCard);
         }
     }
 
-    public void SetPositionByShopCard(ShopCard shopCard)
+    private void ResetTooltip(PanelContainer container)
     {
-        var xPosition = shopCard.Position.X - Size.X + 10;
+        Position = new Vector2(-900, -900);
 
-        if (xPosition <= 0)
-        {
-            xPosition = shopCard.Position.X + shopCard.Size.X + 20;
-        }
+        if (container is not ShopCard shopCard)
+            return;
+
+        if (shopCard.Item is not null)
+            itemNameLabel.Text = itemNameLabel.Text.Replace($"{shopCard.Item.Displayname}", "ItemName");
+    }
+
+    public void SetPositionByNode(PanelContainer container)
+    {
+        var xPosition = container.Position.X - Size.X + 10;
+
+        if (xPosition <= 0) xPosition = container.Position.X + container.Size.X + 20;
 
         Position = new Vector2(xPosition, 27);
     }
