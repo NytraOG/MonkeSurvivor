@@ -34,6 +34,7 @@ public partial class ShopPanel : PanelContainer
 
     public ShopCard[] GetShopCards()
     {
-        return cards;
+        return cards ?? GetNode<MarginContainer>(nameof(MarginContainer))
+            .GetNode<HBoxContainer>(nameof(HBoxContainer)).GetAllChildren<ShopCard>().ToArray();
     }
 }

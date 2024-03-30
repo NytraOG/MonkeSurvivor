@@ -1,4 +1,5 @@
 using Godot;
+using MonkeSurvivor.Scripts.Items;
 using MonkeSurvivor.Scripts.Utils;
 
 namespace MonkeSurvivor.Scripts.Ui;
@@ -30,9 +31,17 @@ public partial class Inventory : PanelContainer
         }
     }
 
-    public InventorySlot FindFirstEmptySlot()
+    public void SetItem(BaseItem item)
     {
-        foreach (var slot in this.GetAllChildren<InventorySlot>())
+        var slot = FindFirstEmptySlot();
+        slot?.SetItem(item);
+    }
+
+    private InventorySlot FindFirstEmptySlot()
+    {
+        var slots = GetNode<GridContainer>("%ItemGrid").GetAllChildren<InventorySlot>();
+        
+        foreach (var slot in slots)
             if (slot.ContainedItem is null)
                 return slot;
 

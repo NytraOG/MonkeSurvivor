@@ -15,10 +15,14 @@ public partial class Shop : Node
     private readonly List<string>   itemScenes = new();
     private          Label          moneyDisply;
     private          ShopPanel      shopPanel;
+    private bool alreadyReadied;
     private          PackedScene    BattleScene => ResourceLoader.Load<PackedScene>("res://Scenes/battle.tscn");
 
     public override void _Ready()
     {
+        if(alreadyReadied)
+            return;
+        
         GetTree().Paused = false;
 
         shopPanel      = GetNode<ShopPanel>("%" + nameof(ShopPanel));
@@ -29,8 +33,17 @@ public partial class Shop : Node
         moneyDisply.Text = StaticMemory.HeldMoney.ToString();
 
         characterSheet.OnAttributeRaised += CharacterSheetOnOnAttributeRaised;
+        
+        shopPanel.ItemBought += ShopPanelOnItemBought;
 
         GenerateItems();
+
+        alreadyReadied = true;
+    }
+
+    private void ShopPanelOnItemBought(BaseItem boughtItem)
+    {
+        inventory.SetItem(boughtItem);
     }
 
     public void _on_button_pressed() => GetTree().ChangeSceneToPacked(BattleScene);
