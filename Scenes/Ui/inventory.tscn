@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbmfnsx53j3wb"]
+[gd_scene load_steps=3 format=3 uid="uid://cbmfnsx53j3wb"]
 
 [ext_resource type="Script" path="res://Scripts/Ui/Inventory.cs" id="1_nibqc"]
+[ext_resource type="PackedScene" uid="uid://db518gxwyweuo" path="res://Scenes/Ui/inventory_slot.tscn" id="2_yc6w7"]
 
 [node name="Inventory" type="PanelContainer"]
 custom_minimum_size = Vector2(1230, 0)
@@ -18,3 +19,6 @@ theme_override_constants/margin_bottom = 15
 [node name="ItemGrid" type="GridContainer" parent="MarginContainer"]
 layout_mode = 2
 columns = 10
+
+[node name="InventorySlot" parent="MarginContainer/ItemGrid" instance=ExtResource("2_yc6w7")]
+layout_mode = 2
