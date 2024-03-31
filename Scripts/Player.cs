@@ -19,6 +19,7 @@ public partial class Player : BaseUnit
     private float           swingTimer;
     private TextureRect     texture;
     private int             xpCurrent;
+    private double regenerationTimer;
     public  List<BaseEnemy> Enemies       { get; set; }
     public  StaticBody2D    WieldedWeapon { get; set; }
 
@@ -96,8 +97,27 @@ public partial class Player : BaseUnit
     {
         base._Process(delta);
 
+        ResolveRegenerationTicks(delta);
         ResolveInvincibility(delta);
         ProgressSwingtimer(delta);
+    }
+
+    private void ResolveRegenerationTicks(double delta)
+    {
+        regenerationTimer += delta;
+
+        if (regenerationTimer >= 1)
+        {
+            var regeneratedAmount = IncreasedHealthregeneration - DecreasedHealthregeneration;
+            
+            if(regeneratedAmount > 0)
+            {
+                HealthCurrent += regeneratedAmount;
+                InstatiateFloatingCombatText((int)regeneratedAmount, Position, false, true);
+            }
+
+            regenerationTimer = 0;
+        }
     }
 
     private void ProgressSwingtimer(double delta)

@@ -71,7 +71,7 @@ public abstract partial class BaseEnemy : BaseUnit
     private void DealDamageToPlayer()
     {
         chasedPlayer.HealthCurrent -= DealtDamage;
-        chasedPlayer.InstatiateFloatingCombatText((int)DealtDamage, chasedPlayer.Position, false);
+        chasedPlayer.InstatiateFloatingCombatText((int)DealtDamage, chasedPlayer.Position, false, false);
     }
 
     public void StartChasingPlayer(Player player)
