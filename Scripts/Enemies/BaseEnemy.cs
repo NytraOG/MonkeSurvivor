@@ -70,6 +70,10 @@ public abstract partial class BaseEnemy : BaseUnit
 
     private void DealDamageToPlayer()
     {
+        var totalDamagereduction = (chasedPlayer.IncreasedDamagereduction - chasedPlayer.DecreasedDamagereduction)/100;
+        var resultingDamagePercentage = 1 - totalDamagereduction;
+        var finalDamage = resultingDamagePercentage * DealtDamage;
+        
         chasedPlayer.HealthCurrent -= DealtDamage;
         chasedPlayer.InstatiateFloatingCombatText((int)DealtDamage, chasedPlayer.Position, false, false);
     }

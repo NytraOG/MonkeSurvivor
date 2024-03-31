@@ -38,6 +38,10 @@ public abstract partial class BaseUnit : CharacterBody2D,
     [Export] public int Intelligence { get; set; } = 1;
 
     //Secondary Stats
+    [Export] public float IncreasedDamagereduction { get; set; }
+
+    [Export] public float DecreasedDamagereduction { get; set; }
+
     [Export] public float IncreasedHealth { get; set; }
 
     [Export] public float DecreasedHealth { get; set; }
@@ -110,13 +114,13 @@ public abstract partial class BaseUnit : CharacterBody2D,
             if (isHeal)
             {
                 floatingCombatTextInstance.Display.AddThemeColorOverride("font_color", Colors.LimeGreen);
-                
+
                 if (isCritical)
                 {
                     floatingCombatTextInstance.Display.AddThemeColorOverride("font_color", Colors.DarkGreen);
                     floatingCombatTextInstance.Display.AddThemeFontSizeOverride("font_size", 42);
                 }
-                
+
                 floatingCombatTextInstance.Display.Text = value.ToString();
             }
             else
@@ -131,7 +135,7 @@ public abstract partial class BaseUnit : CharacterBody2D,
             }
 
             floatingCombatTextInstance.Show();
-            
+
             GetTree()
                 .CurrentScene
                 .AddChild(floatingCombatTextInstance);
