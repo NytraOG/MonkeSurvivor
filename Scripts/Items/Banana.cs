@@ -7,4 +7,13 @@ public partial class Banana : BaseItem
     public override void _Process(double delta) { }
 
     public override string GetTooltipDescription() => "Mjam mjam, lecker Banane.";
+    public override void ApplyEffectTo(Player player)
+    {
+        
+    }
+
+    public override void DeductEffectFrom(Player player)
+    {
+        
+    }
 }
