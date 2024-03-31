@@ -116,6 +116,8 @@ public abstract partial class BaseUnit : CharacterBody2D,
                     floatingCombatTextInstance.Display.AddThemeColorOverride("font_color", Colors.DarkGreen);
                     floatingCombatTextInstance.Display.AddThemeFontSizeOverride("font_size", 42);
                 }
+                
+                floatingCombatTextInstance.Display.Text = value.ToString();
             }
             else
             {
