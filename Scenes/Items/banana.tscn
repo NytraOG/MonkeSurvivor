@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://2ofx3o3nb608"]
+
+[ext_resource type="Script" path="res://Scripts/Items/Banana.cs" id="1_vuest"]
+[ext_resource type="Texture2D" uid="uid://dsorcojpe6ll5" path="res://Images/Items/Banana.png" id="2_0bpr4"]
+
+[node name="Banana" type="Node2D"]
+script = ExtResource("1_vuest")
+ItemImage = ExtResource("2_0bpr4")
+Price = 8
+Displayname = "Banana"

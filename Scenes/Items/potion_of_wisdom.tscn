@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://drrgpcqafp083"]
+
+[ext_resource type="Script" path="res://Scripts/Items/PotionOfWisdom.cs" id="1_3624b"]
+[ext_resource type="Texture2D" uid="uid://dx5u0s3xkumkw" path="res://Images/Items/Alchemy_16_shadow_potion.png" id="2_ke4uf"]
+
+[node name="PotionOfWisdom" type="Node2D"]
+script = ExtResource("1_3624b")
+ItemImage = ExtResource("2_ke4uf")
+Price = 25
+Displayname = "Potion of Wisdom"

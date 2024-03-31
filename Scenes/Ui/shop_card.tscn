@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://y0xqeaih6b7p"]
+[gd_scene load_steps=7 format=3 uid="uid://y0xqeaih6b7p"]
 
 [ext_resource type="Script" path="res://Scripts/Ui/ShopCard.cs" id="1_4p47j"]
 [ext_resource type="Texture2D" uid="uid://crirvn27u8a47" path="res://Images/Mini_frame0.png" id="2_alkot"]
 [ext_resource type="Texture2D" uid="uid://csiudnf6hh1tj" path="res://Images/button_ready_on.png" id="2_dtwl8"]
 [ext_resource type="Texture2D" uid="uid://cy141eosjnq6y" path="res://Images/button_ready_off.png" id="3_437ub"]
 [ext_resource type="Texture2D" uid="uid://tm7rqar3ixal" path="res://Images/button_ready_hover.png" id="4_4hk60"]
+[ext_resource type="Texture2D" uid="uid://dv7b1yh7bb2m8" path="res://Images/Items/Engineering_07_present_explosive.png" id="6_b1e7v"]
 
 [node name="ShopCard" type="PanelContainer"]
 offset_right = 270.0
@@ -21,45 +22,6 @@ theme_override_constants/margin_bottom = 10
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 5
-
-[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-texture = ExtResource("2_alkot")
-patch_margin_left = 10
-patch_margin_top = 120
-patch_margin_right = 10
-patch_margin_bottom = 120
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/NinePatchRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer"]
-layout_mode = 2
-
-[node name="ItemName" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 28
-text = "ItemName"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ItemDescription" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 168)
-layout_mode = 2
-theme_override_font_sizes/font_size = 15
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec commodo, libero a aliquam semper, sapien velit bibendum mauris, et placerat lectus orci ac nulla."
-autowrap_mode = 3
 
 [node name="TextureButton" type="TextureButton" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 110)
@@ -120,4 +82,52 @@ text = "€"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("2_alkot")
+patch_margin_left = 10
+patch_margin_top = 120
+patch_margin_right = 10
+patch_margin_bottom = 120
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer"]
+layout_mode = 2
+
+[node name="ItemName" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "ItemName"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemDescription" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 168)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec commodo, libero a aliquam semper, sapien velit bibendum mauris, et placerat lectus orci ac nulla."
+autowrap_mode = 3
+
+[node name="ItemImage" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("6_b1e7v")
+expand_mode = 5
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered_shopCard"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited_shopCard"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/TextureButton" to="." method="_on_buy_pressed"]

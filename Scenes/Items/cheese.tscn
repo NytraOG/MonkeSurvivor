@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjpm5ibxhpf34"]
+
+[ext_resource type="Script" path="res://Scripts/Items/Cheese.cs" id="1_xfw0x"]
+[ext_resource type="Texture2D" uid="uid://213fl8qe2l3o" path="res://Images/Items/Cheese.png" id="2_63g6v"]
+
+[node name="Cheese" type="Node2D"]
+script = ExtResource("1_xfw0x")
+ItemImage = ExtResource("2_63g6v")
+Price = 12
+Displayname = "Cheese"
