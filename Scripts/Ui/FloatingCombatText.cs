@@ -10,7 +10,7 @@ public partial class FloatingCombatText : Node2D
     public float DriftVelocity { get; set; } = 0.3f;
 
     public Label                  Display { get; set; }
-    public int                    Damage  { get; set; }
+    public int                    Value  { get; set; }
     public double                 Elapsed { get; set; }
     public event QueueFreedSignal OnQueueFreed;
 

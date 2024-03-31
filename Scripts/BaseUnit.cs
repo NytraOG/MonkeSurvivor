@@ -8,9 +8,11 @@ using MonkeSurvivor.Scripts.Ui;
 namespace MonkeSurvivor.Scripts;
 
 public abstract partial class BaseUnit : CharacterBody2D,
-                                         INotifyPropertyChanged
+    INotifyPropertyChanged
 {
     private float healthCurrent;
+
+    [Export] public float HealthMaximum { get; set; } = 12;
 
     public float HealthCurrent
     {
@@ -24,57 +26,43 @@ public abstract partial class BaseUnit : CharacterBody2D,
 
     public int Level { get; set; }
 
-    [Export]
-    public int XpBaseAttribut { get; set; } = 50;
+    [Export] public int XpBaseAttribut { get; set; } = 50;
 
-    [Export]
-    public int Vigor { get; set; } = 1;
+    //Attributes
+    [Export] public int Vigor { get; set; } = 1;
 
-    [Export]
-    public int Strength { get; set; } = 1;
+    [Export] public int Strength { get; set; } = 1;
 
-    [Export]
-    public int Dexterity { get; set; } = 1;
+    [Export] public int Dexterity { get; set; } = 1;
 
-    [Export]
-    public int Intelligence { get; set; } = 1;
+    [Export] public int Intelligence { get; set; } = 1;
 
-    [Export]
-    public float HealthMaximum { get; set; } = 12;
+    //Secondary Stats
+    [Export] public float IncreasedHealth { get; set; }
 
-    [Export]
-    public float IncreasedHealth { get; set; }
+    [Export] public float DecreasedHealth { get; set; }
 
-    [Export]
-    public float DecreasedHealth { get; set; }
+    [Export] public float IncreasedHealthregeneration { get; set; }
 
-    [Export]
-    public float IncreasedHealthregeneration { get; set; }
+    [Export] public float DecreasedHealthregeneration { get; set; }
 
-    [Export]
-    public float DecreasedHealthregeneration { get; set; }
+    [Export] public float IncreasedDamage { get; set; }
 
-    [Export]
-    public float IncreasedDamage { get; set; }
+    [Export] public float DecreasedDamage { get; set; }
 
-    [Export]
-    public float DecreasedDamage { get; set; }
+    [Export] public float IncreasedAttackspeed { get; set; }
 
-    [Export]
-    public float IncreasedAttackspeed { get; set; }
+    [Export] public float DecreasedAttackspeed { get; set; }
 
-    [Export]
-    public float DecreasedAttackspeed { get; set; }
-
-    public PackedScene                       FloatingCombatText => ResourceLoader.Load<PackedScene>("res://Scenes/floating_combat_text.tscn");
-    public bool                              IsDead             => HealthCurrent <= 0;
+    public PackedScene FloatingCombatText => ResourceLoader.Load<PackedScene>("res://Scenes/floating_combat_text.tscn");
+    public bool IsDead => HealthCurrent <= 0;
     public event PropertyChangedEventHandler PropertyChanged;
 
     public override void _Draw()
     {
         base._Draw();
 
-        HealthCurrent   =  HealthMaximum;
+        HealthCurrent = HealthMaximum;
         PropertyChanged += OnPropertyChanged;
     }
 
@@ -90,9 +78,15 @@ public abstract partial class BaseUnit : CharacterBody2D,
             DieProperly();
     }
 
-    protected virtual void DieProperly() => QueueFree();
+    protected virtual void DieProperly()
+    {
+        QueueFree();
+    }
 
-    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 
     protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
     {
@@ -104,27 +98,41 @@ public abstract partial class BaseUnit : CharacterBody2D,
         return true;
     }
 
-    public virtual void InstatiateFloatingCombatText(int receivedDamage, Vector2 spawnPosition, bool isCritical)
+    public virtual void InstatiateFloatingCombatText(int value, Vector2 spawnPosition, bool isCritical, bool isHeal)
     {
         try
         {
             var floatingCombatTextInstance = FloatingCombatText.Instantiate<FloatingCombatText>();
+            floatingCombatTextInstance.Display = floatingCombatTextInstance.GetNode<Label>("Label");
+            floatingCombatTextInstance.Value = value;
+            floatingCombatTextInstance.Position = spawnPosition;
 
-            floatingCombatTextInstance.Display      = floatingCombatTextInstance.GetNode<Label>("Label");
-            floatingCombatTextInstance.Display.Text = receivedDamage <= 0 ? "Miss" : receivedDamage.ToString();
-            floatingCombatTextInstance.Damage       = receivedDamage;
-            floatingCombatTextInstance.Position     = spawnPosition;
-            floatingCombatTextInstance.Show();
-
-            if (isCritical)
+            if (isHeal)
             {
-                floatingCombatTextInstance.Display.AddThemeColorOverride("font_color", Colors.DarkOrange);
-                floatingCombatTextInstance.Display.AddThemeFontSizeOverride("font_size", 42);
+                floatingCombatTextInstance.Display.AddThemeColorOverride("font_color", Colors.LimeGreen);
+                
+                if (isCritical)
+                {
+                    floatingCombatTextInstance.Display.AddThemeColorOverride("font_color", Colors.DarkGreen);
+                    floatingCombatTextInstance.Display.AddThemeFontSizeOverride("font_size", 42);
+                }
+            }
+            else
+            {
+                floatingCombatTextInstance.Display.Text = value <= 0 ? "Miss" : value.ToString();
+
+                if (isCritical)
+                {
+                    floatingCombatTextInstance.Display.AddThemeColorOverride("font_color", Colors.DarkOrange);
+                    floatingCombatTextInstance.Display.AddThemeFontSizeOverride("font_size", 42);
+                }
             }
 
+            floatingCombatTextInstance.Show();
+            
             GetTree()
-                   .CurrentScene
-                   .AddChild(floatingCombatTextInstance);
+                .CurrentScene
+                .AddChild(floatingCombatTextInstance);
         }
         catch (Exception e)
         {
