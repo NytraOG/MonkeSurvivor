@@ -10,24 +10,24 @@ namespace MonkeSurvivor.Scenes;
 
 public partial class Shop : Node
 {
-    private          CharacterSheet characterSheet;
-    private          Inventory      inventory;
-    private readonly List<string>   itemScenes = new();
-    private          Label          moneyDisply;
-    private          ShopPanel      shopPanel;
-    private          PackedScene    BattleScene => ResourceLoader.Load<PackedScene>("res://Scenes/battle.tscn");
+    private readonly List<string> itemScenes = new();
+    private CharacterSheet characterSheet;
+    private Inventory inventory;
+    private Label moneyDisply;
+    private ShopPanel shopPanel;
+    private PackedScene BattleScene => ResourceLoader.Load<PackedScene>("res://Scenes/battle.tscn");
 
     public override void _Ready()
     {
-        if(StaticMemory.AlreadyReadied)
+        if (StaticMemory.AlreadyReadied)
             return;
-        
+
         GetTree().Paused = false;
 
-        shopPanel      = GetNode<ShopPanel>("%" + nameof(ShopPanel));
-        inventory      = GetNode<Inventory>("%" + nameof(Inventory));
+        shopPanel = GetNode<ShopPanel>("%" + nameof(ShopPanel));
+        inventory = GetNode<Inventory>("%" + nameof(Inventory));
         characterSheet = GetNode<CharacterSheet>("%" + nameof(CharacterSheet));
-        moneyDisply    = shopPanel.GetNode<Label>("%PlayerMoney");
+        moneyDisply = shopPanel.GetNode<Label>("%PlayerMoney");
 
         moneyDisply.Text = StaticMemory.HeldMoney.ToString();
 
@@ -47,8 +47,13 @@ public partial class Shop : Node
 
     public void _on_button_pressed()
     {
+        var itemsFromInventory = inventory.GetAllSlots()
+            .Select(s => s.ContainedItem)
+            .ToList();
+
+        StaticMemory.ItemsHeldByPlayer = itemsFromInventory;
         StaticMemory.AlreadyReadied = false;
-        
+
         GetTree().ChangeSceneToPacked(BattleScene);
     }
 
@@ -58,14 +63,14 @@ public partial class Shop : Node
 
         var itemCount = itemScenes.Count;
         var shopCards = shopPanel.GetShopCards();
-        var rng       = new Random();
+        var rng = new Random();
 
-        for (int i = 0; i < shopCards.Length; i++)
+        for (var i = 0; i < shopCards.Length; i++)
         {
-            var number    = rng.Next(0, itemCount);
+            var number = rng.Next(0, itemCount);
             var scenePath = itemScenes[number];
-            var scene     = ResourceLoader.Load<PackedScene>(scenePath);
-            var item      = scene.Instantiate<BaseItem>();
+            var scene = ResourceLoader.Load<PackedScene>(scenePath);
+            var item = scene.Instantiate<BaseItem>();
 
             shopCards[i].SetItem(item);
         }
@@ -94,8 +99,12 @@ public partial class Shop : Node
             }
         }
         else
+        {
             GD.Print($"An error occurred when trying to access the path. '{itemDirectory}'");
+        }
     }
 
-    private void CharacterSheetOnOnAttributeRaised(string attributename) { }
+    private void CharacterSheetOnOnAttributeRaised(string attributename)
+    {
+    }
 }
