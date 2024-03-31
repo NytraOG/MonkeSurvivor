@@ -105,18 +105,24 @@ public partial class Player : BaseUnit
     private void ResolveRegenerationTicks(double delta)
     {
         regenerationTimer += delta;
-
-        if (regenerationTimer >= 1)
+        
+        var regeneratedAmountPerSecond = IncreasedHealthregeneration - DecreasedHealthregeneration;
+        
+        if(regeneratedAmountPerSecond > 0)
         {
-            var regeneratedAmount = IncreasedHealthregeneration - DecreasedHealthregeneration;
-            
-            if(regeneratedAmount > 0)
-            {
-                HealthCurrent += regeneratedAmount;
-                InstatiateFloatingCombatText((int)regeneratedAmount, Position, false, true);
-            }
+            var regeneratedAmountPerFrame = delta * regeneratedAmountPerSecond;
 
-            regenerationTimer = 0;
+            if (regeneratedAmountPerFrame + HealthCurrent > HealthMaximum)
+                HealthCurrent = HealthMaximum;
+            else
+                HealthCurrent += (float)regeneratedAmountPerFrame;
+             
+            if (regenerationTimer >= 1)
+            {
+                InstatiateFloatingCombatText((int)regeneratedAmountPerSecond, Position, false, true);
+
+                regenerationTimer = 0;
+            }   
         }
     }
 

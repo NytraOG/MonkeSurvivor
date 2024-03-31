@@ -48,6 +48,7 @@ public partial class Shop : Node
     public void _on_button_pressed()
     {
         var itemsFromInventory = inventory.GetAllSlots()
+            .Where(s => s.ContainedItem is not null)
             .Select(s => s.ContainedItem)
             .ToList();
 

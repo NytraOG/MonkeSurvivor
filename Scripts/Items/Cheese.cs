@@ -2,7 +2,7 @@ namespace MonkeSurvivor.Scripts.Items;
 
 public partial class Cheese : BaseItem
 {
-    private float healthRegValue = 2.5f;
+    private float healthRegValue = 0.5f;
 
     public override string GetTooltipDescription()
     {
