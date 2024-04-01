@@ -23,6 +23,7 @@ public partial class CharacterSheet : PanelContainer
     private Label rangeValue;
     private Label strengthLabel;
     private Label vigorLabel;
+    private Label healthregenerationValue;
     public event AttributeRaisedEventHandler OnAttributeRaised;
 
     public override void _Ready()
@@ -41,6 +42,7 @@ public partial class CharacterSheet : PanelContainer
         leechValue = GetNode<Label>("%LeechValue");
         increasedHealthValue = GetNode<Label>("%IncreasedHealthValue");
         flatHealthValue = GetNode<Label>("%FlatHealthValue");
+        healthregenerationValue = GetNode<Label>("%HealthregenerationValue");
 
         vigorLabel.Text = StaticMemory.Vigor.ToString();
         strengthLabel.Text = StaticMemory.Strength.ToString();
@@ -63,6 +65,7 @@ public partial class CharacterSheet : PanelContainer
         leechValue.Text = player.FinalLeech.ToString("N1", CultureInfo.CurrentCulture);
         increasedHealthValue.Text = player.FinalHealth.ToString("N1", CultureInfo.CurrentCulture);
         flatHealthValue.Text = player.FinalHealthFlat.ToString("N1", CultureInfo.CurrentCulture);
+        healthregenerationValue.Text = player.FinalHealthregeneration.ToString("N1", CultureInfo.CurrentCulture);
     }
 
     public void _on_Vigor_Raised()

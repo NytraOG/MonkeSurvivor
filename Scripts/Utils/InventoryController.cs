@@ -4,23 +4,17 @@ namespace MonkeSurvivor.Scripts.Utils;
 
 public partial class InventoryController : Node
 {
-	private Player player;
+    private Player player;
 
-	public override void _Ready()
-	{
-		player = GetTree().CurrentScene.GetNode<Player>(nameof(Player));
-		
-		foreach (var item in StaticMemory.ItemsHeldByPlayer)
-		{
-			item?.ApplyEffectTo(player);
-		}
-	}
+    public override void _Ready()
+    {
+        player = GetTree().CurrentScene.GetNode<Player>(nameof(Player));
 
-	public override void _ExitTree()
-	{
-		foreach (var item in StaticMemory.ItemsHeldByPlayer)
-		{
-			item?.DeductEffectFrom(player);
-		}
-	}
+        foreach (var item in StaticMemory.ItemsHeldByPlayer)
+            if (item is not null && !item.IsApplied)
+            {
+                item.ApplyEffectTo(player);
+                item.IsApplied = true;
+            }
+    }
 }

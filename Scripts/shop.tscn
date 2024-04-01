@@ -50,7 +50,6 @@ layout_mode = 2
 
 [node name="CharacterSheet" parent="UI/VBoxContainer/HBoxContainer" instance=ExtResource("4_axdm2")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 
 [node name="ItemTooltip" parent="UI" instance=ExtResource("7_wjhwd")]
