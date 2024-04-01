@@ -6,7 +6,7 @@
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_nibqc")
-SlotAmount = 40
+SlotAmount = 36
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -18,4 +18,4 @@ theme_override_constants/margin_bottom = 15
 [node name="ItemGrid" type="GridContainer" parent="MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-columns = 10
+columns = 9
