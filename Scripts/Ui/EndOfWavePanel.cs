@@ -21,6 +21,7 @@ public partial class EndOfWavePanel : PanelContainer
         StaticMemory.Strength     = player.Strength;
         StaticMemory.Dexterity    = player.Dexterity;
         StaticMemory.Intelligence = player.Intelligence;
+        StaticMemory.CurrentHealth = player.HealthCurrent;
         StaticMemory.WaveNumber++;
 
         GetTree().ChangeSceneToPacked(PostBattleScene);

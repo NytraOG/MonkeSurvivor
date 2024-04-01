@@ -74,7 +74,7 @@ public abstract partial class BaseEnemy : BaseUnit
         var resultingDamagePercentage = 1 - totalDamagereduction;
         var finalDamage = resultingDamagePercentage * DealtDamage;
         
-        chasedPlayer.HealthCurrent -= DealtDamage;
+        chasedPlayer.HealthCurrent -= finalDamage;
         chasedPlayer.InstatiateFloatingCombatText((int)DealtDamage, chasedPlayer.Position, false, false);
     }
 

@@ -32,6 +32,9 @@ public partial class Battle : Node
         player.Dexterity    = StaticMemory.Dexterity;
         player.Intelligence = StaticMemory.Intelligence;
 
+        if (StaticMemory.CurrentHealth != 0)
+            player.HealthCurrent = StaticMemory.CurrentHealth;
+        
         WaveTimer.OnWaveEnded += WaveTimerOnOnWaveEnded;
     }
 
