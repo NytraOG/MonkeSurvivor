@@ -41,7 +41,13 @@ public partial class Shop : Node
         StaticMemory.AlreadyReadied = true;
     }
 
-    private void ShopPanelOnItemBought(BaseItem boughtItem) => inventory.SetItem(boughtItem);
+    private void ShopPanelOnItemBought(BaseItem boughtItem)
+    {
+        inventory.SetItem(boughtItem);
+
+        boughtItem.ApplyEffectTo(StaticMemory.Player);
+        characterSheet.SetDisplayedValues(StaticMemory.Player);
+    }
 
     public void _on_button_pressed()
     {

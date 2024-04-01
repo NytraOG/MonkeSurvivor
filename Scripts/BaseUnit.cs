@@ -54,7 +54,7 @@ public abstract partial class BaseUnit : CharacterBody2D,
     public float FinalDamagereduction => IncreasedDamagereduction - DecreasedDamagereduction;
 
     [Export]
-    public float IncreasedLeech {  get; set; }
+    public float IncreasedLeech { get; set; }
 
     [Export]
     public float DecreasedLeech { get; set; }
@@ -118,7 +118,8 @@ public abstract partial class BaseUnit : CharacterBody2D,
 
     public float FinalAttackspeed => IncreasedAttackspeed - DecreasedAttackspeed;
 
-    [Export(PropertyHint.Range, "1, 100")] public float CriticalHitChance { get; set; } = 5;
+    [Export(PropertyHint.Range, "1, 100")]
+    public float CriticalHitChance { get; set; } = 5;
 
     [Export(PropertyHint.Range, "1, 500")]
     public float CriticalHitDamage { get; set; } = 50;
@@ -129,8 +130,7 @@ public abstract partial class BaseUnit : CharacterBody2D,
     [Export]
     public float DecreasedRange { get; set; }
 
-    public float FinalRange => IncreasedRange - DecreasedRange;
-
+    public float                             FinalRange         => IncreasedRange - DecreasedRange;
     public PackedScene                       FloatingCombatText => ResourceLoader.Load<PackedScene>("res://Scenes/floating_combat_text.tscn");
     public bool                              IsDead             => HealthCurrent <= 0;
     public event PropertyChangedEventHandler PropertyChanged;
