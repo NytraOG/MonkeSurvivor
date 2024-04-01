@@ -52,10 +52,22 @@ public abstract partial class BaseUnit : CharacterBody2D,
     public float DecreasedDamagereduction { get; set; }
 
     [Export]
+    public float IncreasedLeech { get; set; }
+
+    [Export]
+    public float DecreasedLeech { get; set; }
+
+    [Export]
     public float IncreasedHealth { get; set; }
 
     [Export]
     public float DecreasedHealth { get; set; }
+
+    [Export]
+    public float IncreasedDodgeChance { get; set; }
+
+    [Export]
+    public float DecreasedDodgeChance { get; set; }
 
     [Export]
     public float IncreasedHealthregeneration { get; set; }
@@ -81,6 +93,12 @@ public abstract partial class BaseUnit : CharacterBody2D,
 
     [Export]
     public float DecreasedAttackspeed { get; set; }
+
+    [Export]
+    public float IncreasedRange { get; set; }
+
+    [Export]
+    public float DecreasedRange { get; set; }
 
     public PackedScene                       FloatingCombatText => ResourceLoader.Load<PackedScene>("res://Scenes/floating_combat_text.tscn");
     public bool                              IsDead             => HealthCurrent <= 0;
