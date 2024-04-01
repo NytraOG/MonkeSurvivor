@@ -64,6 +64,12 @@ public abstract partial class BaseUnit : CharacterBody2D,
     public float DecreasedHealth { get; set; }
 
     [Export]
+    public float IncreasedHealthFlat { get; set; }
+
+    [Export]
+    public float DecreasedHealthFlat { get; set; }
+
+    [Export]
     public float IncreasedDodgeChance { get; set; }
 
     [Export]
@@ -93,6 +99,12 @@ public abstract partial class BaseUnit : CharacterBody2D,
 
     [Export]
     public float DecreasedAttackspeed { get; set; }
+
+    [Export(PropertyHint.Range, "1, 100")]
+    public float CriticalHitChance { get; set; }
+
+    [Export(PropertyHint.Range, "1, 500")]
+    public float CriticalHitDamage { get; set; } = 50;
 
     [Export]
     public float IncreasedRange { get; set; }

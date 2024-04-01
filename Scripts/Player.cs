@@ -26,12 +26,6 @@ public partial class Player : BaseUnit
     [Export]
     public float Speed { get; set; } = 100;
 
-    [Export(PropertyHint.Range, "1, 100")]
-    public float CriticalHitChance { get; set; }
-
-    [Export(PropertyHint.Range, "1, 500")]
-    public float CriticalHitDamage { get; set; } = 50;
-
     public int XpCurrent
     {
         get => xpCurrent;
