@@ -1,3 +1,4 @@
+using System.Globalization;
 using Godot;
 using MonkeSurvivor.Scripts.Utils;
 
@@ -7,26 +8,62 @@ public partial class CharacterSheet : PanelContainer
 {
     public delegate void AttributeRaisedEventHandler(string attributeName);
 
-    private Label                            dexterityLabel;
-    private Label                            intelligenceLabel;
-    private Label                            strengthLabel;
-    private Label                            vigorLabel;
+    private Label attackspeedValue;
+    private Label criticalDamageValue;
+    private Label criticalHitValue;
+    private Label damagereductionValue;
+
+    private Label dexterityLabel;
+    private Label flatDamageValue;
+    private Label flatHealthValue;
+    private Label increasedDamageValue;
+    private Label increasedHealthValue;
+    private Label intelligenceLabel;
+    private Label leechValue;
+    private Label rangeValue;
+    private Label strengthLabel;
+    private Label vigorLabel;
     public event AttributeRaisedEventHandler OnAttributeRaised;
 
     public override void _Ready()
     {
-        vigorLabel        = GetNode<Label>("%VigorValue");
-        strengthLabel     = GetNode<Label>("%StrengthValue");
-        dexterityLabel    = GetNode<Label>("%DexterityValue");
+        vigorLabel = GetNode<Label>("%VigorValue");
+        strengthLabel = GetNode<Label>("%StrengthValue");
+        dexterityLabel = GetNode<Label>("%DexterityValue");
         intelligenceLabel = GetNode<Label>("%IntelligenceValue");
+        increasedDamageValue = GetNode<Label>("%IncreasedDamageValue");
+        flatDamageValue = GetNode<Label>("%FlatDamageValue");
+        attackspeedValue = GetNode<Label>("%AttackspeedValue");
+        criticalHitValue = GetNode<Label>("%CriticalHitValue");
+        criticalDamageValue = GetNode<Label>("%CriticalDamageValue");
+        rangeValue = GetNode<Label>("%RangeValue");
+        damagereductionValue = GetNode<Label>("%DamagereductionValue");
+        leechValue = GetNode<Label>("%LeechValue");
+        increasedHealthValue = GetNode<Label>("%IncreasedHealthValue");
+        flatHealthValue = GetNode<Label>("%FlatHealthValue");
 
-        vigorLabel.Text        = StaticMemory.Vigor.ToString();
-        strengthLabel.Text     = StaticMemory.Strength.ToString();
-        dexterityLabel.Text    = StaticMemory.Dexterity.ToString();
+        vigorLabel.Text = StaticMemory.Vigor.ToString();
+        strengthLabel.Text = StaticMemory.Strength.ToString();
+        dexterityLabel.Text = StaticMemory.Dexterity.ToString();
         intelligenceLabel.Text = StaticMemory.Intelligence.ToString();
     }
 
-    public override void _Process(double delta) { }
+    public void SetDisplayedValues(Player player)
+    {
+        if(player is null)
+            return;
+        
+        increasedDamageValue.Text = player.FinalDamage.ToString("N1", CultureInfo.CurrentCulture);
+        flatDamageValue.Text = player.FinalFlatDamage.ToString("N1", CultureInfo.CurrentCulture);
+        attackspeedValue.Text = player.FinalAttackspeed.ToString("N1", CultureInfo.CurrentCulture);
+        criticalHitValue.Text = player.CriticalHitChance.ToString("N1", CultureInfo.CurrentCulture);
+        criticalDamageValue.Text = player.CriticalHitDamage.ToString("N1", CultureInfo.CurrentCulture);
+        rangeValue.Text = player.FinalRange.ToString("N1", CultureInfo.CurrentCulture);
+        damagereductionValue.Text = player.FinalDamagereduction.ToString("N1", CultureInfo.CurrentCulture);
+        leechValue.Text = player.FinalLeech.ToString("N1", CultureInfo.CurrentCulture);
+        increasedHealthValue.Text = player.FinalHealth.ToString("N1", CultureInfo.CurrentCulture);
+        flatHealthValue.Text = player.FinalHealthFlat.ToString("N1", CultureInfo.CurrentCulture);
+    }
 
     public void _on_Vigor_Raised()
     {

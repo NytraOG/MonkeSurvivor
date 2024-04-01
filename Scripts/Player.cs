@@ -100,7 +100,7 @@ public partial class Player : BaseUnit
     {
         regenerationTimer += delta;
         
-        var regeneratedAmountPerSecond = IncreasedHealthregeneration - DecreasedHealthregeneration;
+        var regeneratedAmountPerSecond = FinalHealthregeneration;
         
         if(regeneratedAmountPerSecond > 0)
         {

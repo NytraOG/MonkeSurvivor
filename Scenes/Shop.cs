@@ -35,6 +35,8 @@ public partial class Shop : Node
         shopPanel.ItemBought             += ShopPanelOnItemBought;
 
         GenerateItems();
+        
+        characterSheet.SetDisplayedValues(StaticMemory.Player);
 
         StaticMemory.AlreadyReadied = true;
     }
