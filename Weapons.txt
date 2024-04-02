@@ -1,0 +1,108 @@
+Intimidating Punch (Starting Weapon for Mandril Monkey Class)
+Weapon Type: Melee (Close Combat)
+
+Attack Pattern:
+
+The Mandril Monkey performs a powerful forward lunge with a fist slam, targeting a single enemy in front.
+The attack can be chained into a two-hit combo with a follow-up uppercut for additional damage.
+Weapon Stats:
+
+Base Damage: 6-8 (Light attack) / 8-10 (Heavy attack - uppercut)
+Attack Speed: 1.2 attacks per second (Fast)
+Range: 1 meter (Short reach)
+Cost: N/A (Default weapon for Mandril Monkey class)
+
+Passives:
+Intimidation: Chance to frighten enemies on successful hit, reducing their attack power for a short duration.
+Combo Potential: Light attack can be chained into a follow-up uppercut for increased damage.
+
+Visual Design:
+Visually, the Intimidating Punch can be represented by the Mandril Monkey amplifying its natural attacks.
+During the attack animation, the Mandril Monkey's fists could glow with a faint energy, showcasing the power behind the punch.
+The uppercut attack could launch the enemy slightly into the air, emphasizing the force of the blow.
+Sound Design:
+
+The attack should be accompanied by impactful sound effects. The initial lunge could have a deep grunt or roar, and the fist slam should have a heavy thud sound.
+The uppercut attack could have a higher-pitched sound effect to differentiate it from the light attack.
+Overall, the Intimidating Punch is a basic but effective starting weapon for the Mandril Monkey class. It offers a good balance of damage, attack speed, and a touch of utility with the Intimidation passive.
+
+Here are some additional ideas for the Intimidating Punch:
+
+Upgradable: The Intimidating Punch could be upgraded later in the game to increase its damage, attack speed, or intimidation chance.
+Visual Customization: Players could unlock different visual effects for the Intimidating Punch, such as different colored glows or elemental effects.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Tree Stump (Starting Weapon for Gorilla Monkey Class)
+Weapon Type: Melee (Two-Handed)
+
+Attack Pattern:
+
+The Gorilla Monkey slams the tree stump onto the ground with a powerful overhead swing, targeting enemies in a small area in front.
+Alternatively, the Gorilla Monkey can hold the tree stump and perform a charging attack, dealing knockback and potentially interrupting enemy attacks.
+Weapon Stats:
+
+Base Damage: 8-12 (High damage per hit)
+Attack Speed: 0.8 attacks per second (Slow)
+Range: 1.5 meters (Short, wide area of effect)
+Cost: N/A (Default weapon for Gorilla Monkey class)
+
+Passives:
+Brute Force: Chance to inflict a stagger effect on enemies hit by the attack, interrupting their actions.
+Area Control: The wide swing of the tree stump allows the Gorilla Monkey to damage multiple enemies grouped together.
+
+Visual Design:
+The tree stump should be a sturdy piece of wood, possibly with some moss or vines clinging to it.
+The attack animation for the slam attack could show the Gorilla Monkey raising the tree stump high above its head before bringing it down with a crushing blow.
+The charging attack could involve the Gorilla Monkey gripping the tree stump tightly and charging forward with a determined roar.
+Sound Design:
+
+The slam attack should be accompanied by a loud thud as the tree stump connects with the ground.
+The charging attack could have a combination of a deep grunt from the Gorilla Monkey and the sound of the tree stump scraping against the ground.
+Overall, the Tree Stump is a powerful starting weapon for the Gorilla Monkey class, perfect for dealing heavy damage and controlling groups of enemies. Its slow attack speed is balanced by its high damage output and area of effect capabilities.
+
+Here are some additional ideas for the Tree Stump:
+
+Upgradable: The Tree Stump could be upgraded later in the game to be imbued with elemental effects or have spikes added for increased piercing damage.
+Combo Potential: Unlock additional combo attacks with the Tree Stump, such as a follow-up ground pound after a successful slam attack.
+
+Normal attacks, Chargin attack, aoe slam
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Bamboo Spear (Starting Weapon for Orangutan Class)
+Weapon Type: Melee (Two-Handed)
+
+Attack Pattern:
+
+The Orangutan utilizes the Bamboo Spear's reach and leverage to control the battlefield and deliver strong attacks.
+
+Standard Thrust: A basic forward thrust with the spear, targeting a single enemy at a medium distance.
+Sweeping Strike: The Orangutan swings the spear in a wide arc, hitting multiple enemies grouped close together.
+Impaling Strike: A powerful lunging attack where the Orangutan leaps forward and attempts to impale an enemy with the spear's tip. This attack can potentially pin the enemy to the ground momentarily (requires aiming and timing).
+Weapon Stats:
+
+Base Damage: 8-12 (High damage per hit, especially on Impaling Strike)
+Attack Speed: 0.9 attacks per second (Slightly slower than Bamboo Katana)
+Range: 2.5 meters (Long reach)
+Cost: N/A (Default weapon for Orangutan class)
+
+Passives:
+Area Control: The long reach of the spear allows the Orangutan to keep enemies at bay and attack from a safer distance.
+Pinning Potential: Successful Impaling Strikes can pin enemies to the ground, leaving them briefly immobilized and vulnerable to further attacks.
+
+Visual Design:
+The Bamboo Spear should be a sturdy weapon crafted from thick bamboo with a sharpened tip. The Orangutan's strength allows it to wield the spear comfortably with two hands.
+The attack animations should showcase the Orangutan's reach and power. The standard thrust can be a simple but forceful jab, while the sweeping strike involves a wide, almost circular motion.
+The Impaling Strike animation could be a dynamic leap forward with the spear extended, followed by a visual cue if the enemy is successfully pierced.
+Sound Design:
+
+The weapon swings should be accompanied by sharp piercing sounds as the bamboo spear jabs or slices through the air.
+Successful Impaling Strikes could have a distinct "thump" sound as the spear connects with the enemy, potentially followed by a grunt from the Orangutan and a struggle sound from the pierced enemy.
+Overall, the Bamboo Spear offers the Orangutan class a more defensive and strategic approach to combat compared to the Bamboo Katana. The Orangutan can control the battlefield with its reach, keep enemies at a distance, and potentially pin them down for follow-up attacks.
+
+Here are some additional ideas for the Bamboo Spear:
+
+Upgradable: The Bamboo Spear could be upgraded to improve its durability, increase damage output, or gain elemental effects for its tip.
+Combo Potential: Unlock additional combo attacks with the Bamboo Spear, such as a follow-up jab or sweep after a successful Impaling Strike to maximize damage on the pierced enemy.

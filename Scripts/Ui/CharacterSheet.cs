@@ -13,6 +13,7 @@ public partial class CharacterSheet : PanelContainer
     private Label                            criticalHitValue;
     private Label                            damagereductionValue;
     private Label                            dexterityLabel;
+    private Label                            dodgeValue;
     private Label                            flatDamageValue;
     private Label                            flatHealthValue;
     private Label                            healthregenerationValue;
@@ -42,6 +43,7 @@ public partial class CharacterSheet : PanelContainer
         increasedHealthValue    ??= GetNode<Label>("%IncreasedHealthValue");
         flatHealthValue         ??= GetNode<Label>("%FlatHealthValue");
         healthregenerationValue ??= GetNode<Label>("%HealthregenerationValue");
+        dodgeValue              ??= GetNode<Label>("%DodgeValue");
 
         vigorLabel.Text        = StaticMemory.Vigor.ToString();
         strengthLabel.Text     = StaticMemory.Strength.ToString();
@@ -65,13 +67,14 @@ public partial class CharacterSheet : PanelContainer
         SetDisplayedValue(increasedHealthValue, player.FinalHealth, "%IncreasedHealthValue");
         SetDisplayedValue(flatHealthValue, player.FinalHealthFlat, "%FlatHealthValue");
         SetDisplayedValue(healthregenerationValue, player.FinalHealthregeneration, "%HealthregenerationValue");
+        SetDisplayedValue(dodgeValue, player.FinalDodgeChance, "%HealthregenerationValue");
     }
 
     private void SetDisplayedValue(Label label, float value, string labelUniqueName)
     {
         label ??= GetNode<Label>(labelUniqueName);
 
-        if(label is null)
+        if (label is null)
             return;
 
         if (value > 0)

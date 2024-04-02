@@ -236,6 +236,26 @@ text = "0
 "
 horizontal_alignment = 2
 
+[node name="DodgeContainer" type="HBoxContainer" parent="MarginContainer/Stats"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Stats/DodgeContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="MarginContainer/Stats/DodgeContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Dodge"
+
+[node name="DodgeValue" type="Label" parent="MarginContainer/Stats/DodgeContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "0
+"
+horizontal_alignment = 2
+
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 visible = false
 layout_mode = 2
