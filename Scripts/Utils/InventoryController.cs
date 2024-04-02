@@ -14,7 +14,7 @@ public partial class InventoryController : Node
             if (item is not null && !item.IsApplied)
             {
                 item.ApplyEffectTo(player);
-                item.IsApplied = true;
+                //item.IsApplied = true;  Evtl später besser implementieren, wird aber gerade nicht benötigt. Lasse ich erstmal als reminder so stehen
             }
     }
 }
