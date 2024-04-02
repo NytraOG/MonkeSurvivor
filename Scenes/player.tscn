@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cemssp4v0a7o7"]
 
-[ext_resource type="Texture2D" uid="uid://d0h018n0q1lav" path="res://Images/OrangUtan.png" id="1_26e1i"]
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_dxo5q"]
+[ext_resource type="Texture2D" uid="uid://mmhba3j7ocra" path="res://Images/MonkeyClasses/Mandrill.png" id="2_7t6od"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dj1h8"]
 radius = 31.9927
@@ -26,8 +26,8 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("1_26e1i")
-expand_mode = 1
+texture = ExtResource("2_7t6od")
+expand_mode = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-5, 34)
