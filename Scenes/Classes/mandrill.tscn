@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://gm8k6duar51x"]
+
+[ext_resource type="Script" path="res://Scripts/Monkeys/Mandrill.cs" id="1_j36lp"]
+[ext_resource type="Texture2D" uid="uid://mmhba3j7ocra" path="res://Images/MonkeyClasses/Mandrill.png" id="2_vr7vf"]
+
+[node name="Mandril" type="Node2D"]
+script = ExtResource("1_j36lp")
+ClassSprite = ExtResource("2_vr7vf")

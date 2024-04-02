@@ -7,7 +7,7 @@ namespace MonkeSurvivor.Scripts.Ui;
 public partial class Battle : Node
 {
     private Player      player;
-    public  PackedScene MonkeyType => ResourceLoader.Load<PackedScene>("res://Scenes/Classes/orangutan.tscn");
+    public  PackedScene MonkeyType => ResourceLoader.Load<PackedScene>("res://Scenes/Classes/mandrill.tscn");
 
     [Export]
     public PauseMenu PauseMenu { get; set; }

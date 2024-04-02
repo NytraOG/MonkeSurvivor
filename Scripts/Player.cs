@@ -16,10 +16,10 @@ public partial class Player : BaseUnit
     private Node            battleScene;
     private bool            invincibilityRunning;
     private double          millisecondsSinceLastHit;
+    private double          regenerationTimer;
     private float           swingTimer;
     private TextureRect     texture;
     private int             xpCurrent;
-    private double regenerationTimer;
     public  List<BaseEnemy> Enemies       { get; set; }
     public  StaticBody2D    WieldedWeapon { get; set; }
 
@@ -83,9 +83,12 @@ public partial class Player : BaseUnit
         invincibilityRunning = true;
     }
 
-    public void SetMonkeyClass(BaseMonkey monkey) =>
-            //Apply Modifiers
-            WieldedWeapon = monkey.StartingWeapon.Instantiate<StaticBody2D>();
+    public void SetMonkeyClass(BaseMonkey monkey)
+    {
+        //Apply Modifiers
+        WieldedWeapon   = monkey.StartingWeapon.Instantiate<StaticBody2D>();
+        texture.Texture = monkey.ClassSprite;
+    }
 
     public override void _Process(double delta)
     {
@@ -99,10 +102,10 @@ public partial class Player : BaseUnit
     private void ResolveRegenerationTicks(double delta)
     {
         regenerationTimer += delta;
-        
+
         var regeneratedAmountPerSecond = FinalHealthregeneration;
-        
-        if(regeneratedAmountPerSecond > 0)
+
+        if (regeneratedAmountPerSecond > 0)
         {
             var regeneratedAmountPerFrame = delta * regeneratedAmountPerSecond;
 
@@ -110,13 +113,13 @@ public partial class Player : BaseUnit
                 HealthCurrent = HealthMaximum;
             else
                 HealthCurrent += (float)regeneratedAmountPerFrame;
-             
+
             if (regenerationTimer >= 1)
             {
                 InstatiateFloatingCombatText((int)regeneratedAmountPerSecond, Position, false, true);
 
                 regenerationTimer = 0;
-            }   
+            }
         }
     }
 
