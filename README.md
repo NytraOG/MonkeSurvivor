@@ -45,12 +45,12 @@ Active Objectives auf der Map -> DEEPROCk nachbauen erstmal
 	Belohnungen???
 		:BANANEN
 
-Melee/Ranged Skillsystem
+- Melee/Ranged Skillsystem
 	- Verschiedene Kombinationen von Waffen schalten bis zu zwei Active Skillslots frei
 
 
 
-Waffentypen
+- Waffentypen
 	- Melee, Ranged, Magic
 	- Attribute
 		- Basedamage On Hit, Damagerange -> 5-8 Damage (Toggle für Dps/Basedamage anzeigeswitch)
@@ -63,7 +63,7 @@ Waffentypen
 		- Sockel für Käfer
 
 
-MetaProgressions:
+- MetaProgressions:
 	- Item-Locks im Shop
 	- Bananensaft Multiplikator erhöhen(Rate in der Bananen zu XP werden(JUICED))
 	- Waffenslots SCHWANZ und Kopf
