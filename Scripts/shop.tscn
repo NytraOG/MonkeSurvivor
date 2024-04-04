@@ -47,6 +47,7 @@ size_flags_vertical = 3
 [node name="Inventory" parent="UI/VBoxContainer/HBoxContainer" instance=ExtResource("5_3qa3v")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotAmount = 45
 
 [node name="CharacterSheet" parent="UI/VBoxContainer/HBoxContainer" instance=ExtResource("4_axdm2")]
 unique_name_in_owner = true
