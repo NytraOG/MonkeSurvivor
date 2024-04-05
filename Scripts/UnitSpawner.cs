@@ -54,6 +54,8 @@ public partial class UnitSpawner : Control
     private void SpawnWave<T>()
             where T : BaseEnemy
     {
+        player ??= battleScene.GetNode<Player>(nameof(Player));
+
         for (var i = 0; i < AmountPerWave; i++)
             SpawnUnit<T>(i);
 

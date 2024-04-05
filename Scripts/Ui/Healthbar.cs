@@ -6,19 +6,31 @@ namespace MonkeSurvivor.Scripts.Ui;
 public partial class Healthbar : PanelContainer
 {
     private Label              label;
+    private Player             player;
+    private bool               playerAssigned;
+    private bool               playerFound;
     private TextureProgressBar progressBar;
 
-    [Export]
-    public Player Player { get; set; }
+    public override void _Draw() { }
 
-    public override void _Draw()
+    public override void _Process(double delta)
     {
-        progressBar = GetNode<TextureProgressBar>(nameof(TextureProgressBar));
-        label       = GetNode<Label>(nameof(Label));
+        if (!playerFound)
+        {
+            player      = GetTree().CurrentScene.GetNode<Player>(nameof(Player));
+            playerFound = player != null;
+        }
+        else if (playerFound && !playerAssigned)
+        {
+            progressBar = GetNode<TextureProgressBar>(nameof(TextureProgressBar));
+            label       = GetNode<Label>(nameof(Label));
 
-        Player.PropertyChanged += PlayerOnPropertyChanged;
+            player.PropertyChanged += PlayerOnPropertyChanged;
 
-        SetHealthbarValue();
+            SetHealthbarValue();
+
+            playerAssigned = true;
+        }
     }
 
     private void PlayerOnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -31,8 +43,8 @@ public partial class Healthbar : PanelContainer
 
     private void SetHealthbarValue()
     {
-        var healthpercentage = Player.HealthCurrent / Player.HealthMaximum * 100;
+        var healthpercentage = player.HealthCurrent / player.HealthMaximum * 100;
         progressBar.Value = healthpercentage;
-        label.Text        = $"{(int)Player.HealthCurrent}/{(int)Player.HealthMaximum}";
+        label.Text        = $"{(int)player.HealthCurrent}/{(int)player.HealthMaximum}";
     }
 }

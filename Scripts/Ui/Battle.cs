@@ -7,8 +7,8 @@ namespace MonkeSurvivor.Scripts.Ui;
 public partial class Battle : Node
 {
     private Player      player;
-    public  PackedScene MonkeyType => ResourceLoader.Load<PackedScene>("res://Scenes/Classes/mandrill.tscn");
-
+    public  PackedScene MonkeyType  => ResourceLoader.Load<PackedScene>("res://Scenes/Classes/mandrill.tscn");
+    public  PackedScene PlayerScene => ResourceLoader.Load<PackedScene>("res://Scenes/player.tscn");
     [Export]
     public PauseMenu PauseMenu { get; set; }
 
@@ -22,20 +22,23 @@ public partial class Battle : Node
     {
         base._Ready();
 
-        var monkey = MonkeyType.Instantiate<BaseMonkey>();
+        player = StaticMemory.Player ?? InstantiatePlayer();
 
-        player = GetNode<Player>(nameof(Player));
-        player.SetMonkeyClass(monkey);
+        AddChild(player);
 
-        player.Vigor        = StaticMemory.Vigor;
-        player.Strength     = StaticMemory.Strength;
-        player.Dexterity    = StaticMemory.Dexterity;
-        player.Intelligence = StaticMemory.Intelligence;
-
-        if (StaticMemory.CurrentHealth != 0)
-            player.HealthCurrent = StaticMemory.CurrentHealth;
-        
         WaveTimer.OnWaveEnded += WaveTimerOnWaveEnded;
+    }
+
+    private Player InstantiatePlayer()
+    {
+        var newPlayer = PlayerScene.Instantiate<Player>();
+        var monkey    = MonkeyType.Instantiate<BaseMonkey>();
+
+        newPlayer.Speed    = 300;
+        newPlayer.Position = new Vector2(900, 500);
+        newPlayer.SetMonkeyClass(monkey);
+
+        return newPlayer;
     }
 
     public override void _Process(double delta)

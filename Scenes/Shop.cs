@@ -37,6 +37,7 @@ public partial class Shop : Node
         GenerateItems();
         
         characterSheet.SetDisplayedValues(StaticMemory.Player);
+        characterSheet.CharacterImage.Texture = StaticMemory.Player.GetNode<TextureRect>(nameof(TextureRect)).Texture;
 
         StaticMemory.AlreadyReadied = true;
     }

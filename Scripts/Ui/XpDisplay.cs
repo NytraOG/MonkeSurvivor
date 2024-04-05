@@ -4,19 +4,31 @@ namespace MonkeSurvivor.Scripts.Ui;
 
 public partial class XpDisplay : PanelContainer
 {
-    private Label xpDisplayValue;
+    private Player player;
+    private bool   playerAssigned;
+    private bool   playerFound;
+    private Label  xpDisplayValue;
 
-    public override void _Ready()
+    public override void _Process(double delta)
     {
-        var player = GetTree().CurrentScene.GetNode<Player>(nameof(Player));
-        xpDisplayValue = GetNode<Label>("%XpValue");
-        SetDisplayedValue(player);
-
-        player.PropertyChanged += (sender, e) =>
+        if (!playerFound)
         {
-            if (e.PropertyName == nameof(Player.XpCurrent) && sender is Player alsoPlayer)
-                SetDisplayedValue(alsoPlayer);
-        };
+            player      = GetTree().CurrentScene.GetNode<Player>(nameof(Player));
+            playerFound = player != null;
+        }
+        else if (playerFound && !playerAssigned)
+        {
+            xpDisplayValue = GetNode<Label>("%XpValue");
+            SetDisplayedValue(player);
+
+            player.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == nameof(Player.XpCurrent) && sender is Player alsoPlayer)
+                    SetDisplayedValue(alsoPlayer);
+            };
+
+            playerAssigned = true;
+        }
     }
 
     private void SetDisplayedValue(Player player)

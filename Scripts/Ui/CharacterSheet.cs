@@ -26,6 +26,8 @@ public partial class CharacterSheet : PanelContainer
     private Label                            vigorLabel;
     public event AttributeRaisedEventHandler OnAttributeRaised;
 
+    public TextureRect CharacterImage => GetNode<TextureRect>("%CharacterImage");
+
     public override void _Ready()
     {
         vigorLabel              ??= GetNode<Label>("%VigorValue");

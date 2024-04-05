@@ -53,7 +53,9 @@ public partial class Player : BaseUnit
 
     public float DiagonalSpeed => (float)Math.Sqrt(Math.Pow(Speed, 2) / 2);
 
-    public override void _Ready()
+    public override void _Ready() => Initialize();
+
+    public void Initialize()
     {
         battleScene = GetTree().CurrentScene;
         var unitSpawner = battleScene.GetNode<UnitSpawner>(nameof(UnitSpawner));
@@ -85,6 +87,7 @@ public partial class Player : BaseUnit
 
     public void SetMonkeyClass(BaseMonkey monkey)
     {
+        texture ??= GetNode<TextureRect>(nameof(TextureRect));
         //Apply Modifiers
         WieldedWeapon   = monkey.StartingWeapon.Instantiate<StaticBody2D>();
         texture.Texture = monkey.ClassSprite;

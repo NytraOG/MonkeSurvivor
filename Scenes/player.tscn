@@ -31,3 +31,12 @@ expand_mode = 5
 position = Vector2(-5, 34)
 rotation = 1.56726
 shape = SubResource("CapsuleShape2D_dj1h8")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(74, 63)
+zoom = Vector2(1.2, 1.2)
+limit_left = 0
+limit_top = 0
+limit_right = 2910
+limit_bottom = 1630
+editor_draw_limits = true

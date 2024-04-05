@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Ui/EquipedWeaponsDisplay.cs" id="1_r5sbr"]
 
 [node name="EquipedWeaponsDisplay" type="PanelContainer"]
+custom_minimum_size = Vector2(400, 400)
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_r5sbr")
