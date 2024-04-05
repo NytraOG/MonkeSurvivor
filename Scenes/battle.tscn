@@ -97,7 +97,6 @@ offset_left = 909.0
 offset_top = 959.0
 offset_right = 1011.0
 offset_bottom = 1071.0
-WaveTimeSeconds = 5
 
 [node name="EndOfWavePanel" parent="UI" instance=ExtResource("12_etiq2")]
 visible = false

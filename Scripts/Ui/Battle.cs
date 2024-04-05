@@ -35,7 +35,7 @@ public partial class Battle : Node
         if (StaticMemory.CurrentHealth != 0)
             player.HealthCurrent = StaticMemory.CurrentHealth;
         
-        WaveTimer.OnWaveEnded += WaveTimerOnOnWaveEnded;
+        WaveTimer.OnWaveEnded += WaveTimerOnWaveEnded;
     }
 
     public override void _Process(double delta)
@@ -47,7 +47,7 @@ public partial class Battle : Node
         }
     }
 
-    private void WaveTimerOnOnWaveEnded() => EndRound();
+    private void WaveTimerOnWaveEnded() => EndRound();
 
     private void EndRound()
     {

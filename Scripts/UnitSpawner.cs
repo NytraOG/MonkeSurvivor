@@ -12,6 +12,7 @@ public partial class UnitSpawner : Control
     private Node            battleScene;
     private Player          player;
     private double          waveTimer;
+    public  bool            AllowedToSpawn { get; set; } = true;
     public  List<BaseEnemy> SpawnedEnemies { get; set; } = new();
 
     [Export]
@@ -46,7 +47,7 @@ public partial class UnitSpawner : Control
 
     public override void _Process(double delta)
     {
-        if ((waveTimer += delta) >= ModifiedCooldown)
+        if ((waveTimer += delta) >= ModifiedCooldown && AllowedToSpawn)
             SpawnWave<Spider>();
     }
 
