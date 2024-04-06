@@ -9,6 +9,7 @@ public partial class Battle : Node
     private Player      player;
     public  PackedScene MonkeyType  => ResourceLoader.Load<PackedScene>("res://Scenes/Classes/mandrill.tscn");
     public  PackedScene PlayerScene => ResourceLoader.Load<PackedScene>("res://Scenes/player.tscn");
+
     [Export]
     public PauseMenu PauseMenu { get; set; }
 
@@ -22,15 +23,18 @@ public partial class Battle : Node
     {
         base._Ready();
 
-        player = StaticMemory.Player ?? InstantiatePlayer();
+        InstantiatePlayer();
 
         AddChild(player);
 
         WaveTimer.OnWaveEnded += WaveTimerOnWaveEnded;
     }
 
-    private Player InstantiatePlayer()
+    private void InstantiatePlayer()
     {
+        if (IsInstanceValid(StaticMemory.Player))
+            player = StaticMemory.Player;
+
         var newPlayer = PlayerScene.Instantiate<Player>();
         var monkey    = MonkeyType.Instantiate<BaseMonkey>();
 
@@ -38,7 +42,7 @@ public partial class Battle : Node
         newPlayer.Position = new Vector2(900, 500);
         newPlayer.SetMonkeyClass(monkey);
 
-        return newPlayer;
+        player = newPlayer;
     }
 
     public override void _Process(double delta)

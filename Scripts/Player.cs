@@ -24,7 +24,7 @@ public partial class Player : BaseUnit
     public  StaticBody2D    WieldedWeapon { get; set; }
 
     [Export]
-    public float Speed { get; set; } = 100;
+    public float Speed { get; set; } = 400;
 
     public int XpCurrent
     {

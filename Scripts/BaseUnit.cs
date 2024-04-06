@@ -14,7 +14,7 @@ public abstract partial class BaseUnit : CharacterBody2D,
     public  int   Level { get; set; }
 
     [Export]
-    public float HealthMaximum { get; set; } = 12;
+    public float HealthMaximum { get; set; } = 25;
 
     public float HealthCurrent
     {
