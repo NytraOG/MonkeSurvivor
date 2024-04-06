@@ -2,20 +2,6 @@
 
 namespace MonkeSurvivor.Scripts.Weapons;
 
-public class BaseRangedWeapon : BaseItem
+public abstract partial class BaseRangedWeapon : BaseWeapon
 {
-    public override string GetTooltipDescription()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void ApplyEffectTo(Player player)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void DeductEffectFrom(Player player)
-    {
-        throw new System.NotImplementedException();
-    }
 }

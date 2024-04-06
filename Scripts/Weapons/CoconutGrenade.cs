@@ -1,6 +1,6 @@
 namespace MonkeSurvivor.Scripts.Weapons;
 
-public partial class CoconutGrenade : BaseWeapon
+public partial class CoconutGrenade : BaseRangedWeapon
 {
     public override void _Process(double delta) { }
 
