@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://cuyv13hlq5sqp"]
+
+[ext_resource type="Script" path="res://Scripts/Weapons/BambooSpear.cs" id="1_rfgbp"]
+[ext_resource type="Texture2D" uid="uid://ihbnwfxsravg" path="res://Images/Weapons/BambooSpear.png" id="2_3ag70"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3u7sx"]
+
+[sub_resource type="Animation" id="Animation_2aohn"]
+resource_name = "WeaponSwing"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponRightHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(76, 3), Vector2(-166, -17), Vector2(-160, -82), Vector2(-121, -132), Vector2(-55, -185), Vector2(27, -197), Vector2(97, -189), Vector2(144, -144), Vector2(184, -81), Vector2(209, 2.99999), Vector2(197, 82), Vector2(76, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponRightHand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.541764, -2.25885, -1.88862, -1.51838, -1.0758, -0.633209, -0.278928, 0.0753525, 0.429633, 0.783914, 1.13819, -0.541764]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_54vm6"]
+_data = {
+"WeaponSwing": SubResource("Animation_2aohn")
+}
+
+[node name="BambooSpear" type="StaticBody2D"]
+script = ExtResource("1_rfgbp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3u7sx")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_3ag70")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_54vm6")
+}
