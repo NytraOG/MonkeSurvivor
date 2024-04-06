@@ -21,7 +21,10 @@ public partial class Player : BaseUnit
     private TextureRect     texture;
     private int             xpCurrent;
     public  List<BaseEnemy> Enemies       { get; set; }
-    public  StaticBody2D    WieldedWeapon { get; set; }
+    public  StaticBody2D    WieldedWeaponRightHand { get; set; }
+    public  StaticBody2D    WieldedWeaponLeftHand { get; set; }
+    public  StaticBody2D    WieldedWeaponTail { get; set; }
+    public  StaticBody2D    WieldedWeaponHeadmounted { get; set; }
 
     [Export]
     public float Speed { get; set; } = 400;
@@ -91,7 +94,7 @@ public partial class Player : BaseUnit
     {
         texture ??= GetNode<TextureRect>(nameof(TextureRect));
         //Apply Modifiers
-        WieldedWeapon   = monkey.StartingWeapon.Instantiate<StaticBody2D>();
+        WieldedWeaponRightHand   = monkey.StartingWeapon.Instantiate<StaticBody2D>();
         texture.Texture = monkey.ClassSprite;
     }
 
@@ -130,12 +133,12 @@ public partial class Player : BaseUnit
 
     private void ProgressSwingtimer(double delta)
     {
-        if (WieldedWeapon is null)
+        if (WieldedWeaponRightHand is null)
             return;
 
         swingTimer += (float)delta;
 
-        if (WieldedWeapon is BaseWeapon wieldedWeapon && swingTimer >= wieldedWeapon.SwingCooldown)
+        if (WieldedWeaponRightHand is BaseWeapon wieldedWeapon && swingTimer >= wieldedWeapon.SwingCooldown)
         {
             swingTimer = 0;
 
