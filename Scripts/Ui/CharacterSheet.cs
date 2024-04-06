@@ -69,7 +69,7 @@ public partial class CharacterSheet : PanelContainer
         SetDisplayedValue(increasedHealthValue, player.FinalHealth, "%IncreasedHealthValue");
         SetDisplayedValue(flatHealthValue, player.FinalHealthFlat, "%FlatHealthValue");
         SetDisplayedValue(healthregenerationValue, player.FinalHealthregeneration, "%HealthregenerationValue");
-        SetDisplayedValue(dodgeValue, player.FinalDodgeChance, "%HealthregenerationValue");
+        SetDisplayedValue(dodgeValue, player.FinalDodgeChance, "%DodgeValue");
     }
 
     private void SetDisplayedValue(Label label, float value, string labelUniqueName)

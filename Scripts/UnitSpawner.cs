@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 using MonkeSurvivor.Scripts.Enemies;
+using MonkeSurvivor.Scripts.Ui;
 
 namespace MonkeSurvivor.Scripts;
 
@@ -30,12 +31,10 @@ public partial class UnitSpawner : Control
     private float                        ModifiedCooldown => WaveCooldown * WaveCooldownModifier;
     public event WaveSpawnedEventHandler WaveSpawned;
 
-    public override void _Ready()
+    public void Initialize(Battle battle, Player incomingPlayer)
     {
-        var sceneTree = GetTree();
-
-        battleScene = sceneTree.CurrentScene;
-        player      = battleScene.GetNode<Player>(nameof(Player));
+        battleScene = battle;
+        player      = incomingPlayer;
         background  = battleScene.GetNode<TextureRect>("Background");
     }
 
@@ -57,12 +56,11 @@ public partial class UnitSpawner : Control
         player    ??= battleScene.GetNode<Player>(nameof(Player));
         waveTimer =   0;
 
-        if(player is null)
+        if (player is null)
             return;
 
         for (var i = 0; i < AmountPerWave; i++)
             SpawnUnit<T>(i);
-
 
         WaveSpawned?.Invoke();
     }

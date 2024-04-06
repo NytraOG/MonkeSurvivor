@@ -139,7 +139,9 @@ public abstract partial class BaseUnit : CharacterBody2D,
     {
         base._Draw();
 
-        HealthCurrent   =  HealthMaximum;
+        if(HealthCurrent <= 0)
+            HealthCurrent   =  HealthMaximum;
+
         PropertyChanged += OnPropertyChanged;
     }
 

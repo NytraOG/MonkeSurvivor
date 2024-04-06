@@ -64,6 +64,8 @@ public partial class Player : BaseUnit
         texture   = GetNode<TextureRect>(nameof(TextureRect));
         XpCurrent = StaticMemory.HeldMoney;
 
+        invincibilityRunning = true;
+
         PropertyChanged += OnPropertyChanged;
     }
 

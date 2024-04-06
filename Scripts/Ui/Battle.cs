@@ -21,11 +21,10 @@ public partial class Battle : Node
 
     public override void _Ready()
     {
-        base._Ready();
-
         InstantiatePlayer();
 
-        AddChild(player);
+        var unitSpawner = GetNode<UnitSpawner>(nameof(UnitSpawner));
+        unitSpawner.Initialize(this, player);
 
         WaveTimer.OnWaveEnded += WaveTimerOnWaveEnded;
     }
@@ -38,11 +37,15 @@ public partial class Battle : Node
         var newPlayer = PlayerScene.Instantiate<Player>();
         var monkey    = MonkeyType.Instantiate<BaseMonkey>();
 
-        newPlayer.Speed    = 300;
-        newPlayer.Position = new Vector2(900, 500);
+        if(StaticMemory.Player is not null)
+            newPlayer.HealthCurrent = StaticMemory.Player.HealthCurrent;
+
+        newPlayer.Speed         = 400;
+        newPlayer.Position      = new Vector2(900, 500);
         newPlayer.SetMonkeyClass(monkey);
 
         player = newPlayer;
+        AddChild(player);
     }
 
     public override void _Process(double delta)
