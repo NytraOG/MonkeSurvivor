@@ -9,8 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://djdwd0cq1i12" path="res://Scenes/xp_display.tscn" id="8_byico"]
 [ext_resource type="PackedScene" uid="uid://byg24jevou41s" path="res://Scenes/wave_count_display.tscn" id="9_ng8op"]
 [ext_resource type="PackedScene" uid="uid://dqr0tpx7cqojt" path="res://Scenes/dps_display.tscn" id="10_i1e05"]
-[ext_resource type="PackedScene" uid="uid://cxjdev6p4pck2" path="res://Scenes/wave_timer.tscn" id="11_sfg61"]
-[ext_resource type="PackedScene" uid="uid://o2krirg1072s" path="res://Scenes/end_of_wave_panel.tscn" id="12_etiq2"]
+[ext_resource type="PackedScene" path="res://Scenes/wave_timer.tscn" id="11_sfg61"]
+[ext_resource type="PackedScene" path="res://Scenes/end_of_wave_panel.tscn" id="12_etiq2"]
 [ext_resource type="PackedScene" uid="uid://djofp60813u06" path="res://Scenes/Utils/inventory_controller.tscn" id="13_yujit"]
 
 [node name="Battle" type="Node" node_paths=PackedStringArray("PauseMenu", "WaveTimer", "EndOfWavePanel")]
