@@ -1,10 +1,45 @@
-[gd_scene load_steps=3 format=3 uid="uid://cemssp4v0a7o7"]
+[gd_scene load_steps=7 format=3 uid="uid://cemssp4v0a7o7"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_dxo5q"]
+[ext_resource type="Texture2D" uid="uid://d0h018n0q1lav" path="res://Images/MonkeyClasses/OrangUtan.png" id="2_b52vf"]
+[ext_resource type="Texture2D" uid="uid://ihbnwfxsravg" path="res://Images/Weapons/BambooSpear.png" id="3_np1gx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dj1h8"]
 radius = 31.9927
 height = 63.9855
+
+[sub_resource type="Animation" id="Animation_2aohn"]
+resource_name = "WeaponSwing"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponRightHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(76, 3), Vector2(-166, -17), Vector2(-160, -82), Vector2(-121, -132), Vector2(-55, -185), Vector2(27, -197), Vector2(97, -189), Vector2(144, -144), Vector2(184, -81), Vector2(209, 2.99999), Vector2(197, 82), Vector2(76, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponRightHand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.541764, -2.25885, -1.88862, -1.51838, -1.0758, -0.633209, -0.278928, 0.0753525, 0.429633, 0.783914, 1.13819, -0.541764]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_54vm6"]
+_data = {
+"WeaponSwing": SubResource("Animation_2aohn")
+}
 
 [node name="Player" type="CharacterBody2D"]
 self_modulate = Color(1, 1, 1, 0)
@@ -25,6 +60,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+texture = ExtResource("2_b52vf")
 expand_mode = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -40,3 +76,16 @@ limit_top = 0
 limit_right = 2910
 limit_bottom = 1630
 editor_draw_limits = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_54vm6")
+}
+
+[node name="WeaponRightHand" type="Node2D" parent="."]
+position = Vector2(76, 3)
+rotation = -0.541764
+
+[node name="Sprite2D" type="Sprite2D" parent="WeaponRightHand"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_np1gx")
