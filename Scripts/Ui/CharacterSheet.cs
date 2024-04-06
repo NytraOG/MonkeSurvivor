@@ -1,3 +1,4 @@
+using System.Globalization;
 using Godot;
 using MonkeSurvivor.Scripts.Utils;
 
@@ -7,18 +8,44 @@ public partial class CharacterSheet : PanelContainer
 {
     public delegate void AttributeRaisedEventHandler(string attributeName);
 
+    private Label                            attackspeedValue;
+    private Label                            criticalDamageValue;
+    private Label                            criticalHitValue;
+    private Label                            damagereductionValue;
     private Label                            dexterityLabel;
+    private Label                            dodgeValue;
+    private Label                            flatDamageValue;
+    private Label                            flatHealthValue;
+    private Label                            healthregenerationValue;
+    private Label                            increasedDamageValue;
+    private Label                            increasedHealthValue;
     private Label                            intelligenceLabel;
+    private Label                            leechValue;
+    private Label                            rangeValue;
     private Label                            strengthLabel;
     private Label                            vigorLabel;
     public event AttributeRaisedEventHandler OnAttributeRaised;
 
+    public TextureRect CharacterImage => GetNode<TextureRect>("%CharacterImage");
+
     public override void _Ready()
     {
-        vigorLabel        = GetNode<Label>("%VigorValue");
-        strengthLabel     = GetNode<Label>("%StrengthValue");
-        dexterityLabel    = GetNode<Label>("%DexterityValue");
-        intelligenceLabel = GetNode<Label>("%IntelligenceValue");
+        vigorLabel              ??= GetNode<Label>("%VigorValue");
+        strengthLabel           ??= GetNode<Label>("%StrengthValue");
+        dexterityLabel          ??= GetNode<Label>("%DexterityValue");
+        intelligenceLabel       ??= GetNode<Label>("%IntelligenceValue");
+        increasedDamageValue    ??= GetNode<Label>("%IncreasedDamageValue");
+        flatDamageValue         ??= GetNode<Label>("%FlatDamageValue");
+        attackspeedValue        ??= GetNode<Label>("%AttackspeedValue");
+        criticalHitValue        ??= GetNode<Label>("%CriticalHitValue");
+        criticalDamageValue     ??= GetNode<Label>("%CriticalDamageValue");
+        rangeValue              ??= GetNode<Label>("%RangeValue");
+        damagereductionValue    ??= GetNode<Label>("%DamagereductionValue");
+        leechValue              ??= GetNode<Label>("%LeechValue");
+        increasedHealthValue    ??= GetNode<Label>("%IncreasedHealthValue");
+        flatHealthValue         ??= GetNode<Label>("%FlatHealthValue");
+        healthregenerationValue ??= GetNode<Label>("%HealthregenerationValue");
+        dodgeValue              ??= GetNode<Label>("%DodgeValue");
 
         vigorLabel.Text        = StaticMemory.Vigor.ToString();
         strengthLabel.Text     = StaticMemory.Strength.ToString();
@@ -26,7 +53,39 @@ public partial class CharacterSheet : PanelContainer
         intelligenceLabel.Text = StaticMemory.Intelligence.ToString();
     }
 
-    public override void _Process(double delta) { }
+    public void SetDisplayedValues(Player player)
+    {
+        if (player is null)
+            return;
+
+        SetDisplayedValue(increasedDamageValue, player.FinalDamage, "%IncreasedDamageValue");
+        SetDisplayedValue(flatDamageValue, player.FinalFlatDamage, "%FlatDamageValue");
+        SetDisplayedValue(attackspeedValue, player.FinalAttackspeed, "%AttackspeedValue");
+        SetDisplayedValue(criticalHitValue, player.CriticalHitChance, "%CriticalHitValue");
+        SetDisplayedValue(criticalDamageValue, player.CriticalHitDamage, "%CriticalDamageValue");
+        SetDisplayedValue(rangeValue, player.FinalRange, "%RangeValue");
+        SetDisplayedValue(damagereductionValue, player.FinalDamagereduction, "%DamagereductionValue");
+        SetDisplayedValue(leechValue, player.FinalLeech, "%LeechValue");
+        SetDisplayedValue(increasedHealthValue, player.FinalHealth, "%IncreasedHealthValue");
+        SetDisplayedValue(flatHealthValue, player.FinalHealthFlat, "%FlatHealthValue");
+        SetDisplayedValue(healthregenerationValue, player.FinalHealthregeneration, "%HealthregenerationValue");
+        SetDisplayedValue(dodgeValue, player.FinalDodgeChance, "%DodgeValue");
+    }
+
+    private void SetDisplayedValue(Label label, float value, string labelUniqueName)
+    {
+        label ??= GetNode<Label>(labelUniqueName);
+
+        if (label is null)
+            return;
+
+        if (value > 0)
+            label.AddThemeColorOverride("font_color", Colors.LawnGreen);
+        else if (value < 0)
+            label.AddThemeColorOverride("font_color", Colors.Red);
+
+        label.Text = value.ToString("N0", CultureInfo.CurrentCulture);
+    }
 
     public void _on_Vigor_Raised()
     {

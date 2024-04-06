@@ -22,6 +22,19 @@ public partial class Inventory : PanelContainer
 
     public override void _Ready()
     {
+        GenerateInventorySlots();
+        AddHeldItemsToInventory();
+    }
+
+    private void AddHeldItemsToInventory()
+    {
+        var itemsHeldByPlayer = StaticMemory.ItemsHeldByPlayer;
+
+        foreach (var item in itemsHeldByPlayer) SetItem(item);
+    }
+
+    private void GenerateInventorySlots()
+    {
         var itemGrid = GetNode<GridContainer>("%ItemGrid");
 
         for (var i = 0; i < SlotAmount; i++)
@@ -45,7 +58,7 @@ public partial class Inventory : PanelContainer
     private InventorySlot FindFirstEmptySlot()
     {
         var slots = GetAllSlots();
-        
+
         foreach (var slot in slots)
             if (slot.ContainedItem is null)
                 return slot;

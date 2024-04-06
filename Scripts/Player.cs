@@ -16,6 +16,7 @@ public partial class Player : BaseUnit
     private Node            battleScene;
     private bool            invincibilityRunning;
     private double          millisecondsSinceLastHit;
+    private double          regenerationTimer;
     private float           swingTimer;
     private TextureRect     texture;
     private int             xpCurrent;
@@ -23,13 +24,7 @@ public partial class Player : BaseUnit
     public  StaticBody2D    WieldedWeapon { get; set; }
 
     [Export]
-    public float Speed { get; set; } = 100;
-
-    [Export(PropertyHint.Range, "1, 100")]
-    public float CriticalHitChance { get; set; }
-
-    [Export(PropertyHint.Range, "1, 500")]
-    public float CriticalHitDamage { get; set; } = 50;
+    public float Speed { get; set; } = 400;
 
     public int XpCurrent
     {
@@ -58,7 +53,9 @@ public partial class Player : BaseUnit
 
     public float DiagonalSpeed => (float)Math.Sqrt(Math.Pow(Speed, 2) / 2);
 
-    public override void _Ready()
+    public override void _Ready() => Initialize();
+
+    public void Initialize()
     {
         battleScene = GetTree().CurrentScene;
         var unitSpawner = battleScene.GetNode<UnitSpawner>(nameof(UnitSpawner));
@@ -66,6 +63,8 @@ public partial class Player : BaseUnit
 
         texture   = GetNode<TextureRect>(nameof(TextureRect));
         XpCurrent = StaticMemory.HeldMoney;
+
+        invincibilityRunning = true;
 
         PropertyChanged += OnPropertyChanged;
     }
@@ -88,16 +87,45 @@ public partial class Player : BaseUnit
         invincibilityRunning = true;
     }
 
-    public void SetMonkeyClass(BaseMonkey monkey) =>
-            //Apply Modifiers
-            WieldedWeapon = monkey.StartingWeapon.Instantiate<StaticBody2D>();
+    public void SetMonkeyClass(BaseMonkey monkey)
+    {
+        texture ??= GetNode<TextureRect>(nameof(TextureRect));
+        //Apply Modifiers
+        WieldedWeapon   = monkey.StartingWeapon.Instantiate<StaticBody2D>();
+        texture.Texture = monkey.ClassSprite;
+    }
 
     public override void _Process(double delta)
     {
         base._Process(delta);
 
+        ResolveRegenerationTicks(delta);
         ResolveInvincibility(delta);
         ProgressSwingtimer(delta);
+    }
+
+    private void ResolveRegenerationTicks(double delta)
+    {
+        regenerationTimer += delta;
+
+        var regeneratedAmountPerSecond = FinalHealthregeneration;
+
+        if (regeneratedAmountPerSecond > 0)
+        {
+            var regeneratedAmountPerFrame = delta * regeneratedAmountPerSecond;
+
+            if (regeneratedAmountPerFrame + HealthCurrent > HealthMaximum)
+                HealthCurrent = HealthMaximum;
+            else
+                HealthCurrent += (float)regeneratedAmountPerFrame;
+
+            if (regenerationTimer >= 1)
+            {
+                InstatiateFloatingCombatText((int)regeneratedAmountPerSecond, Position, false, true);
+
+                regenerationTimer = 0;
+            }
+        }
     }
 
     private void ProgressSwingtimer(double delta)

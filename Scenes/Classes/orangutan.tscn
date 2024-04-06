@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cfxpo2o33qb22"]
+[gd_scene load_steps=3 format=3 uid="uid://cfxpo2o33qb22"]
 
 [ext_resource type="Script" path="res://Scripts/Monkeys/Orangutan.cs" id="1_isyof"]
+[ext_resource type="Texture2D" uid="uid://d0h018n0q1lav" path="res://Images/MonkeyClasses/OrangUtan.png" id="2_ne2rk"]
 
 [node name="Orangutan" type="Node2D"]
 script = ExtResource("1_isyof")
+ClassSprite = ExtResource("2_ne2rk")

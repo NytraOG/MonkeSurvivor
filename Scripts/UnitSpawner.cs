@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 using MonkeSurvivor.Scripts.Enemies;
+using MonkeSurvivor.Scripts.Ui;
 
 namespace MonkeSurvivor.Scripts;
 
@@ -12,6 +13,7 @@ public partial class UnitSpawner : Control
     private Node            battleScene;
     private Player          player;
     private double          waveTimer;
+    public  bool            AllowedToSpawn { get; set; } = true;
     public  List<BaseEnemy> SpawnedEnemies { get; set; } = new();
 
     [Export]
@@ -29,12 +31,10 @@ public partial class UnitSpawner : Control
     private float                        ModifiedCooldown => WaveCooldown * WaveCooldownModifier;
     public event WaveSpawnedEventHandler WaveSpawned;
 
-    public override void _Ready()
+    public void Initialize(Battle battle, Player incomingPlayer)
     {
-        var sceneTree = GetTree();
-
-        battleScene = sceneTree.CurrentScene;
-        player      = battleScene.GetNode<Player>(nameof(Player));
+        battleScene = battle;
+        player      = incomingPlayer;
         background  = battleScene.GetNode<TextureRect>("Background");
     }
 
@@ -46,17 +46,21 @@ public partial class UnitSpawner : Control
 
     public override void _Process(double delta)
     {
-        if ((waveTimer += delta) >= ModifiedCooldown)
+        if ((waveTimer += delta) >= ModifiedCooldown && AllowedToSpawn)
             SpawnWave<Spider>();
     }
 
     private void SpawnWave<T>()
             where T : BaseEnemy
     {
+        player    ??= battleScene.GetNode<Player>(nameof(Player));
+        waveTimer =   0;
+
+        if (player is null)
+            return;
+
         for (var i = 0; i < AmountPerWave; i++)
             SpawnUnit<T>(i);
-
-        waveTimer = 0;
 
         WaveSpawned?.Invoke();
     }

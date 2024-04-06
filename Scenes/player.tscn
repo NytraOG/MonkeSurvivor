@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=3 uid="uid://cemssp4v0a7o7"]
+[gd_scene load_steps=3 format=3 uid="uid://cemssp4v0a7o7"]
 
-[ext_resource type="Texture2D" uid="uid://d0h018n0q1lav" path="res://Images/OrangUtan.png" id="1_26e1i"]
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_dxo5q"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dj1h8"]
@@ -10,8 +9,6 @@ height = 63.9855
 [node name="Player" type="CharacterBody2D"]
 self_modulate = Color(1, 1, 1, 0)
 script = ExtResource("1_dxo5q")
-CriticalHitChance = 60.0
-CriticalHitDamage = 200.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(128, 128)
@@ -28,10 +25,18 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("1_26e1i")
-expand_mode = 1
+expand_mode = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-5, 34)
 rotation = 1.56726
 shape = SubResource("CapsuleShape2D_dj1h8")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(74, 63)
+zoom = Vector2(1.2, 1.2)
+limit_left = 0
+limit_top = 0
+limit_right = 2910
+limit_bottom = 1630
+editor_draw_limits = true

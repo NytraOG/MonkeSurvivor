@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://db518gxwyweuo"]
+[gd_scene load_steps=2 format=3 uid="uid://bhum6vieh4kle"]
 
 [ext_resource type="Script" path="res://Scripts/Ui/InventorySlot.cs" id="1_vq1cm"]
 
 [node name="InventorySlot" type="PanelContainer"]
-custom_minimum_size = Vector2(128, 128)
+custom_minimum_size = Vector2(96, 96)
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_vq1cm")

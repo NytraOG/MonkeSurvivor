@@ -7,7 +7,8 @@ namespace MonkeSurvivor.Scripts.Ui;
 public partial class Battle : Node
 {
     private Player      player;
-    public  PackedScene MonkeyType => ResourceLoader.Load<PackedScene>("res://Scenes/Classes/orangutan.tscn");
+    public  PackedScene MonkeyType  => ResourceLoader.Load<PackedScene>("res://Scenes/Classes/mandrill.tscn");
+    public  PackedScene PlayerScene => ResourceLoader.Load<PackedScene>("res://Scenes/player.tscn");
 
     [Export]
     public PauseMenu PauseMenu { get; set; }
@@ -20,19 +21,31 @@ public partial class Battle : Node
 
     public override void _Ready()
     {
-        base._Ready();
+        InstantiatePlayer();
 
-        var monkey = MonkeyType.Instantiate<BaseMonkey>();
+        var unitSpawner = GetNode<UnitSpawner>(nameof(UnitSpawner));
+        unitSpawner.Initialize(this, player);
 
-        player = GetNode<Player>(nameof(Player));
-        player.SetMonkeyClass(monkey);
+        WaveTimer.OnWaveEnded += WaveTimerOnWaveEnded;
+    }
 
-        player.Vigor        = StaticMemory.Vigor;
-        player.Strength     = StaticMemory.Strength;
-        player.Dexterity    = StaticMemory.Dexterity;
-        player.Intelligence = StaticMemory.Intelligence;
+    private void InstantiatePlayer()
+    {
+        if (IsInstanceValid(StaticMemory.Player))
+            player = StaticMemory.Player;
 
-        WaveTimer.OnWaveEnded += WaveTimerOnOnWaveEnded;
+        var newPlayer = PlayerScene.Instantiate<Player>();
+        var monkey    = MonkeyType.Instantiate<BaseMonkey>();
+
+        if(StaticMemory.Player is not null)
+            newPlayer.HealthCurrent = StaticMemory.Player.HealthCurrent;
+
+        newPlayer.Speed         = 400;
+        newPlayer.Position      = new Vector2(900, 500);
+        newPlayer.SetMonkeyClass(monkey);
+
+        player = newPlayer;
+        AddChild(player);
     }
 
     public override void _Process(double delta)
@@ -44,7 +57,7 @@ public partial class Battle : Node
         }
     }
 
-    private void WaveTimerOnOnWaveEnded() => EndRound();
+    private void WaveTimerOnWaveEnded() => EndRound();
 
     private void EndRound()
     {

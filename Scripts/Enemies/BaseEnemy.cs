@@ -70,8 +70,12 @@ public abstract partial class BaseEnemy : BaseUnit
 
     private void DealDamageToPlayer()
     {
-        chasedPlayer.HealthCurrent -= DealtDamage;
-        chasedPlayer.InstatiateFloatingCombatText((int)DealtDamage, chasedPlayer.Position, false);
+        var totalDamagereduction = (chasedPlayer.IncreasedDamagereduction - chasedPlayer.DecreasedDamagereduction)/100;
+        var resultingDamagePercentage = 1 - totalDamagereduction;
+        var finalDamage = resultingDamagePercentage * DealtDamage;
+        
+        chasedPlayer.HealthCurrent -= finalDamage;
+        chasedPlayer.InstatiateFloatingCombatText((int)DealtDamage, chasedPlayer.Position, false, false);
     }
 
     public void StartChasingPlayer(Player player)

@@ -2,9 +2,20 @@ namespace MonkeSurvivor.Scripts.Items;
 
 public partial class Cheese : BaseItem
 {
-    public override void _Ready() { }
+    private float healthRegValue = 0.5f;
 
-    public override void _Process(double delta) { }
+    public override string GetTooltipDescription()
+    {
+        return "Dieser Käse stinkt nicht.";
+    }
 
-    public override string GetTooltipDescription() => "Dieser Käse stinkt nicht.";
+    public override void ApplyEffectTo(Player player)
+    {
+        player.IncreasedHealthregeneration += healthRegValue;
+    }
+
+    public override void DeductEffectFrom(Player player)
+    {
+        player.IncreasedHealthregeneration -= healthRegValue;
+    }
 }

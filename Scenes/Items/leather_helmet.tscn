@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnnnawxtphpb0"]
+
+[ext_resource type="Script" path="res://Scripts/Items/LeatherHelmet.cs" id="1_14sip"]
+[ext_resource type="Texture2D" uid="uid://c8utpdj1ucdv8" path="res://Images/Items/2_Leather_head.png" id="2_2x0py"]
+
+[node name="LeatherHelmet" type="Node2D"]
+script = ExtResource("1_14sip")
+IncreasedDamagereduction = 10.0
+ItemImage = ExtResource("2_2x0py")
+Price = 49
+Displayname = "Leather Helmet"

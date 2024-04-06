@@ -104,7 +104,7 @@ public abstract partial class BaseWeapon : StaticBody2D
         var damage = FinalDamage.DamageDealt * multiplier;
         TotalDamageDealt    += damage;
         enemy.HealthCurrent -= damage;
-        enemy.InstatiateFloatingCombatText((int)damage, enemy.Position, FinalDamage.IsCritical);
+        enemy.InstatiateFloatingCombatText((int)damage, enemy.Position, FinalDamage.IsCritical, false);
     }
 
     private void ExecuteAttack(Node node)
