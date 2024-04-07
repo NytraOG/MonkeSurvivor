@@ -30,12 +30,18 @@ public partial class MonkeySelection : Node
 			var selectionCard = selectionCardScene.Instantiate<MonkeySelectionCard>();
 			var monkeyInstance = scene.Instantiate<BaseMonkey>();
 
+			selectionCard.OnMonkeySelectionClicked += SelectionCardOnMonkeySelectionClicked;
 			selectionCard.SetMonkey(monkeyInstance);
 			
 			cardContainer.AddChild(selectionCard);
 		}
 	}
-	
+
+	private void SelectionCardOnMonkeySelectionClicked(MonkeySelectionCard sender)
+	{
+		sender.Material.
+	}
+
 	private void AssembleItemScenes()
 	{
 		var monkeyDirectory = "res://Scenes/Classes/";
