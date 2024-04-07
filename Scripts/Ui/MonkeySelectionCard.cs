@@ -7,16 +7,15 @@ public partial class MonkeySelectionCard : PanelContainer
 {
     public delegate void MonkeySelectionClickedEventHandler(MonkeySelectionCard sender);
 
-    [Export]
-    public ShaderMaterial ShaderMaterial { get; set; }
+    [Export] public Shader SelectionHighlightShader { get; set; }
 
-    public BaseMonkey ContainedMonkey { get; private set; }
+    public BaseMonkey Monkey { get; private set; }
 
     public event MonkeySelectionClickedEventHandler OnMonkeySelectionClicked;
 
     public void SetMonkey(BaseMonkey monkey)
     {
-        ContainedMonkey = monkey;
+        Monkey = monkey;
 
         var label = GetNode<Label>("%MonkeyName");
         var textureNode = GetNode<TextureRect>("%MonkeyImage");
@@ -31,8 +30,25 @@ public partial class MonkeySelectionCard : PanelContainer
             OnMonkeySelectionClicked?.Invoke(this);
     }
 
+    public void SetWhiteShaderHighlightColor()
+    {
+        SetShaderHighlightColor(new Vector4(1, 1, 1, 0.1f));
+    }
+
+    public void RemoveShader()
+    {
+        if (Material is not ShaderMaterial shaderMaterial)
+            return;
+
+        shaderMaterial.Shader = null;
+    }
+
     public void SetShaderHighlightColor(Vector4 color)
     {
-        ShaderMaterial.SetShaderParameter("selectionHighlightColor", color);
+        if (Material is not ShaderMaterial shaderMaterial)
+            return;
+
+        shaderMaterial.Shader = SelectionHighlightShader;
+        shaderMaterial.SetShaderParameter("selectionHighlightColor", color);
     }
 }

@@ -9,33 +9,29 @@ public partial class UnitSpawner : Control
 {
     public delegate void WaveSpawnedEventHandler();
 
-    private TextureRect     background;
-    private Node            battleScene;
-    private Player          player;
-    private double          waveTimer;
-    public  bool            AllowedToSpawn { get; set; } = true;
-    public  List<BaseEnemy> SpawnedEnemies { get; set; } = new();
+    private TextureRect background;
+    private Node battleScene;
+    private Player player;
+    private double waveTimer;
+    public bool AllowedToSpawn { get; set; } = true;
+    public List<BaseEnemy> SpawnedEnemies { get; set; } = new();
 
-    [Export]
-    public PackedScene UnitToSpawn { get; set; }
+    [Export] public PackedScene UnitToSpawn { get; set; }
 
-    [Export]
-    public int AmountPerWave { get; set; } = 5;
+    [Export] public int AmountPerWave { get; set; } = 5;
 
-    [Export]
-    public float WaveCooldown { get; set; } = 5;
+    [Export] public float WaveCooldown { get; set; } = 5;
 
-    [Export]
-    public float WaveCooldownModifier { get; set; } = 1;
+    [Export] public float WaveCooldownModifier { get; set; } = 1;
 
-    private float                        ModifiedCooldown => WaveCooldown * WaveCooldownModifier;
+    private float ModifiedCooldown => WaveCooldown * WaveCooldownModifier;
     public event WaveSpawnedEventHandler WaveSpawned;
 
     public void Initialize(Battle battle, Player incomingPlayer)
     {
         battleScene = battle;
-        player      = incomingPlayer;
-        background  = battleScene.GetNode<TextureRect>("Background");
+        player = incomingPlayer;
+        background = battleScene.GetNode<TextureRect>("Background");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -51,10 +47,11 @@ public partial class UnitSpawner : Control
     }
 
     private void SpawnWave<T>()
-            where T : BaseEnemy
+        where T : BaseEnemy
     {
-        player    ??= battleScene.GetNode<Player>(nameof(Player));
-        waveTimer =   0;
+        battleScene ??= GetTree().CurrentScene;
+        player ??= battleScene.GetNode<Player>(nameof(Player));
+        waveTimer = 0;
 
         if (player is null)
             return;
@@ -66,7 +63,7 @@ public partial class UnitSpawner : Control
     }
 
     private void SpawnUnit<T>(int offset)
-            where T : BaseEnemy
+        where T : BaseEnemy
     {
         var enemyInstance = UnitToSpawn.Instantiate<T>();
 

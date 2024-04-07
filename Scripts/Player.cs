@@ -101,6 +101,9 @@ public partial class Player : BaseUnit
     public override void _Process(double delta)
     {
         base._Process(delta);
+        
+        if(!IsInstanceValid(battleScene))
+            battleScene = GetTree().CurrentScene;
 
         ResolveRegenerationTicks(delta);
         ResolveInvincibility(delta);

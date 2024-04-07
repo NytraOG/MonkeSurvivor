@@ -1,23 +1,19 @@
 using Godot;
-using MonkeSurvivor.Scripts.Monkeys;
 using MonkeSurvivor.Scripts.Utils;
 
 namespace MonkeSurvivor.Scripts.Ui;
 
 public partial class Battle : Node
 {
-    private Player      player;
-    public  PackedScene MonkeyType  => ResourceLoader.Load<PackedScene>("res://Scenes/Classes/mandrill.tscn");
-    public  PackedScene PlayerScene => ResourceLoader.Load<PackedScene>("res://Scenes/player.tscn");
+    private Player player;
+    public PackedScene MonkeyType => ResourceLoader.Load<PackedScene>("res://Scenes/Classes/mandrill.tscn");
+    public PackedScene PlayerScene => ResourceLoader.Load<PackedScene>("res://Scenes/player.tscn");
 
-    [Export]
-    public PauseMenu PauseMenu { get; set; }
+    [Export] public PauseMenu PauseMenu { get; set; }
 
-    [Export]
-    public WaveTimer WaveTimer { get; set; }
+    [Export] public WaveTimer WaveTimer { get; set; }
 
-    [Export]
-    public EndOfWavePanel EndOfWavePanel { get; set; }
+    [Export] public EndOfWavePanel EndOfWavePanel { get; set; }
 
     public override void _Ready()
     {
@@ -31,20 +27,18 @@ public partial class Battle : Node
 
     private void InstantiatePlayer()
     {
-        if (IsInstanceValid(StaticMemory.Player))
-            player = StaticMemory.Player;
-
         var newPlayer = PlayerScene.Instantiate<Player>();
-        var monkey    = MonkeyType.Instantiate<BaseMonkey>();
+        var monkey = StaticMemory.SelectedMonkey;
 
-        if(StaticMemory.Player is not null)
+        if (StaticMemory.Player is not null)
             newPlayer.HealthCurrent = StaticMemory.Player.HealthCurrent;
 
-        newPlayer.Speed         = 400;
-        newPlayer.Position      = new Vector2(900, 500);
+        newPlayer.Speed = 400;
+        newPlayer.Position = new Vector2(900, 500);
         newPlayer.SetMonkeyClass(monkey);
 
         player = newPlayer;
+
         AddChild(player);
     }
 
@@ -53,15 +47,18 @@ public partial class Battle : Node
         if (Input.IsKeyPressed(Key.Escape))
         {
             PauseMenu.Visible = true;
-            GetTree().Paused  = true;
+            GetTree().Paused = true;
         }
     }
 
-    private void WaveTimerOnWaveEnded() => EndRound();
+    private void WaveTimerOnWaveEnded()
+    {
+        EndRound();
+    }
 
     private void EndRound()
     {
         EndOfWavePanel.Visible = true;
-        GetTree().Paused       = true;
+        GetTree().Paused = true;
     }
 }
