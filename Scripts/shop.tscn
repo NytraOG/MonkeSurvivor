@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://Scenes/Shop.cs" id="1_i2oyi"]
 [ext_resource type="Texture2D" uid="uid://cx5mg032n4geg" path="res://Images/ShopBackground.png" id="2_sktvq"]
-[ext_resource type="PackedScene" path="res://Scenes/start_wave_button.tscn" id="3_kjhhr"]
+[ext_resource type="PackedScene" uid="uid://5qkloygnrlqd" path="res://Scenes/start_wave_button.tscn" id="3_kjhhr"]
 [ext_resource type="PackedScene" uid="uid://cadv0kndeffaj" path="res://Scenes/Ui/shop_panel.tscn" id="4_51st1"]
 [ext_resource type="PackedScene" uid="uid://b02nultf4hf0k" path="res://Scenes/character_sheet.tscn" id="4_axdm2"]
 [ext_resource type="PackedScene" uid="uid://cbmfnsx53j3wb" path="res://Scenes/Ui/inventory.tscn" id="5_3qa3v"]
 [ext_resource type="PackedScene" uid="uid://cqxp00xn43ont" path="res://Scenes/Ui/item_tooltip.tscn" id="7_wjhwd"]
-[ext_resource type="PackedScene" path="res://Scenes/Ui/weapon_slot.tscn" id="8_neuka"]
+[ext_resource type="PackedScene" uid="uid://safgos4ffg81" path="res://Scenes/Ui/weapon_slot.tscn" id="8_neuka"]
 
 [node name="Shop" type="Node"]
 script = ExtResource("1_i2oyi")
