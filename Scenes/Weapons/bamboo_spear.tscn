@@ -11,26 +11,26 @@ length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("WeaponRightHand:position")
+tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.1, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0.1, 0.3, 1, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(76, 3), Vector2(-166, -17), Vector2(-160, -82), Vector2(-121, -132), Vector2(-55, -185), Vector2(27, -197), Vector2(97, -189), Vector2(144, -144), Vector2(184, -81), Vector2(209, 2.99999), Vector2(197, 82), Vector2(76, 3)]
+"values": [Vector2(14, 0), Vector2(-40, -7), Vector2(34, 12), Vector2(14, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("WeaponRightHand:rotation")
+tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.1, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0.1, 0.3, 1, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [-0.541764, -2.25885, -1.88862, -1.51838, -1.0758, -0.633209, -0.278928, 0.0753525, 0.429633, 0.783914, 1.13819, -0.541764]
+"values": [-0.550087, -2.24627, 1.26119, -0.550087]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_54vm6"]
@@ -39,6 +39,8 @@ _data = {
 }
 
 [node name="BambooSpear" type="StaticBody2D"]
+position = Vector2(14, 0)
+rotation = -0.550087
 script = ExtResource("1_rfgbp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
