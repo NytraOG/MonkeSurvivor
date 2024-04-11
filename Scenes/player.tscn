@@ -1,25 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://cemssp4v0a7o7"]
+[gd_scene load_steps=10 format=3 uid="uid://cemssp4v0a7o7"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_dxo5q"]
-[ext_resource type="Shader" path="res://Shaders/dissolve_test.gdshader" id="2_5urya"]
 [ext_resource type="Texture2D" uid="uid://d0h018n0q1lav" path="res://Images/MonkeyClasses/OrangUtan.png" id="2_b52vf"]
 [ext_resource type="Texture2D" uid="uid://ihbnwfxsravg" path="res://Images/Weapons/BambooSpear.png" id="3_np1gx"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_afsue"]
-noise_type = 4
-frequency = 0.0249
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jn6tw"]
-width = 128
-height = 128
-noise = SubResource("FastNoiseLite_afsue")
+[ext_resource type="Shader" path="res://Shaders/pixelation.gdshader" id="4_afab4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fpdm8"]
-shader = ExtResource("2_5urya")
-shader_parameter/dissolve_value = 1.0
-shader_parameter/burn_size = 0.04
-shader_parameter/burn_color = Color(0.556863, 0.384314, 0.984314, 1)
-shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_jn6tw")
+shader = ExtResource("4_afab4")
+shader_parameter/amount = 94
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dj1h8"]
 radius = 31.9927
@@ -57,6 +45,10 @@ tracks/1/keys = {
 _data = {
 "WeaponSwing": SubResource("Animation_2aohn")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_utscn"]
+shader = ExtResource("4_afab4")
+shader_parameter/amount = 128
 
 [node name="Player" type="CharacterBody2D"]
 self_modulate = Color(1, 1, 1, 0)
@@ -101,10 +93,10 @@ libraries = {
 }
 
 [node name="WeaponRightHand" type="Node2D" parent="."]
-visible = false
 position = Vector2(76, 3)
 rotation = -0.541764
 
 [node name="Sprite2D" type="Sprite2D" parent="WeaponRightHand"]
+material = SubResource("ShaderMaterial_utscn")
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_np1gx")
