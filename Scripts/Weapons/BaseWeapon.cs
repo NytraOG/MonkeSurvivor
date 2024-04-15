@@ -81,7 +81,7 @@ public abstract partial class BaseWeapon : StaticBody2D
         enemy.InstatiateFloatingCombatText((int)damage, enemy.Position, FinalDamage.IsCritical, false);
     }
 
-    protected void ExecuteAttack(Node node)
+    protected virtual void ExecuteAttack(Node node)
     {
         if (node is not BaseEnemy enemy)
             return;
@@ -92,8 +92,6 @@ public abstract partial class BaseWeapon : StaticBody2D
             DealSplashDamageAround(enemy);
 
         OnDamageDealt?.Invoke(TotalDamageDealt);
-
-        QueueFree();
     }
 
     protected void DealSplashDamageAround(BaseEnemy enemy)

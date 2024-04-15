@@ -11,7 +11,12 @@ public partial class BambooSpear : BaseMeleeWeapon
 
     protected override void ExecuteBehaviour(double delta)
     {
-        if(animationPlayer.IsPlaying() || (timeSinceLastSwing += delta) < SwingCooldown)
+        var overlappingBodies = GetOverlappingBodies();
+
+        foreach (var body in overlappingBodies)
+            ExecuteAttack(body);
+
+        if (animationPlayer.IsPlaying() || (timeSinceLastSwing += delta) < SwingCooldown)
             return;
 
         animationPlayer.Play("WeaponSwing");

@@ -4,4 +4,5 @@ namespace MonkeSurvivor.Scripts.Weapons;
 
 public abstract partial class BaseMeleeWeapon : BaseWeapon
 {
+
 }

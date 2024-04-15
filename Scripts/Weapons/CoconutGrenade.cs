@@ -1,4 +1,5 @@
 using System.Linq;
+using Godot;
 
 namespace MonkeSurvivor.Scripts.Weapons;
 
@@ -22,5 +23,12 @@ public partial class CoconutGrenade : BaseRangedWeapon
         var luckyBastard = overlappingBodies.First();
 
         ExecuteAttack(luckyBastard);
+    }
+
+    protected override void ExecuteAttack(Node node)
+    {
+        base.ExecuteAttack(node);
+
+        QueueFree();
     }
 }
