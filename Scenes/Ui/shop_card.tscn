@@ -26,6 +26,21 @@ shader_parameter/outline_color_2 = null
 shader_parameter/use_outline_uv = false
 shader_parameter/useTexture = false
 
+[sub_resource type="Animation" id="Animation_hd4qt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.0458201]
+}
+
 [sub_resource type="Animation" id="Animation_doa28"]
 resource_name = "shake"
 length = 0.5
@@ -40,21 +55,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [0.0, -0.0458201, 0.0371276, -0.0175004, 0.0157285, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_hd4qt"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-0.0458201]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_d5rk4"]

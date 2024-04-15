@@ -16,13 +16,13 @@ public partial class ItemTooltip : BaseTooltip
         SubscribeToShopCards(shopScene);
         SubscribeToInventorySlots(shopScene);
 
-        itemNameLabel = GetNode<RichTextLabel>("%ItemName");
+        itemNameLabel        = GetNode<RichTextLabel>("%ItemName");
         itemDescriptionLabel = GetNode<RichTextLabel>("%ItemDescription");
     }
 
     private void SubscribeToInventorySlots(Node shopScene)
     {
-        var inventory = shopScene.GetNode<Inventory>("%" + nameof(Inventory));
+        var inventory      = shopScene.GetNode<Inventory>("%" + nameof(Inventory));
         var inventorySlots = inventory.GetAllSlots();
 
         foreach (var inventorySlot in inventorySlots) inventorySlot.MouseEntering += InventorySlotOnMouseEntering;
@@ -36,9 +36,7 @@ public partial class ItemTooltip : BaseTooltip
             SetPositionByNode(inventorySlot);
         }
         else
-        {
             ResetTooltip(inventorySlot);
-        }
     }
 
     private void SubscribeToShopCards(Node shopScene)
@@ -70,20 +68,19 @@ public partial class ItemTooltip : BaseTooltip
             SetPositionByNode(shopCard);
         }
         else
-        {
             ResetTooltip(shopCard);
-        }
     }
 
     private void ResetTooltip(PanelContainer container)
     {
         Position = new Vector2(-900, -900);
 
-        if (container is not ShopCard shopCard)
-            return;
-
-        if (shopCard.Item is not null)
-            itemNameLabel.Text = itemNameLabel.Text.Replace($"{shopCard.Item.Displayname}", "ItemName");
+        itemNameLabel.Text = container switch
+        {
+            ShopCard { Item: not null } shopCard => itemNameLabel.Text.Replace($"[u]{shopCard.Item.Displayname}[/u]", "ItemName"),
+            InventorySlot { ContainedItem: not null } inventorySlot => itemNameLabel.Text.Replace($"[u]{inventorySlot.ContainedItem.Displayname}[/u]", "ItemName"),
+            _ => itemNameLabel.Text
+        };
     }
 
     public void SetPositionByNode(PanelContainer container)
