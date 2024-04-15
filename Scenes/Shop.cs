@@ -27,9 +27,9 @@ public partial class Shop : Node
         shopPanel          = GetNode<ShopPanel>("%" + nameof(ShopPanel));
         inventory          = GetNode<Inventory>("%" + nameof(Inventory));
         characterSheet     = GetNode<CharacterSheet>("%" + nameof(CharacterSheet));
-        ressourceIndicator = shopPanel.GetNode<RessourceIndicator>("%" + nameof(RessourceIndicator));
 
-        ressourceIndicator.SetBananaAmount();
+        ressourceIndicator = shopPanel.GetNode<RessourceIndicator>("%" + nameof(RessourceIndicator));
+        ressourceIndicator.SetBananaAmount(StaticMemory.Player.XpCurrent);
 
         characterSheet.OnAttributeRaised += CharacterSheetOnOnAttributeRaised;
         shopPanel.ItemBought             += ShopPanelOnItemBought;
