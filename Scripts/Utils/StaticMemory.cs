@@ -11,7 +11,7 @@ public static class StaticMemory
     public static Player Player { get; set; }
     public static BaseMonkey SelectedMonkey { get; set; }
     public static float CurrentHealth { get; set; }
-    public static int HeldMoney { get; set; }
+    public static int HeldBananas { get; set; }
     public static int Vigor { get; set; } = 1;
     public static int Strength { get; set; } = 1;
     public static int Dexterity { get; set; } = 1;

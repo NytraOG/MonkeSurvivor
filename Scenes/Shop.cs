@@ -29,7 +29,7 @@ public partial class Shop : Node
         characterSheet = GetNode<CharacterSheet>("%" + nameof(CharacterSheet));
         moneyDisply    = shopPanel.GetNode<Label>("%PlayerMoney");
 
-        moneyDisply.Text = StaticMemory.HeldMoney.ToString();
+        moneyDisply.Text = StaticMemory.HeldBananas.ToString();
 
         characterSheet.OnAttributeRaised += CharacterSheetOnOnAttributeRaised;
         shopPanel.ItemBought             += ShopPanelOnItemBought;

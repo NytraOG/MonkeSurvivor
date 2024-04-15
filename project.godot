@@ -26,3 +26,7 @@ window/stretch/aspect="ignore"
 [dotnet]
 
 project/assembly_name="Monke Survivor"
+
+[gui]
+
+theme/custom_font="res://Fonts/JungleBoy-1voL.ttf"

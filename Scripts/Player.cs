@@ -65,7 +65,7 @@ public partial class Player : BaseUnit
         unitSpawner.WaveSpawned += UnitSpawnerOnWaveSpawned;
 
         texture   = GetNode<TextureRect>(nameof(TextureRect));
-        XpCurrent = StaticMemory.HeldMoney;
+        XpCurrent = StaticMemory.HeldBananas;
 
         invincibilityRunning = true;
 
