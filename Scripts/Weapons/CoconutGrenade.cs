@@ -1,10 +1,10 @@
+using System.Linq;
+
 namespace MonkeSurvivor.Scripts.Weapons;
 
 public partial class CoconutGrenade : BaseRangedWeapon
 {
-    public override void _Process(double delta) { }
-
-    protected override void ExecuteBehaviour()
+    protected override void ExecuteBehaviour(double delta)
     {
         var target = FindTargetOrDefault();
 
@@ -14,5 +14,13 @@ public partial class CoconutGrenade : BaseRangedWeapon
         var direction = (target.Position - Position).Normalized();
 
         MoveAndCollide(direction * Speed);
+
+        var overlappingBodies = GetOverlappingBodies();
+
+        if (!overlappingBodies.Any()) return;
+
+        var luckyBastard = overlappingBodies.First();
+
+        ExecuteAttack(luckyBastard);
     }
 }

@@ -11,17 +11,19 @@ public abstract partial class BaseWeapon : StaticBody2D
 {
     public delegate void DamageDealtEventHandler(float totalDamage);
 
-    private Area2D impactArea;
-    public DamageDealtEventHandler OnDamageDealt;
-    private Player player;
-    protected Random Rng;
-    private Area2D splashArea;
-    protected BaseEnemy Target;
-    public IEnumerable<BaseEnemy> Enemies { get; set; }
+    protected Area2D                  ImpactArea;
+    public    DamageDealtEventHandler OnDamageDealt;
+    private   Player                  player;
+    protected Random                  Rng;
+    protected Area2D                  SplashArea;
+    protected BaseEnemy               Target;
+    public    IEnumerable<BaseEnemy>  Enemies { get; set; }
 
-    [Export] public int DamageOnHit { get; set; } = 10;
+    [Export]
+    public int DamageOnHit { get; set; } = 10;
 
-    [Export] public float KnockbackForce { get; set; }
+    [Export]
+    public float KnockbackForce { get; set; }
 
     public HitResult FinalDamage
     {
@@ -30,10 +32,10 @@ public abstract partial class BaseWeapon : StaticBody2D
             Rng ??= new Random();
 
             player ??= GetTree()
-                .CurrentScene
-                .GetNode<Player>(nameof(Player));
+                      .CurrentScene
+                      .GetNode<Player>(nameof(Player));
 
-            var roll = Rng.Next(0, 101);
+            var roll   = Rng.Next(0, 101);
             var isCrit = player.CriticalHitChance >= roll;
 
             var dealtDamage = isCrit ? DamageOnHit * (1 + player.CriticalHitDamage / 100) : DamageOnHit;
@@ -42,46 +44,44 @@ public abstract partial class BaseWeapon : StaticBody2D
         }
     }
 
-    [Export] public float SwingCooldown { get; set; }
+    [Export]
+    public float SwingCooldown { get; set; }
 
-    [Export] public bool DealsSplashDamag { get; set; }
+    [Export]
+    public bool DealsSplashDamag { get; set; }
 
-    [Export(PropertyHint.Range, "0, 1")] public float SplashDamage { get; set; } = 0.75f;
+    [Export(PropertyHint.Range, "0, 1")]
+    public float SplashDamage { get; set; } = 0.75f;
 
-    [Export] public float Speed { get; set; } = 50;
+    [Export]
+    public float Speed { get; set; } = 50;
 
     public float TotalDamageDealt { get; set; }
-    public int EnemyCount { get; set; }
+    public int   EnemyCount       { get; set; }
 
-    public override void _PhysicsProcess(double delta)
+    public override void _PhysicsProcess(double delta) => ExecuteBehaviour(delta);
+
+    protected virtual List<Node2D> GetOverlappingBodies()
     {
-        ExecuteBehaviour();
+        ImpactArea ??= GetNode<Area2D>("ImpactArea");
 
-        splashArea ??= GetNode<Area2D>("SplashArea");
-        impactArea ??= GetNode<Area2D>("ImpactArea");
-
-        var overlappingBodies = impactArea.GetOverlappingBodies()
-            .Where(b => b.Name != nameof(Player))
-            .ToList();
-
-        if (!overlappingBodies.Any()) return;
-
-        var luckyBastard = overlappingBodies.First();
-
-        ExecuteAttack(luckyBastard);
+        var overlappingBodies = ImpactArea.GetOverlappingBodies()
+                                          .Where(b => b.Name != nameof(Player))
+                                          .ToList();
+        return overlappingBodies;
     }
 
-    protected abstract void ExecuteBehaviour();
+    protected abstract void ExecuteBehaviour(double delta);
 
     public void DealDamageTo(BaseEnemy enemy, float multiplier = 1)
     {
         var damage = FinalDamage.DamageDealt * multiplier;
-        TotalDamageDealt += damage;
+        TotalDamageDealt    += damage;
         enemy.HealthCurrent -= damage;
         enemy.InstatiateFloatingCombatText((int)damage, enemy.Position, FinalDamage.IsCritical, false);
     }
 
-    private void ExecuteAttack(Node node)
+    protected void ExecuteAttack(Node node)
     {
         if (node is not BaseEnemy enemy)
             return;
@@ -98,10 +98,14 @@ public abstract partial class BaseWeapon : StaticBody2D
 
     protected void DealSplashDamageAround(BaseEnemy enemy)
     {
-        var overlappingBodies = splashArea.GetOverlappingBodies().Where(b => b.Name != nameof(Player));
+        SplashArea ??= GetNode<Area2D>("SplashArea");
+
+        var overlappingBodies = SplashArea.GetOverlappingBodies().Where(b => b.Name != nameof(Player));
 
         foreach (var hitEnemy in overlappingBodies.Where(b => b is BaseEnemy).Cast<BaseEnemy>())
+        {
             if (hitEnemy != enemy)
                 DealDamageTo(hitEnemy, SplashDamage);
+        }
     }
 }

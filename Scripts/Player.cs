@@ -23,10 +23,10 @@ public partial class Player : BaseUnit
     private TextureRect        texture;
     private int                bananasHeld;
     public  List<BaseEnemy>    Enemies                  { get; set; }
-    public  StaticBody2D       WieldedWeaponRightHand   { get; set; }
-    public  StaticBody2D       WieldedWeaponLeftHand    { get; set; }
-    public  StaticBody2D       WieldedWeaponTail        { get; set; }
-    public  StaticBody2D       WieldedWeaponHeadmounted { get; set; }
+    public  BaseWeapon         WieldedWeaponRightHand   { get; set; }
+    public  BaseWeapon         WieldedWeaponLeftHand    { get; set; }
+    public  BaseWeapon         WieldedWeaponTail        { get; set; }
+    public  BaseWeapon         WieldedWeaponHeadmounted { get; set; }
 
     [Export]
     public float Speed { get; set; } = 400;
@@ -118,7 +118,8 @@ public partial class Player : BaseUnit
     {
         texture ??= GetNode<TextureRect>(nameof(TextureRect));
         //Apply Modifiers
-        WieldedWeaponRightHand = monkey.StartingWeapon.Instantiate<StaticBody2D>();
+        WieldedWeaponRightHand = monkey.StartingWeapon.Instantiate<BaseWeapon>();
+        AddChild(WieldedWeaponRightHand);
         texture.Texture        = monkey.ClassSprite;
     }
 
@@ -165,7 +166,7 @@ public partial class Player : BaseUnit
 
         swingTimer += (float)delta;
 
-        if (WieldedWeaponRightHand is BaseWeapon wieldedWeapon && swingTimer >= wieldedWeapon.SwingCooldown)
+        if (WieldedWeaponRightHand is CoconutGrenade wieldedWeapon && swingTimer >= wieldedWeapon.SwingCooldown)
         {
             swingTimer = 0;
 
