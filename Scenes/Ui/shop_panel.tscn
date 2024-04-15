@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cadv0kndeffaj"]
+[gd_scene load_steps=5 format=3 uid="uid://cadv0kndeffaj"]
 
 [ext_resource type="Script" path="res://Scripts/Ui/ShopPanel.cs" id="1_ao437"]
 [ext_resource type="PackedScene" uid="uid://y0xqeaih6b7p" path="res://Scenes/Ui/shop_card.tscn" id="2_at01t"]
+[ext_resource type="PackedScene" uid="uid://ckql1dlgaeil8" path="res://Scenes/Ui/ressource_indicator.tscn" id="2_e4lt8"]
 [ext_resource type="PackedScene" uid="uid://bumwy4hhqb2wa" path="res://Scenes/Ui/sell_button.tscn" id="2_xc3sr"]
 
 [node name="ShopPanel" type="PanelContainer"]
@@ -26,24 +27,10 @@ alignment = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="RessourceIndicator" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_e4lt8")]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(150, 135)
 layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 135)
-layout_mode = 2
-theme_override_font_sizes/font_size = 36
-text = "Money:"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PlayerMoney" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 36
-text = "9999"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="SellButton" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_xc3sr")]
 layout_mode = 2

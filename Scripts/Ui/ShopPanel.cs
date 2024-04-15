@@ -9,14 +9,13 @@ public partial class ShopPanel : PanelContainer
 {
     public delegate void ItemBoughtEventHandler(BaseItem boughtItem);
 
-    private ShopCard[] cards;
-
+    private ShopCard[]                  cards;
     public event ItemBoughtEventHandler ItemBought;
 
     public override void _Ready()
     {
         var boxContainer = GetNode<MarginContainer>(nameof(MarginContainer))
-            .GetNode<HBoxContainer>(nameof(HBoxContainer));
+               .GetNode<HBoxContainer>(nameof(HBoxContainer));
 
         cards = boxContainer.GetAllChildren<ShopCard>().ToArray();
 
@@ -27,14 +26,10 @@ public partial class ShopPanel : PanelContainer
         }
     }
 
-    private void ShopCardOnItemBought(BaseItem boughtItem)
-    {
-        ItemBought?.Invoke(boughtItem);
-    }
+    private void ShopCardOnItemBought(BaseItem boughtItem) => ItemBought?.Invoke(boughtItem);
 
-    public ShopCard[] GetShopCards()
-    {
-        return cards ?? GetNode<MarginContainer>(nameof(MarginContainer))
-            .GetNode<HBoxContainer>(nameof(HBoxContainer)).GetAllChildren<ShopCard>().ToArray();
-    }
+    public ShopCard[] GetShopCards() => cards ?? GetNode<MarginContainer>(nameof(MarginContainer))
+                                                .GetNode<HBoxContainer>(nameof(HBoxContainer))
+                                                .GetAllChildren<ShopCard>()
+                                                .ToArray();
 }
