@@ -69,7 +69,6 @@ public partial class Player : BaseUnit
                                         .GetNode<RessourceIndicator>(nameof(RessourceIndicator));
 
         texture   = GetNode<TextureRect>(nameof(TextureRect));
-        XpCurrent = StaticMemory.HeldBananas;
 
         invincibilityRunning = true;
 
