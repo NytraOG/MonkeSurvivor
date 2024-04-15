@@ -93,6 +93,7 @@ libraries = {
 }
 
 [node name="WeaponRightHand" type="Node2D" parent="."]
+visible = false
 position = Vector2(76, 3)
 rotation = -0.541764
 
