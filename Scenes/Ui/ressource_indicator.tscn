@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://ckql1dlgaeil8"]
+[gd_scene load_steps=5 format=3 uid="uid://ckql1dlgaeil8"]
 
 [ext_resource type="Script" path="res://Scripts/Ui/RessourceIndicator.cs" id="1_e37uw"]
+[ext_resource type="Shader" path="res://Shaders/shadow.gdshader" id="2_d25lr"]
 [ext_resource type="Texture2D" uid="uid://dsorcojpe6ll5" path="res://Images/Items/Banana.png" id="2_ugxi4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cmmpl"]
+shader = ExtResource("2_d25lr")
+shader_parameter/deform = Vector2(0.265, 0.59)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/modulate = null
 
 [node name="RessourceIndicator" type="PanelContainer"]
 custom_minimum_size = Vector2(150, 80)
@@ -34,6 +41,7 @@ text = "999x"
 horizontal_alignment = 2
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+material = SubResource("ShaderMaterial_cmmpl")
 layout_mode = 2
 texture = ExtResource("2_ugxi4")
 expand_mode = 3

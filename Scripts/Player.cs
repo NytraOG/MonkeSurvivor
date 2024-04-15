@@ -13,18 +13,19 @@ namespace MonkeSurvivor.Scripts;
 
 public partial class Player : BaseUnit
 {
-    private Node            battleScene;
-    private bool            invincibilityRunning;
-    private double          millisecondsSinceLastHit;
-    private double          regenerationTimer;
-    private float           swingTimer;
-    private TextureRect     texture;
-    private int             xpCurrent;
-    public  List<BaseEnemy> Enemies       { get; set; }
-    public  StaticBody2D    WieldedWeaponRightHand { get; set; }
-    public  StaticBody2D    WieldedWeaponLeftHand { get; set; }
-    public  StaticBody2D    WieldedWeaponTail { get; set; }
-    public  StaticBody2D    WieldedWeaponHeadmounted { get; set; }
+    private Node               battleScene;
+    private bool               invincibilityRunning;
+    private double             millisecondsSinceLastHit;
+    private double             regenerationTimer;
+    private RessourceIndicator ressourceIndicator;
+    private float              swingTimer;
+    private TextureRect        texture;
+    private int                xpCurrent;
+    public  List<BaseEnemy>    Enemies                  { get; set; }
+    public  StaticBody2D       WieldedWeaponRightHand   { get; set; }
+    public  StaticBody2D       WieldedWeaponLeftHand    { get; set; }
+    public  StaticBody2D       WieldedWeaponTail        { get; set; }
+    public  StaticBody2D       WieldedWeaponHeadmounted { get; set; }
 
     [Export]
     public float Speed { get; set; } = 400;
@@ -64,6 +65,9 @@ public partial class Player : BaseUnit
         var unitSpawner = battleScene.GetNode<UnitSpawner>(nameof(UnitSpawner));
         unitSpawner.WaveSpawned += UnitSpawnerOnWaveSpawned;
 
+        ressourceIndicator = battleScene.GetNode<CanvasLayer>("UI")
+                                        .GetNode<RessourceIndicator>(nameof(RessourceIndicator));
+
         texture   = GetNode<TextureRect>(nameof(TextureRect));
         XpCurrent = StaticMemory.HeldBananas;
 
@@ -84,6 +88,9 @@ public partial class Player : BaseUnit
 
     private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
+        if (e.PropertyName == nameof(XpCurrent))
+            ressourceIndicator.SetBananaAmount(XpCurrent);
+
         if (e.PropertyName != nameof(HealthCurrent))
             return;
 
@@ -94,15 +101,15 @@ public partial class Player : BaseUnit
     {
         texture ??= GetNode<TextureRect>(nameof(TextureRect));
         //Apply Modifiers
-        WieldedWeaponRightHand   = monkey.StartingWeapon.Instantiate<StaticBody2D>();
-        texture.Texture = monkey.ClassSprite;
+        WieldedWeaponRightHand = monkey.StartingWeapon.Instantiate<StaticBody2D>();
+        texture.Texture        = monkey.ClassSprite;
     }
 
     public override void _Process(double delta)
     {
         base._Process(delta);
-        
-        if(!IsInstanceValid(battleScene))
+
+        if (!IsInstanceValid(battleScene))
             battleScene = GetTree().CurrentScene;
 
         ResolveRegenerationTicks(delta);

@@ -14,10 +14,13 @@ public partial class RessourceIndicator : PanelContainer
         SetBananaAmount();
     }
 
-    public void SetBananaAmount()
+    public void SetBananaAmount(int amount) => amountLabel.Text = ProcessDisplayedValue(amount.ToString());
+
+    public void SetBananaAmount() => amountLabel.Text = ProcessDisplayedValue(StaticMemory.HeldBananas.ToString());
+
+    private static string ProcessDisplayedValue(string newXpValues)
     {
-        var result      = string.Empty;
-        var newXpValues = StaticMemory.HeldBananas.ToString().ToCharArray();
+        var result = string.Empty;
 
         result += newXpValues.Length switch
         {
@@ -32,6 +35,6 @@ public partial class RessourceIndicator : PanelContainer
                 result += $"{parsedInteger}";
         }
 
-        amountLabel.Text = result + "x";
+        return result + "x";
     }
 }
