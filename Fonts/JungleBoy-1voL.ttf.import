@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://c5pix1mp7r3q8"
-path="res://.godot/imported/SuperGlue.ttf-60cc1dc7e414b1dace0cc9b2e329567b.fontdata"
+uid="uid://cmvxagxnpog7n"
+path="res://.godot/imported/JungleBoy-1voL.ttf-79ce49f02229d5babb5ecf685eb1a64d.fontdata"
 
 [deps]
 
-source_file="res://SuperGlue.ttf"
-dest_files=["res://.godot/imported/SuperGlue.ttf-60cc1dc7e414b1dace0cc9b2e329567b.fontdata"]
+source_file="res://Fonts/JungleBoy-1voL.ttf"
+dest_files=["res://.godot/imported/JungleBoy-1voL.ttf-79ce49f02229d5babb5ecf685eb1a64d.fontdata"]
 
 [params]
 

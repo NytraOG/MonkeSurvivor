@@ -26,7 +26,3 @@ window/stretch/aspect="ignore"
 [dotnet]
 
 project/assembly_name="Monke Survivor"
-
-[gui]
-
-theme/custom_font="res://SuperGlue.ttf"
