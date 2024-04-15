@@ -36,10 +36,11 @@ public partial class Battle : Node
         if (StaticMemory.Player is not null)
         {
             newPlayer.HealthCurrent = StaticMemory.Player.HealthCurrent;
-            newPlayer.XpCurrent     = StaticMemory.Player.XpCurrent;
+            newPlayer.BananasHeld     = StaticMemory.Player.BananasHeld;
+            newPlayer.BananasSpent = StaticMemory.Player.BananasSpent;
 
             var ressourceIndicator = GetNode<CanvasLayer>("UI").GetNode<RessourceIndicator>(nameof(RessourceIndicator));
-            ressourceIndicator.SetBananaAmount(newPlayer.XpCurrent);
+            ressourceIndicator.SetBananaAmount(newPlayer.BananasHeld);
         }
 
         newPlayer.Speed    = 400;

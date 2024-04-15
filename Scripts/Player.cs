@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Godot;
+using MonkeSurvivor.Scenes;
 using MonkeSurvivor.Scripts.Enemies;
 using MonkeSurvivor.Scripts.Monkeys;
 using MonkeSurvivor.Scripts.Ui;
@@ -20,7 +21,7 @@ public partial class Player : BaseUnit
     private RessourceIndicator ressourceIndicator;
     private float              swingTimer;
     private TextureRect        texture;
-    private int                xpCurrent;
+    private int                bananasHeld;
     public  List<BaseEnemy>    Enemies                  { get; set; }
     public  StaticBody2D       WieldedWeaponRightHand   { get; set; }
     public  StaticBody2D       WieldedWeaponLeftHand    { get; set; }
@@ -30,13 +31,13 @@ public partial class Player : BaseUnit
     [Export]
     public float Speed { get; set; } = 400;
 
-    public int XpCurrent
+    public int BananasHeld
     {
-        get => xpCurrent;
-        set => SetField(ref xpCurrent, value);
+        get => bananasHeld;
+        set => SetField(ref bananasHeld, value);
     }
 
-    public int XpSpent { get; set; }
+    public int BananasSpent { get; set; }
 
     [Export]
     public int InvicibilityTimeMilliseconds { get; set; } = 1000;
@@ -87,8 +88,25 @@ public partial class Player : BaseUnit
 
     private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(XpCurrent))
-            ressourceIndicator.SetBananaAmount(XpCurrent);
+        if (e.PropertyName == nameof(BananasHeld))
+        {
+            if(GetTree() is null)
+                return;
+            
+            if (!IsInstanceValid(ressourceIndicator) && GetTree().CurrentScene is Shop shop)
+            {
+                ressourceIndicator = shop.GetNode<CanvasLayer>("UI")
+                                         .GetNode<ShopPanel>("%" + nameof(ShopPanel))
+                                         .GetNode<RessourceIndicator>("%" + nameof(RessourceIndicator));
+            }
+            else if (!IsInstanceValid(ressourceIndicator) && GetTree().CurrentScene is Battle battle)
+            {
+                ressourceIndicator = battle.GetNode<CanvasLayer>("UI")
+                                           .GetNode<RessourceIndicator>(nameof(RessourceIndicator));
+            }
+            
+            ressourceIndicator.SetBananaAmount(BananasHeld);
+        }
 
         if (e.PropertyName != nameof(HealthCurrent))
             return;

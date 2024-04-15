@@ -18,5 +18,7 @@ public partial class EndOfWavePanel : PanelContainer
         var tree = GetTree();
         tree.CurrentScene.RemoveChild(StaticMemory.Player);
         tree.ChangeSceneToPacked(PostBattleScene);
+        
+        GetTree()?.CurrentScene?.QueueFree();
     }
 }

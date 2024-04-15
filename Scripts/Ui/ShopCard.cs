@@ -51,7 +51,7 @@ public partial class ShopCard : PanelContainer
         if (Item is null)
             return;
 
-        var fundsSufficient = StaticMemory.Player.XpCurrent >= Item.Price;
+        var fundsSufficient = StaticMemory.Player.BananasHeld >= Item.Price;
         
         if(fundsSufficient)
         {

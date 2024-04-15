@@ -10,11 +10,13 @@ public partial class RessourceIndicator : PanelContainer
     public override void _Ready()
     {
         amountLabel = GetNode<Label>("%Amount");
-
-        SetBananaAmount();
     }
 
-    public void SetBananaAmount(int amount) => amountLabel.Text = ProcessDisplayedValue(amount.ToString());
+    public void SetBananaAmount(int amount)
+    {
+        amountLabel ??= GetNode<Label>("%Amount");
+        amountLabel.Text = ProcessDisplayedValue(amount.ToString());
+    }
 
     public void SetBananaAmount() => amountLabel.Text = ProcessDisplayedValue(StaticMemory.HeldBananas.ToString());
 

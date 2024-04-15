@@ -26,7 +26,10 @@ public partial class ShopPanel : PanelContainer
         }
     }
 
-    private void ShopCardOnItemBought(BaseItem boughtItem) => ItemBought?.Invoke(boughtItem);
+    private void ShopCardOnItemBought(BaseItem boughtItem)
+    {
+        ItemBought?.Invoke(boughtItem);
+    }
 
     public ShopCard[] GetShopCards() => cards ?? GetNode<MarginContainer>(nameof(MarginContainer))
                                                 .GetNode<HBoxContainer>(nameof(HBoxContainer))

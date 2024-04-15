@@ -23,7 +23,7 @@ public partial class XpDisplay : PanelContainer
 
             player.PropertyChanged += (sender, e) =>
             {
-                if (e.PropertyName == nameof(Player.XpCurrent) && sender is Player alsoPlayer)
+                if (e.PropertyName == nameof(Player.BananasHeld) && sender is Player alsoPlayer)
                     SetDisplayedValue(alsoPlayer);
             };
 
@@ -34,7 +34,7 @@ public partial class XpDisplay : PanelContainer
     private void SetDisplayedValue(Player player)
     {
         var result      = string.Empty;
-        var newXpValues = player.XpCurrent.ToString().ToCharArray();
+        var newXpValues = player.BananasHeld.ToString().ToCharArray();
 
         result += newXpValues.Length switch
         {
