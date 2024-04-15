@@ -38,7 +38,7 @@ public partial class XpToken : StaticBody2D
 
         if (bodiesInCollectionarea.Any() && bodiesInCollectionarea[0] is Player alsoPlayer)
         {
-            alsoPlayer.XpCurrent += GrantedXp;
+            alsoPlayer.BananasHeld += GrantedXp;
 
             QueueFree();
         }

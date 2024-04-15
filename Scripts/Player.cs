@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Godot;
+using MonkeSurvivor.Scenes;
 using MonkeSurvivor.Scripts.Enemies;
 using MonkeSurvivor.Scripts.Monkeys;
 using MonkeSurvivor.Scripts.Ui;
@@ -13,26 +14,30 @@ namespace MonkeSurvivor.Scripts;
 
 public partial class Player : BaseUnit
 {
-    private Node            battleScene;
-    private bool            invincibilityRunning;
-    private double          millisecondsSinceLastHit;
-    private double          regenerationTimer;
-    private float           swingTimer;
-    private TextureRect     texture;
-    private int             xpCurrent;
-    public  List<BaseEnemy> Enemies       { get; set; }
-    public  StaticBody2D    WieldedWeapon { get; set; }
+    private Node               battleScene;
+    private bool               invincibilityRunning;
+    private double             millisecondsSinceLastHit;
+    private double             regenerationTimer;
+    private RessourceIndicator ressourceIndicator;
+    private float              swingTimer;
+    private TextureRect        texture;
+    private int                bananasHeld;
+    public  List<BaseEnemy>    Enemies                  { get; set; }
+    public  StaticBody2D       WieldedWeaponRightHand   { get; set; }
+    public  StaticBody2D       WieldedWeaponLeftHand    { get; set; }
+    public  StaticBody2D       WieldedWeaponTail        { get; set; }
+    public  StaticBody2D       WieldedWeaponHeadmounted { get; set; }
 
     [Export]
     public float Speed { get; set; } = 400;
 
-    public int XpCurrent
+    public int BananasHeld
     {
-        get => xpCurrent;
-        set => SetField(ref xpCurrent, value);
+        get => bananasHeld;
+        set => SetField(ref bananasHeld, value);
     }
 
-    public int XpSpent { get; set; }
+    public int BananasSpent { get; set; }
 
     [Export]
     public int InvicibilityTimeMilliseconds { get; set; } = 1000;
@@ -61,8 +66,10 @@ public partial class Player : BaseUnit
         var unitSpawner = battleScene.GetNode<UnitSpawner>(nameof(UnitSpawner));
         unitSpawner.WaveSpawned += UnitSpawnerOnWaveSpawned;
 
+        ressourceIndicator = battleScene.GetNode<CanvasLayer>("UI")
+                                        .GetNode<RessourceIndicator>(nameof(RessourceIndicator));
+
         texture   = GetNode<TextureRect>(nameof(TextureRect));
-        XpCurrent = StaticMemory.HeldMoney;
 
         invincibilityRunning = true;
 
@@ -81,6 +88,26 @@ public partial class Player : BaseUnit
 
     private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
+        if (e.PropertyName == nameof(BananasHeld))
+        {
+            if(GetTree() is null)
+                return;
+            
+            if (!IsInstanceValid(ressourceIndicator) && GetTree().CurrentScene is Shop shop)
+            {
+                ressourceIndicator = shop.GetNode<CanvasLayer>("UI")
+                                         .GetNode<ShopPanel>("%" + nameof(ShopPanel))
+                                         .GetNode<RessourceIndicator>("%" + nameof(RessourceIndicator));
+            }
+            else if (!IsInstanceValid(ressourceIndicator) && GetTree().CurrentScene is Battle battle)
+            {
+                ressourceIndicator = battle.GetNode<CanvasLayer>("UI")
+                                           .GetNode<RessourceIndicator>(nameof(RessourceIndicator));
+            }
+            
+            ressourceIndicator.SetBananaAmount(BananasHeld);
+        }
+
         if (e.PropertyName != nameof(HealthCurrent))
             return;
 
@@ -91,13 +118,16 @@ public partial class Player : BaseUnit
     {
         texture ??= GetNode<TextureRect>(nameof(TextureRect));
         //Apply Modifiers
-        WieldedWeapon   = monkey.StartingWeapon.Instantiate<StaticBody2D>();
-        texture.Texture = monkey.ClassSprite;
+        WieldedWeaponRightHand = monkey.StartingWeapon.Instantiate<StaticBody2D>();
+        texture.Texture        = monkey.ClassSprite;
     }
 
     public override void _Process(double delta)
     {
         base._Process(delta);
+
+        if (!IsInstanceValid(battleScene))
+            battleScene = GetTree().CurrentScene;
 
         ResolveRegenerationTicks(delta);
         ResolveInvincibility(delta);
@@ -130,12 +160,12 @@ public partial class Player : BaseUnit
 
     private void ProgressSwingtimer(double delta)
     {
-        if (WieldedWeapon is null)
+        if (WieldedWeaponRightHand is null)
             return;
 
         swingTimer += (float)delta;
 
-        if (WieldedWeapon is BaseWeapon wieldedWeapon && swingTimer >= wieldedWeapon.SwingCooldown)
+        if (WieldedWeaponRightHand is BaseWeapon wieldedWeapon && swingTimer >= wieldedWeapon.SwingCooldown)
         {
             swingTimer = 0;
 

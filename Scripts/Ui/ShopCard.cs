@@ -1,11 +1,13 @@
 using Godot;
 using MonkeSurvivor.Scripts.Items;
+using MonkeSurvivor.Scripts.Utils;
 
 namespace MonkeSurvivor.Scripts.Ui;
 
 public partial class ShopCard : PanelContainer
 {
     public delegate void ItemBoughtEventHandler(BaseItem boughtItem);
+    public delegate void PurchaseFailedEventHandler(BaseItem boughtItem);
 
     public delegate void MouseEventHandler(bool entered, ShopCard shopCard);
 
@@ -19,6 +21,7 @@ public partial class ShopCard : PanelContainer
     public BaseItem Item { get; set; }
     public event MouseEventHandler OnMouseEvent;
     public event ItemBoughtEventHandler ItemBought;
+    public event PurchaseFailedEventHandler OnPurchaseFailed;
 
     public override void _Ready()
     {
@@ -48,13 +51,26 @@ public partial class ShopCard : PanelContainer
         if (Item is null)
             return;
 
-        ItemBought?.Invoke(Item);
+        var fundsSufficient = StaticMemory.Player.BananasHeld >= Item.Price;
+        
+        if(fundsSufficient)
+        {
+            ItemBought?.Invoke(Item);
 
-        Item = null;
-        Modulate = new Color(Modulate, 0);
-        Disabled = true;
+            Item = null;
+            Modulate = new Color(Modulate, 0);
+            Disabled = true;
 
-        _on_mouse_exited_shopCard();
+            _on_mouse_exited_shopCard();
+        }
+        else
+        {
+            OnPurchaseFailed?.Invoke(Item);
+
+            var animationPlayer = GetNode<AnimationPlayer>(nameof(AnimationPlayer));
+            
+            animationPlayer.Play("shake");
+        }
     }
 
     public void _on_mouse_entered_shopCard()

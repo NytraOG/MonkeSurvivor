@@ -10,12 +10,12 @@ namespace MonkeSurvivor.Scenes;
 
 public partial class Shop : Node
 {
-    private readonly List<string>   itemScenes = new();
-    private          CharacterSheet characterSheet;
-    private          Inventory      inventory;
-    private          Label          moneyDisply;
-    private          ShopPanel      shopPanel;
-    private          PackedScene    BattleScene => ResourceLoader.Load<PackedScene>("res://Scenes/battle.tscn");
+    private readonly List<string>       itemScenes = new();
+    private          CharacterSheet     characterSheet;
+    private          Inventory          inventory;
+    private          RessourceIndicator ressourceIndicator;
+    private          ShopPanel          shopPanel;
+    private          PackedScene        BattleScene => ResourceLoader.Load<PackedScene>("res://Scenes/battle.tscn");
 
     public override void _Ready()
     {
@@ -24,18 +24,18 @@ public partial class Shop : Node
 
         GetTree().Paused = false;
 
-        shopPanel      = GetNode<ShopPanel>("%" + nameof(ShopPanel));
-        inventory      = GetNode<Inventory>("%" + nameof(Inventory));
-        characterSheet = GetNode<CharacterSheet>("%" + nameof(CharacterSheet));
-        moneyDisply    = shopPanel.GetNode<Label>("%PlayerMoney");
+        shopPanel          = GetNode<ShopPanel>("%" + nameof(ShopPanel));
+        inventory          = GetNode<Inventory>("%" + nameof(Inventory));
+        characterSheet     = GetNode<CharacterSheet>("%" + nameof(CharacterSheet));
 
-        moneyDisply.Text = StaticMemory.HeldMoney.ToString();
+        ressourceIndicator = shopPanel.GetNode<RessourceIndicator>("%" + nameof(RessourceIndicator));
+        ressourceIndicator.SetBananaAmount(StaticMemory.Player.BananasHeld);
 
         characterSheet.OnAttributeRaised += CharacterSheetOnOnAttributeRaised;
         shopPanel.ItemBought             += ShopPanelOnItemBought;
 
         GenerateItems();
-        
+
         characterSheet.SetDisplayedValues(StaticMemory.Player);
         characterSheet.CharacterImage.Texture = StaticMemory.Player.GetNode<TextureRect>(nameof(TextureRect)).Texture;
 
@@ -44,6 +44,11 @@ public partial class Shop : Node
 
     private void ShopPanelOnItemBought(BaseItem boughtItem)
     {
+        StaticMemory.Player.BananasHeld -= boughtItem.Price;
+        StaticMemory.Player.BananasSpent += boughtItem.Price;
+        
+        ressourceIndicator.SetBananaAmount(StaticMemory.Player.BananasHeld);
+        
         inventory.SetItem(boughtItem);
 
         boughtItem.ApplyEffectTo(StaticMemory.Player);
@@ -61,6 +66,8 @@ public partial class Shop : Node
         StaticMemory.AlreadyReadied    = false;
 
         GetTree().ChangeSceneToPacked(BattleScene);
+        
+        QueueFree();
     }
 
     private void GenerateItems()

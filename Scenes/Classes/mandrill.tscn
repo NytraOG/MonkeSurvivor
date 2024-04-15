@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://gm8k6duar51x"]
+[gd_scene load_steps=3 format=3 uid="uid://brmva4j7as5pf"]
 
 [ext_resource type="Script" path="res://Scripts/Monkeys/Mandrill.cs" id="1_j36lp"]
 [ext_resource type="Texture2D" uid="uid://mmhba3j7ocra" path="res://Images/MonkeyClasses/Mandrill.png" id="2_vr7vf"]

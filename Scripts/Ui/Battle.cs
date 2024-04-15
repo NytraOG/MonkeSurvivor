@@ -1,5 +1,4 @@
 using Godot;
-using MonkeSurvivor.Scripts.Monkeys;
 using MonkeSurvivor.Scripts.Utils;
 
 namespace MonkeSurvivor.Scripts.Ui;
@@ -31,20 +30,25 @@ public partial class Battle : Node
 
     private void InstantiatePlayer()
     {
-        if (IsInstanceValid(StaticMemory.Player))
-            player = StaticMemory.Player;
-
         var newPlayer = PlayerScene.Instantiate<Player>();
-        var monkey    = MonkeyType.Instantiate<BaseMonkey>();
+        var monkey    = StaticMemory.SelectedMonkey;
 
-        if(StaticMemory.Player is not null)
+        if (StaticMemory.Player is not null)
+        {
             newPlayer.HealthCurrent = StaticMemory.Player.HealthCurrent;
+            newPlayer.BananasHeld     = StaticMemory.Player.BananasHeld;
+            newPlayer.BananasSpent = StaticMemory.Player.BananasSpent;
 
-        newPlayer.Speed         = 400;
-        newPlayer.Position      = new Vector2(900, 500);
+            var ressourceIndicator = GetNode<CanvasLayer>("UI").GetNode<RessourceIndicator>(nameof(RessourceIndicator));
+            ressourceIndicator.SetBananaAmount(newPlayer.BananasHeld);
+        }
+
+        newPlayer.Speed    = 400;
+        newPlayer.Position = new Vector2(900, 500);
         newPlayer.SetMonkeyClass(monkey);
 
         player = newPlayer;
+
         AddChild(player);
     }
 

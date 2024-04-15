@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bn6qogp6dur0v"]
 
 [ext_resource type="Script" path="res://Scripts/XpToken.cs" id="1_7gw6l"]
-[ext_resource type="Texture2D" uid="uid://bo3xk0bs4a7af" path="res://Images/XpToken.png" id="2_s1b7p"]
+[ext_resource type="Texture2D" uid="uid://dsorcojpe6ll5" path="res://Images/Items/Banana.png" id="2_7tgpk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p8gvj"]
 radius = 178.101
@@ -17,19 +17,19 @@ script = ExtResource("1_7gw6l")
 Speed = 20.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(20, 20)
+custom_minimum_size = Vector2(50, 20)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -10.0
-offset_top = -10.0
+offset_top = -15.0
 offset_right = 10.0
-offset_bottom = 10.0
+offset_bottom = 15.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_s1b7p")
+texture = ExtResource("2_7tgpk")
 expand_mode = 5
 
 [node name="AttractArea" type="Area2D" parent="."]
