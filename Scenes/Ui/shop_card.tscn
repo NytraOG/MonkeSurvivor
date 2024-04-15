@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://y0xqeaih6b7p"]
+[gd_scene load_steps=15 format=3 uid="uid://y0xqeaih6b7p"]
 
 [ext_resource type="Script" path="res://Scripts/Ui/ShopCard.cs" id="1_4p47j"]
 [ext_resource type="Shader" path="res://Shaders/shop_card.gdshader" id="1_ht2nm"]
@@ -26,9 +26,48 @@ shader_parameter/outline_color_2 = null
 shader_parameter/use_outline_uv = false
 shader_parameter/useTexture = false
 
+[sub_resource type="Animation" id="Animation_doa28"]
+resource_name = "shake"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0458201, 0.0371276, -0.0175004, 0.0157285, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_hd4qt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.0458201]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d5rk4"]
+_data = {
+"RESET": SubResource("Animation_hd4qt"),
+"shake": SubResource("Animation_doa28")
+}
+
 [node name="ShopCard" type="PanelContainer"]
 offset_right = 270.0
-offset_bottom = 375.0
+offset_bottom = 385.0
+rotation = -0.0458201
+pivot_offset = Vector2(136, 199)
 script = ExtResource("1_4p47j")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -141,6 +180,11 @@ material = SubResource("ShaderMaterial_7ouh1")
 layout_mode = 2
 texture = ExtResource("6_b1e7v")
 expand_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_d5rk4")
+}
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered_shopCard"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited_shopCard"]
