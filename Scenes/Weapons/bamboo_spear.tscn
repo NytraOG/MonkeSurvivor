@@ -44,7 +44,7 @@ position = Vector2(43, -8)
 rotation = -0.550087
 script = ExtResource("1_rfgbp")
 KnockbackForce = 1.0
-SwingCooldown = 1.5
+SwingCooldown = 1.0
 SplashDamage = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -80,7 +80,8 @@ libraries = {
 
 [node name="ImpactArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ImpactArea"]
+[node name="ImpactCollision" type="CollisionShape2D" parent="ImpactArea"]
+unique_name_in_owner = true
 position = Vector2(0.788365, 0.466332)
 rotation = 0.721743
 shape = SubResource("RectangleShape2D_os3da")

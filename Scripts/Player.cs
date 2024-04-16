@@ -7,7 +7,6 @@ using MonkeSurvivor.Scenes;
 using MonkeSurvivor.Scripts.Enemies;
 using MonkeSurvivor.Scripts.Monkeys;
 using MonkeSurvivor.Scripts.Ui;
-using MonkeSurvivor.Scripts.Utils;
 using MonkeSurvivor.Scripts.Weapons;
 
 namespace MonkeSurvivor.Scripts;
