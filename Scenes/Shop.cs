@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Godot;
+using MonkeSurvivor.Scripts;
 using MonkeSurvivor.Scripts.Items;
 using MonkeSurvivor.Scripts.Ui;
 using MonkeSurvivor.Scripts.Utils;
@@ -33,8 +35,10 @@ public partial class Shop : Node
         ressourceIndicator = shopPanel.GetNode<RessourceIndicator>("%" + nameof(RessourceIndicator));
         ressourceIndicator.SetBananaAmount(StaticMemory.Player.BananasHeld);
 
-        characterSheet.OnAttributeRaised += CharacterSheetOnOnAttributeRaised;
-        shopPanel.ItemBought             += ShopPanelOnItemBought;
+        StaticMemory.Player.PropertyChanged += PlayerOnPropertyChanged;
+        characterSheet.OnAttributeRaised    += CharacterSheetOnOnAttributeRaised;
+        shopPanel.ItemBought                += ShopPanelOnItemBought;
+        TreeExiting                         += OnTreeExiting;
 
         GenerateItems();
 
@@ -46,13 +50,28 @@ public partial class Shop : Node
         StaticMemory.AlreadyReadied = true;
     }
 
+    private void PlayerOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName != nameof(Player.BananasHeld) || sender is not Player player)
+            return;
+
+        if (!IsInstanceValid(player) && GetTree().CurrentScene is Shop shop)
+        {
+            ressourceIndicator = shop.GetNode<CanvasLayer>("UI")
+                                     .GetNode<ShopPanel>("%" + nameof(ShopPanel))
+                                     .GetNode<RessourceIndicator>("%" + nameof(RessourceIndicator));
+        }
+
+        ressourceIndicator.SetBananaAmount(player.BananasHeld);
+    }
+
     private void ShopPanelOnItemBought(BaseItem boughtItem)
     {
-        StaticMemory.Player.BananasHeld -= boughtItem.Price;
+        StaticMemory.Player.BananasHeld  -= boughtItem.Price;
         StaticMemory.Player.BananasSpent += boughtItem.Price;
-        
+
         ressourceIndicator.SetBananaAmount(StaticMemory.Player.BananasHeld);
-        
+
         inventory.SetItem(boughtItem);
 
         boughtItem.ApplyEffectTo(StaticMemory.Player);
@@ -70,7 +89,7 @@ public partial class Shop : Node
         StaticMemory.AlreadyReadied    = false;
 
         GetTree().ChangeSceneToPacked(BattleScene);
-        
+
         QueueFree();
     }
 
@@ -120,4 +139,12 @@ public partial class Shop : Node
     }
 
     private void CharacterSheetOnOnAttributeRaised(string attributename) { }
+
+    private void OnTreeExiting()
+    {
+        StaticMemory.Player.PropertyChanged -= PlayerOnPropertyChanged;
+        characterSheet.OnAttributeRaised    -= CharacterSheetOnOnAttributeRaised;
+        shopPanel.ItemBought                -= ShopPanelOnItemBought;
+        TreeExiting                         -= OnTreeExiting;
+    }
 }

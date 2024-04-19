@@ -7,32 +7,31 @@ namespace MonkeSurvivor.Scripts.Ui;
 public partial class ShopCard : PanelContainer
 {
     public delegate void ItemBoughtEventHandler(BaseItem boughtItem);
-    public delegate void PurchaseFailedEventHandler(BaseItem boughtItem);
 
     public delegate void MouseEventHandler(bool entered, ShopCard shopCard);
 
-    private Label itemCostLabel;
+    public delegate void PurchaseFailedEventHandler(BaseItem boughtItem);
+
+    private Label       itemCostLabel;
     private TextureRect itemImage;
-    private Label itemNameLabel;
+    private Label       itemNameLabel;
 
-    [Export] public int CardId { get; set; }
+    [Export]
+    public int CardId { get; set; }
 
-    public bool Disabled { get; set; }
-    public BaseItem Item { get; set; }
-    public event MouseEventHandler OnMouseEvent;
-    public event ItemBoughtEventHandler ItemBought;
+    public bool                             Disabled { get; set; }
+    public BaseItem                         Item     { get; set; }
+    public event MouseEventHandler          OnMouseEvent;
+    public event ItemBoughtEventHandler     ItemBought;
     public event PurchaseFailedEventHandler OnPurchaseFailed;
 
-    public override void _Ready()
-    {
-        EnsureNodesExist();
-    }
+    public override void _Ready() => EnsureNodesExist();
 
     private void EnsureNodesExist()
     {
         itemNameLabel ??= GetNode<Label>("%ItemName");
         itemCostLabel ??= GetNode<Label>("%ItemCost");
-        itemImage ??= GetNode<TextureRect>("%ItemImage");
+        itemImage     ??= GetNode<TextureRect>("%ItemImage");
     }
 
     public void SetItem(BaseItem itemToSet)
@@ -41,7 +40,7 @@ public partial class ShopCard : PanelContainer
 
         itemNameLabel.Text = itemToSet.Displayname;
         itemCostLabel.Text = itemToSet.Price.ToString();
-        itemImage.Texture = itemToSet.ItemImage;
+        itemImage.Texture  = itemToSet.ItemImage;
 
         Item = itemToSet;
     }
@@ -52,12 +51,12 @@ public partial class ShopCard : PanelContainer
             return;
 
         var fundsSufficient = StaticMemory.Player.BananasHeld >= Item.Price;
-        
-        if(fundsSufficient)
+
+        if (fundsSufficient)
         {
             ItemBought?.Invoke(Item);
 
-            Item = null;
+            Item     = null;
             Modulate = new Color(Modulate, 0);
             Disabled = true;
 
@@ -68,18 +67,12 @@ public partial class ShopCard : PanelContainer
             OnPurchaseFailed?.Invoke(Item);
 
             var animationPlayer = GetNode<AnimationPlayer>(nameof(AnimationPlayer));
-            
+
             animationPlayer.Play("shake");
         }
     }
 
-    public void _on_mouse_entered_shopCard()
-    {
-        OnMouseEvent?.Invoke(true, this);
-    }
+    public void _on_mouse_entered_shopCard() => OnMouseEvent?.Invoke(true, this);
 
-    public void _on_mouse_exited_shopCard()
-    {
-        OnMouseEvent?.Invoke(false, this);
-    }
+    public void _on_mouse_exited_shopCard() => OnMouseEvent?.Invoke(false, this);
 }

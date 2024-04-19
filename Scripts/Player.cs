@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Godot;
-using MonkeSurvivor.Scenes;
 using MonkeSurvivor.Scripts.Enemies;
 using MonkeSurvivor.Scripts.Monkeys;
 using MonkeSurvivor.Scripts.Ui;
@@ -13,6 +12,7 @@ namespace MonkeSurvivor.Scripts;
 
 public partial class Player : BaseUnit
 {
+    private int                bananasHeld;
     private Node               battleScene;
     private bool               invincibilityRunning;
     private double             millisecondsSinceLastHit;
@@ -20,7 +20,6 @@ public partial class Player : BaseUnit
     private RessourceIndicator ressourceIndicator;
     private float              swingTimer;
     private TextureRect        texture;
-    private int                bananasHeld;
     public  List<BaseEnemy>    Enemies                  { get; set; }
     public  BaseWeapon         WieldedWeaponRightHand   { get; set; }
     public  BaseWeapon         WieldedWeaponLeftHand    { get; set; }
@@ -65,10 +64,7 @@ public partial class Player : BaseUnit
         var unitSpawner = battleScene.GetNode<UnitSpawner>(nameof(UnitSpawner));
         unitSpawner.WaveSpawned += UnitSpawnerOnWaveSpawned;
 
-        ressourceIndicator = battleScene.GetNode<CanvasLayer>("UI")
-                                        .GetNode<RessourceIndicator>(nameof(RessourceIndicator));
-
-        texture   = GetNode<TextureRect>(nameof(TextureRect));
+        texture = GetNode<TextureRect>(nameof(TextureRect));
 
         invincibilityRunning = true;
 
@@ -87,26 +83,6 @@ public partial class Player : BaseUnit
 
     private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(BananasHeld))
-        {
-            if(GetTree() is null)
-                return;
-            
-            if (!IsInstanceValid(ressourceIndicator) && GetTree().CurrentScene is Shop shop)
-            {
-                ressourceIndicator = shop.GetNode<CanvasLayer>("UI")
-                                         .GetNode<ShopPanel>("%" + nameof(ShopPanel))
-                                         .GetNode<RessourceIndicator>("%" + nameof(RessourceIndicator));
-            }
-            else if (!IsInstanceValid(ressourceIndicator) && GetTree().CurrentScene is Battle battle)
-            {
-                ressourceIndicator = battle.GetNode<CanvasLayer>("UI")
-                                           .GetNode<RessourceIndicator>(nameof(RessourceIndicator));
-            }
-            
-            ressourceIndicator.SetBananaAmount(BananasHeld);
-        }
-
         if (e.PropertyName != nameof(HealthCurrent))
             return;
 
@@ -119,7 +95,7 @@ public partial class Player : BaseUnit
         //Apply Modifiers
         WieldedWeaponRightHand = monkey.StartingWeapon.Instantiate<BaseWeapon>();
         AddChild(WieldedWeaponRightHand);
-        texture.Texture        = monkey.ClassSprite;
+        texture.Texture = monkey.ClassSprite;
     }
 
     public override void _Process(double delta)
