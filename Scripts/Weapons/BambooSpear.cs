@@ -26,6 +26,8 @@ public partial class BambooSpear : BaseMeleeWeapon
 
     protected override void ExecuteBehaviour(double delta)
     {
+        var target            = FindClosestTargetOrDefault();
+
         var overlappingBodies = GetOverlappingBodies();
 
         foreach (var body in overlappingBodies)

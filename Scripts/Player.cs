@@ -79,6 +79,8 @@ public partial class Player : BaseUnit
         Enemies = allEnemies
                  .Cast<BaseEnemy>()
                  .ToList();
+
+        WieldedWeaponRightHand.Enemies = Enemies;
     }
 
     private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)

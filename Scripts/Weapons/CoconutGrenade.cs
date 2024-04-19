@@ -7,7 +7,7 @@ public partial class CoconutGrenade : BaseRangedWeapon
 {
     protected override void ExecuteBehaviour(double delta)
     {
-        var target = FindTargetOrDefault();
+        var target = FindRandomTargetOrDefault();
 
         if (target is null || target.IsDead)
             return;

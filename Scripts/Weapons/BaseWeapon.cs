@@ -94,6 +94,44 @@ public abstract partial class BaseWeapon : StaticBody2D
         OnDamageDealt?.Invoke(TotalDamageDealt);
     }
 
+    protected virtual BaseEnemy FindRandomTargetOrDefault()
+    {
+        if (Target is not null)
+            return Target;
+
+        var eligebleTargets = Enemies?.Where(e => !e.IsDead)
+                                      .ToList();
+
+        if (eligebleTargets == null)
+            return null;
+
+        EnemyCount =   eligebleTargets.Count;
+        Rng        ??= new Random();
+
+        var randomNumber = Rng.Next(EnemyCount);
+
+        if (eligebleTargets.Count == EnemyCount)
+            Target = eligebleTargets[randomNumber];
+
+        return Target;
+    }
+
+    protected virtual BaseEnemy FindClosestTargetOrDefault()
+    {
+        if (Enemies is null || !Enemies.Any())
+            return null;
+
+        var kek = Enemies.Select(e => new
+        {
+            e,
+            e.Position
+        });
+
+        kek = kek.OrderBy(e => (e.Position - Position).Length());
+
+        return kek.FirstOrDefault()?.e;
+    }
+
     protected void DealSplashDamageAround(BaseEnemy enemy)
     {
         SplashArea ??= GetNode<Area2D>("SplashArea");
