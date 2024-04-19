@@ -5,8 +5,11 @@ namespace MonkeSurvivor.Scripts.Weapons;
 
 public partial class BambooSpear : BaseMeleeWeapon
 {
-    private AnimationPlayer animationPlayer;
-    private double          timeSinceLastSwing;
+    private const string          SwingAnimation = "WeaponSwing";
+    private const string          PokeAnimation  = "WeaponPoke";
+    private       AnimationPlayer animationPlayer;
+    private       string          lastPlayedAnimation;
+    private       double          timeSinceLastSwing;
 
     public override void _Ready()
     {
@@ -26,7 +29,7 @@ public partial class BambooSpear : BaseMeleeWeapon
 
     protected override void ExecuteBehaviour(double delta)
     {
-        var target            = FindClosestTargetOrDefault();
+        var target = FindClosestTargetOrDefault();
 
         var overlappingBodies = GetOverlappingBodies();
 
@@ -37,10 +40,18 @@ public partial class BambooSpear : BaseMeleeWeapon
         if (animationPlayer.IsPlaying() || (timeSinceLastSwing += delta) < SwingCooldown)
             return;
 
+        PlayAnimation();
+    }
+
+    private void PlayAnimation()
+    {
         var implactCollisionShape = GetNode<CollisionShape2D>("%ImpactCollision");
         implactCollisionShape.Disabled = false;
 
-        animationPlayer.Play("WeaponSwing");
+        if(string.IsNullOrWhiteSpace(lastPlayedAnimation))
+            lastPlayedAnimation =
+
+        animationPlayer.Play("");
 
         timeSinceLastSwing = 0;
     }
