@@ -63,7 +63,7 @@ public abstract partial class BaseWeapon : StaticBody2D
 
     protected virtual List<Node2D> GetOverlappingBodies()
     {
-        ImpactArea ??= GetNode<Area2D>("ImpactArea");
+        ImpactArea ??= GetNode<Area2D>("%ImpactArea");
 
         var overlappingBodies = ImpactArea.GetOverlappingBodies()
                                           .Where(b => b.Name != nameof(Player))

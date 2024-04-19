@@ -12,7 +12,7 @@ public partial class WeaponSlot : PanelContainer
     {
         Weapon =   weapon;
         image  ??= GetNode<TextureRect>("%WeaponImage");
-        var weaponImage = weapon.GetNode<TextureRect>(nameof(TextureRect));
+        var weaponImage = weapon.GetNode<TextureRect>("%" + nameof(TextureRect));
         image.Texture = weaponImage.Texture;
     }
 }

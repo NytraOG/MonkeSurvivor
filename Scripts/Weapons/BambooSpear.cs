@@ -10,7 +10,7 @@ public partial class BambooSpear : BaseMeleeWeapon
 
     public override void _Ready()
     {
-        animationPlayer                   =  GetNode<AnimationPlayer>(nameof(AnimationPlayer));
+        animationPlayer                   =  GetNode<AnimationPlayer>("%" + nameof(AnimationPlayer));
         animationPlayer.AnimationFinished += AnimationPlayerOnAnimationFinished;
 
         OnDamageDealt += damage =>

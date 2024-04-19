@@ -89,8 +89,8 @@ libraries = {
 
 [node name="WeaponRightHand" type="Node2D" parent="."]
 visible = false
-position = Vector2(76, 3)
-rotation = -0.541764
+position = Vector2(209, 2.99998)
+rotation = 0.783914
 
 [node name="Sprite2D" type="Sprite2D" parent="WeaponRightHand"]
 material = SubResource("ShaderMaterial_utscn")
