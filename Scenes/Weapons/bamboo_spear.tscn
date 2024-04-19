@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cuyv13hlq5sqp"]
+[gd_scene load_steps=7 format=3 uid="uid://cuyv13hlq5sqp"]
 
 [ext_resource type="Script" path="res://Scripts/Weapons/BambooSpear.cs" id="1_rfgbp"]
 [ext_resource type="Texture2D" uid="uid://ihbnwfxsravg" path="res://Images/Weapons/BambooSpear.png" id="2_3ag70"]
@@ -34,8 +34,37 @@ tracks/1/keys = {
 "values": [-0.537655, -2.39604, -1.71543, -1.03481, -0.289296, 0.326429, -0.537655]
 }
 
+[sub_resource type="Animation" id="Animation_3aonp"]
+resource_name = "WeaponPoke"
+length = 1.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.6, 0.8, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(55, 0), Vector2(17, 79), Vector2(2, -270), Vector2(2, -270), Vector2(55, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationContainer:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.6, 0.8, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.537561, -0.789092, -0.740162, -0.740162, -0.537561]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_54vm6"]
 _data = {
+"WeaponPoke": SubResource("Animation_3aonp"),
 "WeaponSwing": SubResource("Animation_2aohn")
 }
 
@@ -54,7 +83,7 @@ disabled = true
 
 [node name="AnimationContainer" type="Node2D" parent="."]
 position = Vector2(55, 0)
-rotation = -0.537655
+rotation = -0.537561
 
 [node name="TextureRect" type="TextureRect" parent="AnimationContainer"]
 unique_name_in_owner = true
