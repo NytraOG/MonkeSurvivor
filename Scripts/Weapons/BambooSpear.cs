@@ -48,10 +48,10 @@ public partial class BambooSpear : BaseMeleeWeapon
         var implactCollisionShape = GetNode<CollisionShape2D>("%ImpactCollision");
         implactCollisionShape.Disabled = false;
 
-        if(string.IsNullOrWhiteSpace(lastPlayedAnimation))
-            lastPlayedAnimation =
-
-        animationPlayer.Play("");
+        // if(string.IsNullOrWhiteSpace(lastPlayedAnimation))
+        //     lastPlayedAnimation =
+        
+        animationPlayer.Play("WeaponSwing");
 
         timeSinceLastSwing = 0;
     }

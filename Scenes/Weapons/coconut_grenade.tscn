@@ -48,6 +48,7 @@ disabled = true
 shape = SubResource("CircleShape2D_xfbba")
 
 [node name="ImpactArea" type="Area2D" parent="."]
+unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ImpactArea"]
 shape = SubResource("CircleShape2D_6t1pa")

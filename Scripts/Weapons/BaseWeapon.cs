@@ -68,6 +68,7 @@ public abstract partial class BaseWeapon : StaticBody2D
         var overlappingBodies = ImpactArea.GetOverlappingBodies()
                                           .Where(b => b.Name != nameof(Player))
                                           .ToList();
+        
         return overlappingBodies;
     }
 
