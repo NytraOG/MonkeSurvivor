@@ -12,22 +12,23 @@ namespace MonkeSurvivor.Scripts;
 
 public partial class Player : BaseUnit
 {
-    private int                bananasHeld;
-    private Node               battleScene;
-    private bool               invincibilityRunning;
-    private double             millisecondsSinceLastHit;
-    private double             regenerationTimer;
-    private RessourceIndicator ressourceIndicator;
-    private float              swingTimer;
-    private TextureRect        texture;
-    public  List<BaseEnemy>    Enemies                  { get; set; }
-    public  BaseWeapon         WieldedWeaponRightHand   { get; set; }
-    public  BaseWeapon         WieldedWeaponLeftHand    { get; set; }
-    public  BaseWeapon         WieldedWeaponTail        { get; set; }
-    public  BaseWeapon         WieldedWeaponHeadmounted { get; set; }
+    public delegate void PlayerDiedEventHandler();
 
-    [Export]
-    public float Speed { get; set; } = 400;
+    private int bananasHeld;
+    private Node battleScene;
+    private bool invincibilityRunning;
+    private double millisecondsSinceLastHit;
+    private double regenerationTimer;
+    private RessourceIndicator ressourceIndicator;
+    private float swingTimer;
+    private TextureRect texture;
+    public List<BaseEnemy> Enemies { get; set; }
+    public BaseWeapon WieldedWeaponRightHand { get; set; }
+    public BaseWeapon WieldedWeaponLeftHand { get; set; }
+    public BaseWeapon WieldedWeaponTail { get; set; }
+    public BaseWeapon WieldedWeaponHeadmounted { get; set; }
+
+    [Export] public float Speed { get; set; } = 400;
 
     public int BananasHeld
     {
@@ -37,8 +38,7 @@ public partial class Player : BaseUnit
 
     public int BananasSpent { get; set; }
 
-    [Export]
-    public int InvicibilityTimeMilliseconds { get; set; } = 1000;
+    [Export] public int InvicibilityTimeMilliseconds { get; set; } = 1000;
 
     public bool IsInvicible
     {
@@ -47,7 +47,7 @@ public partial class Player : BaseUnit
             if (InvicibilityTimeMilliseconds > millisecondsSinceLastHit)
                 return true;
 
-            invincibilityRunning     = false;
+            invincibilityRunning = false;
             millisecondsSinceLastHit = 0;
 
             return false;
@@ -56,7 +56,12 @@ public partial class Player : BaseUnit
 
     public float DiagonalSpeed => (float)Math.Sqrt(Math.Pow(Speed, 2) / 2);
 
-    public override void _Ready() => Initialize();
+    public event PlayerDiedEventHandler PlayerDied;
+
+    public override void _Ready()
+    {
+        Initialize();
+    }
 
     public void Initialize()
     {
@@ -74,11 +79,11 @@ public partial class Player : BaseUnit
     private void UnitSpawnerOnWaveSpawned()
     {
         var allChildren = battleScene.GetChildren();
-        var allEnemies  = allChildren.Where(c => c is BaseEnemy);
+        var allEnemies = allChildren.Where(c => c is BaseEnemy);
 
         Enemies = allEnemies
-                 .Cast<BaseEnemy>()
-                 .ToList();
+            .Cast<BaseEnemy>()
+            .ToList();
 
         WieldedWeaponRightHand.Enemies = Enemies;
     }
@@ -151,17 +156,15 @@ public partial class Player : BaseUnit
                 return;
 
             var duplicateWeapon = (BaseWeapon)wieldedWeapon.Duplicate();
-            duplicateWeapon.Enemies  = Enemies;
+            duplicateWeapon.Enemies = Enemies;
             duplicateWeapon.Position = Position;
 
             duplicateWeapon.OnDamageDealt += damage =>
             {
                 if (battleScene is Battle battle)
-                {
                     battle.GetNode<CanvasLayer>("UI")
-                          .GetNode<DpsDisplay>("DpsDisplay")
-                          .DamageDealtInTimeFrame += damage;
-                }
+                        .GetNode<DpsDisplay>("DpsDisplay")
+                        .DamageDealtInTimeFrame += damage;
             };
 
             battleScene.AddChild(duplicateWeapon);
@@ -175,6 +178,11 @@ public partial class Player : BaseUnit
 
         if (invincibilityRunning)
             millisecondsSinceLastHit += delta * 1000;
+    }
+
+    protected override void DieProperly()
+    {
+        PlayerDied?.Invoke();
     }
 
     public override void _PhysicsProcess(double delta)
@@ -246,7 +254,9 @@ public partial class Player : BaseUnit
             Velocity = direction * Speed;
         }
         else
+        {
             Velocity = Vector2.Zero;
+        }
 
         MoveAndSlide();
     }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c0cu326xrrwqy"]
+[gd_scene load_steps=14 format=3 uid="uid://c0cu326xrrwqy"]
 
 [ext_resource type="Texture2D" uid="uid://cluta3sh7uc8p" path="res://Images/Background.png" id="1_tlb5t"]
 [ext_resource type="Script" path="res://Scripts/Ui/Battle.cs" id="1_vvbst"]
@@ -8,16 +8,18 @@
 [ext_resource type="PackedScene" uid="uid://bv6vuoocw2txk" path="res://Scenes/Healthbar.tscn" id="7_xa6r3"]
 [ext_resource type="PackedScene" uid="uid://byg24jevou41s" path="res://Scenes/wave_count_display.tscn" id="9_ng8op"]
 [ext_resource type="PackedScene" uid="uid://dqr0tpx7cqojt" path="res://Scenes/dps_display.tscn" id="10_i1e05"]
-[ext_resource type="PackedScene" uid="uid://ckql1dlgaeil8" path="res://Scenes/Ui/ressource_indicator.tscn" id="11_metlu"]
-[ext_resource type="PackedScene" uid="uid://cxjdev6p4pck2" path="res://Scenes/wave_timer.tscn" id="11_sfg61"]
+[ext_resource type="PackedScene" path="res://Scenes/Ui/ressource_indicator.tscn" id="11_metlu"]
+[ext_resource type="PackedScene" path="res://Scenes/wave_timer.tscn" id="11_sfg61"]
 [ext_resource type="PackedScene" uid="uid://o2krirg1072s" path="res://Scenes/end_of_wave_panel.tscn" id="12_etiq2"]
+[ext_resource type="PackedScene" uid="uid://rla0v1o4r52k" path="res://Scenes/Ui/deathscreen.tscn" id="12_r6p28"]
 [ext_resource type="PackedScene" uid="uid://djofp60813u06" path="res://Scenes/Utils/inventory_controller.tscn" id="13_yujit"]
 
-[node name="Battle" type="Node" node_paths=PackedStringArray("PauseMenu", "WaveTimer", "EndOfWavePanel")]
+[node name="Battle" type="Node" node_paths=PackedStringArray("PauseMenu", "WaveTimer", "EndOfWavePanel", "Deathscreen")]
 script = ExtResource("1_vvbst")
 PauseMenu = NodePath("UI/PauseMenu")
 WaveTimer = NodePath("UI/WaveTimer")
 EndOfWavePanel = NodePath("UI/EndOfWavePanel")
+Deathscreen = NodePath("UI/Deathscreen")
 
 [node name="UnitSpawner" type="Control" parent="."]
 layout_mode = 3
@@ -37,6 +39,11 @@ texture = ExtResource("1_tlb5t")
 metadata/_edit_use_anchors_ = true
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Deathscreen" parent="UI" instance=ExtResource("12_r6p28")]
+visible = false
+offset_top = -125.0
+offset_bottom = 125.0
 
 [node name="PauseMenu" parent="UI" instance=ExtResource("3_4a0fk")]
 visible = false

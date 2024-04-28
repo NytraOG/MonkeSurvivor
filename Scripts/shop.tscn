@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b02nultf4hf0k" path="res://Scenes/character_sheet.tscn" id="4_axdm2"]
 [ext_resource type="PackedScene" uid="uid://cbmfnsx53j3wb" path="res://Scenes/Ui/inventory.tscn" id="5_3qa3v"]
 [ext_resource type="PackedScene" uid="uid://cqxp00xn43ont" path="res://Scenes/Ui/item_tooltip.tscn" id="7_wjhwd"]
-[ext_resource type="PackedScene" uid="uid://safgos4ffg81" path="res://Scenes/Ui/weapon_slot.tscn" id="8_neuka"]
+[ext_resource type="PackedScene" path="res://Scenes/Ui/weapon_slot.tscn" id="8_neuka"]
 
 [node name="Shop" type="Node"]
 script = ExtResource("1_i2oyi")

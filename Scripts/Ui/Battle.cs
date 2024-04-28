@@ -6,19 +6,18 @@ namespace MonkeSurvivor.Scripts.Ui;
 
 public partial class Battle : Node
 {
-    private Player             player;
+    private Player player;
     private RessourceIndicator ressourceIndicator;
-    public  PackedScene        MonkeyType  => ResourceLoader.Load<PackedScene>("res://Scenes/Classes/mandrill.tscn");
-    public  PackedScene        PlayerScene => ResourceLoader.Load<PackedScene>("res://Scenes/player.tscn");
+    public PackedScene MonkeyType => ResourceLoader.Load<PackedScene>("res://Scenes/Classes/mandrill.tscn");
+    public PackedScene PlayerScene => ResourceLoader.Load<PackedScene>("res://Scenes/player.tscn");
 
-    [Export]
-    public PauseMenu PauseMenu { get; set; }
+    [Export] public PauseMenu PauseMenu { get; set; }
 
-    [Export]
-    public WaveTimer WaveTimer { get; set; }
+    [Export] public WaveTimer WaveTimer { get; set; }
 
-    [Export]
-    public EndOfWavePanel EndOfWavePanel { get; set; }
+    [Export] public EndOfWavePanel EndOfWavePanel { get; set; }
+
+    [Export] public Deathscreen Deathscreen { get; set; }
 
     public override void _Ready()
     {
@@ -37,26 +36,33 @@ public partial class Battle : Node
     private void InstantiatePlayer()
     {
         var newPlayer = PlayerScene.Instantiate<Player>();
-        var monkey    = StaticMemory.SelectedMonkey;
+        var monkey = StaticMemory.SelectedMonkey;
 
         if (StaticMemory.Player is not null)
         {
             newPlayer.HealthCurrent = StaticMemory.Player.HealthCurrent;
-            newPlayer.BananasHeld   = StaticMemory.Player.BananasHeld;
-            newPlayer.BananasSpent  = StaticMemory.Player.BananasSpent;
-
-            ressourceIndicator.SetBananaAmount(newPlayer.BananasHeld);
-
-            newPlayer.PropertyChanged += PlayerOnPropertyChanged;
+            newPlayer.BananasHeld = StaticMemory.Player.BananasHeld;
+            newPlayer.BananasSpent = StaticMemory.Player.BananasSpent;
         }
 
-        newPlayer.Speed    = 400;
+        newPlayer.Speed = 400;
         newPlayer.Position = new Vector2(900, 500);
         newPlayer.SetMonkeyClass(monkey);
 
+        newPlayer.PropertyChanged += PlayerOnPropertyChanged;
+        newPlayer.PlayerDied += OnPlayerDied;
+
+        ressourceIndicator.SetBananaAmount(newPlayer.BananasHeld);
         player = newPlayer;
 
         AddChild(player);
+    }
+
+    private void OnPlayerDied()
+    {
+        Deathscreen.Visible = true;
+        GetTree().Paused = true;
+        player.QueueFree();
     }
 
     private void PlayerOnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -75,22 +81,25 @@ public partial class Battle : Node
         if (Input.IsKeyPressed(Key.Escape))
         {
             PauseMenu.Visible = true;
-            GetTree().Paused  = true;
+            GetTree().Paused = true;
         }
     }
 
-    private void WaveTimerOnWaveEnded() => EndRound();
+    private void WaveTimerOnWaveEnded()
+    {
+        EndRound();
+    }
 
     private void EndRound()
     {
         EndOfWavePanel.Visible = true;
-        GetTree().Paused       = true;
+        GetTree().Paused = true;
     }
 
     private void OnTreeExiting()
     {
         player.PropertyChanged -= PlayerOnPropertyChanged;
-        WaveTimer.OnWaveEnded  -= WaveTimerOnWaveEnded;
-        TreeExiting            -= OnTreeExiting;
+        WaveTimer.OnWaveEnded -= WaveTimerOnWaveEnded;
+        TreeExiting -= OnTreeExiting;
     }
 }

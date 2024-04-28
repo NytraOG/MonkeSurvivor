@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://rla0v1o4r52k"]
+
+[ext_resource type="Script" path="res://Scripts/Ui/Deathscreen.cs" id="1_g7j2b"]
+
+[sub_resource type="FontFile" id="FontFile_bvuf5"]
+cache/0/170/0/ascent = 0.0
+cache/0/170/0/descent = 0.0
+cache/0/170/0/underline_position = 0.0
+cache/0/170/0/underline_thickness = 0.0
+cache/0/170/0/scale = 1.0
+cache/0/170/0/kerning_overrides/170/0 = Vector2(0, 0)
+cache/0/170/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/170/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+
+[node name="Deathscreen" type="PanelContainer"]
+process_mode = 2
+custom_minimum_size = Vector2(0, 250)
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g7j2b")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.556863, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = SubResource("FontFile_bvuf5")
+theme_override_font_sizes/font_size = 170
+text = "APE DEAD"
+horizontal_alignment = 1
+vertical_alignment = 1
