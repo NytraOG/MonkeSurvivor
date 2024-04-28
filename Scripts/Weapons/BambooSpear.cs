@@ -27,8 +27,9 @@ public partial class BambooSpear : BaseMeleeWeapon
 
     protected override void ExecuteBehaviour(double delta)
     {
-        var target = FindClosestTargetOrDefault();
-
+        if(!animationPlayer.IsPlaying())
+            RotateToClosestEnemy();
+        
         var overlappingBodies = GetOverlappingBodies();
 
         foreach (var body in overlappingBodies)
@@ -37,11 +38,23 @@ public partial class BambooSpear : BaseMeleeWeapon
         //Meleewaffenticks impln noch( soll nicht jeden frame damage machen)
         if (animationPlayer.IsPlaying() || (timeSinceLastSwing += delta) < SwingCooldown)
             return;
-
-        PlayAnimation();
+        
+        ExecuteAnimation();
     }
 
-    private void PlayAnimation()
+    private void RotateToClosestEnemy()
+    {
+        var target = FindClosestTargetOrDefault();
+
+        if (target is not null)
+        {
+            LookAt(target.Position);
+
+            RotationDegrees += 90;
+        }
+    }
+
+    private void ExecuteAnimation()
     {
         var impactCollisionShape = GetNode<CollisionShape2D>("%ImpactCollision");
         impactCollisionShape.Disabled = false;
