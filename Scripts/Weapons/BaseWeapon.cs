@@ -18,6 +18,7 @@ public abstract partial class BaseWeapon : StaticBody2D
     protected Area2D                  SplashArea;
     protected BaseEnemy               Target;
     public    IEnumerable<BaseEnemy>  Enemies { get; set; }
+    protected List<string> AlreadyHitEnemyNames = new List<string>(); 
 
     [Export]
     public int DamageOnHit { get; set; } = 10;
@@ -84,9 +85,11 @@ public abstract partial class BaseWeapon : StaticBody2D
 
     protected virtual void ExecuteAttack(Node node)
     {
-        if (node is not BaseEnemy enemy)
+        if (node is not BaseEnemy enemy || AlreadyHitEnemyNames.Any(e => e == enemy.Name))
             return;
-
+        
+        AlreadyHitEnemyNames.Add(enemy.Name);
+        
         DealDamageTo(enemy);
 
         if (DealsSplashDamag)

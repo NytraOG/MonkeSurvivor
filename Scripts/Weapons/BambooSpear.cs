@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 using MonkeSurvivor.Scripts.Ui;
 
@@ -35,7 +36,6 @@ public partial class BambooSpear : BaseMeleeWeapon
         foreach (var body in overlappingBodies)
             ExecuteAttack(body);
 
-        //Meleewaffenticks impln noch( soll nicht jeden frame damage machen)
         if (animationPlayer.IsPlaying() || (timeSinceLastSwing += delta) < SwingCooldown)
             return;
         
@@ -85,5 +85,7 @@ public partial class BambooSpear : BaseMeleeWeapon
     {
         var implactCollisionShape = GetNode<CollisionShape2D>("%ImpactCollision");
         implactCollisionShape.Disabled = true;
+
+        AlreadyHitEnemyNames = new List<string>();
     }
 }
