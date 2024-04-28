@@ -196,6 +196,10 @@ public abstract partial class BaseUnit : CharacterBody2D,
             {
                 floatingCombatTextInstance.Display.Text = value <= 0 ? "Miss" : value.ToString();
 
+                if (this is Player)
+                    floatingCombatTextInstance.Display.AddThemeColorOverride("font_color", Colors.Red);
+                floatingCombatTextInstance.Display.AddThemeFontSizeOverride("font_size", 36);
+                
                 if (isCritical)
                 {
                     floatingCombatTextInstance.Display.AddThemeColorOverride("font_color", Colors.DarkOrange);
