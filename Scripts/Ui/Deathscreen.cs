@@ -1,15 +1,20 @@
 using Godot;
-using System;
+
+namespace MonkeSurvivor.Scripts.Ui;
 
 public partial class Deathscreen : PanelContainer
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	private PackedScene CharacterSeletionScene => ResourceLoader.Load<PackedScene>("res://Scenes/Ui/monkey_selection.tscn");
 	public override void _Process(double delta)
 	{
+		if (Input.IsAnythingPressed())
+			ResetPlaythrough();
+	}
+
+	private void ResetPlaythrough()
+	{
+		var tree = GetTree();
+		tree.ChangeSceneToPacked(CharacterSeletionScene);
+		tree.Paused = false;
 	}
 }
