@@ -122,15 +122,15 @@ public abstract partial class BaseWeapon : StaticBody2D
         if (Enemies is null || !Enemies.Any())
             return null;
 
-        var kek = Enemies.Select(e => new
+        var enemyPositionContainer = Enemies.Select(e => new
         {
             e,
             e.Position
         });
 
-        kek = kek.OrderBy(e => (e.Position - Position).Length());
+        enemyPositionContainer = enemyPositionContainer.OrderBy(e => (e.Position - Position).Length());
 
-        return kek.FirstOrDefault()?.e;
+        return enemyPositionContainer.FirstOrDefault()?.e;
     }
 
     protected void DealSplashDamageAround(BaseEnemy enemy)
