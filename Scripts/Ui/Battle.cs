@@ -62,7 +62,6 @@ public partial class Battle : Node
     {
         Deathscreen.Visible = true;
         GetTree().Paused = true;
-        player.QueueFree();
     }
 
     private void PlayerOnPropertyChanged(object sender, PropertyChangedEventArgs e)
