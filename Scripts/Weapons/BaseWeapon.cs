@@ -18,14 +18,17 @@ public abstract partial class BaseWeapon : StaticBody2D
     protected Area2D                  SplashArea;
     protected BaseEnemy               Target;
     public    IEnumerable<BaseEnemy>  Enemies { get; set; }
-    protected List<string> AlreadyHitEnemyNames = new List<string>(); 
+    protected List<string> AlreadyHitEnemyNames = new (); 
 
     [Export]
-    public int DamageOnHit { get; set; } = 10;
+    public int MinDamage { get; set; }
+
+    [Export]
+    public int MaxDamage { get; set; }
 
     [Export]
     public float KnockbackForce { get; set; }
-
+    
     public HitResult FinalDamage
     {
         get
@@ -39,7 +42,11 @@ public abstract partial class BaseWeapon : StaticBody2D
             var roll   = Rng.Next(0, 101);
             var isCrit = player.CriticalHitChance >= roll;
 
-            var dealtDamage = isCrit ? DamageOnHit * (1 + player.CriticalHitDamage / 100) : DamageOnHit;
+            var damageDelta = MaxDamage - MinDamage;
+            var addedRandomizedDamageValue = Rng.Next(0, damageDelta);
+            var damageInRange = MinDamage + addedRandomizedDamageValue;
+
+            var dealtDamage = isCrit ? damageInRange * (1 + player.CriticalHitDamage / 100) : damageInRange;
 
             return new HitResult(dealtDamage, isCrit);
         }
@@ -49,7 +56,7 @@ public abstract partial class BaseWeapon : StaticBody2D
     public float SwingCooldown { get; set; }
 
     [Export]
-    public bool DealsSplashDamag { get; set; }
+    public bool DealsSplashDamage { get; set; }
 
     [Export(PropertyHint.Range, "0, 1")]
     public float SplashDamage { get; set; } = 0.75f;
@@ -92,7 +99,7 @@ public abstract partial class BaseWeapon : StaticBody2D
         
         DealDamageTo(enemy);
 
-        if (DealsSplashDamag)
+        if (DealsSplashDamage)
             DealSplashDamageAround(enemy);
 
         OnDamageDealt?.Invoke(TotalDamageDealt);
