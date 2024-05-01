@@ -75,6 +75,7 @@ MaxDamage = 7
 KnockbackForce = 1.0
 SwingCooldown = 1.0
 SplashDamage = 0.0
+TooltipName = "Bamboo Spear"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

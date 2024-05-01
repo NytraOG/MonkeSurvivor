@@ -16,6 +16,7 @@ public partial class ItemTooltip : BaseTooltip
 
         SubscribeToShopCards(shopScene);
         SubscribeToInventorySlots(shopScene);
+        SubscribeToWeaponSlots(shopScene);
 
         itemNameLabel        = GetNode<RichTextLabel>("%ItemName");
         itemDescriptionLabel = GetNode<RichTextLabel>("%ItemDescription");
@@ -42,21 +43,14 @@ public partial class ItemTooltip : BaseTooltip
 
     private void SubscribeToWeaponSlots(Node shopScene)
     {
-        var weaponSlotRight = shopScene.GetNode<WeaponSlot>("%WeaponSlotRight");
-        var weaponSlotLeft = shopScene.GetNode<WeaponSlot>("%WeaponSlotLeft");
+        var weaponSlotRight = shopScene.GetNode<WeaponSlot>("%WeaponSlotRightHand");
+        var weaponSlotLeft = shopScene.GetNode<WeaponSlot>("%WeaponSlotLeftHand");
         var weaponSlotHead = shopScene.GetNode<WeaponSlot>("%WeaponSlotHead");
         var weaponSlotTail = shopScene.GetNode<WeaponSlot>("%WeaponSlotTail");
         
-        weaponSlotRight.OnMouseEvent -= WeaponSlotRightOnMouseEvent;
         weaponSlotRight.OnMouseEvent += WeaponSlotRightOnMouseEvent;
-        
-        weaponSlotLeft.OnMouseEvent -= WeaponSlotLeftOnMouseEvent;
         weaponSlotLeft.OnMouseEvent += WeaponSlotLeftOnMouseEvent;
-        
-        weaponSlotHead.OnMouseEvent -= WeaponSlotHeadOnMouseEvent;
         weaponSlotHead.OnMouseEvent += WeaponSlotHeadOnMouseEvent;
-        
-        weaponSlotTail.OnMouseEvent -= WeaponSlotTailOnMouseEvent;
         weaponSlotTail.OnMouseEvent += WeaponSlotTailOnMouseEvent;
     }
 
@@ -82,10 +76,13 @@ public partial class ItemTooltip : BaseTooltip
 
     private void HandleTooltipBehaviour(bool entered, WeaponSlot slot)
     {
+        if (slot.Weapon is null)
+            return;
+        
         if (entered)
         {
             SetDisplayedDataByItem(slot.Weapon);
-            SetPositionByNode(slot);
+            Position = new Vector2(845, 426);
         }
         else
             ResetTooltip(slot);
@@ -132,6 +129,7 @@ public partial class ItemTooltip : BaseTooltip
         {
             ShopCard { Item: not null } shopCard => itemNameLabel.Text.Replace($"[u]{shopCard.Item.TooltipName}[/u]", "ItemName"),
             InventorySlot { ContainedItem: not null } inventorySlot => itemNameLabel.Text.Replace($"[u]{inventorySlot.ContainedItem.TooltipName}[/u]", "ItemName"),
+            WeaponSlot {Weapon:not null} weaponSlot => itemNameLabel.Text.Replace($"[u]{weaponSlot.Weapon.TooltipName}[/u]", "ItemName"),
             _ => itemNameLabel.Text
         };
     }
