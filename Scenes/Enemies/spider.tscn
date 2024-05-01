@@ -13,7 +13,7 @@ collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_pospj")
 DealtDamage = 7.0
-HealthMaximum = 30.0
+HealthMaximum = 7.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(64, 64)

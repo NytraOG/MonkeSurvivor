@@ -47,6 +47,11 @@ public abstract partial class BaseWeapon : StaticBody2D, ITooltipConsumable
             var addedRandomizedDamageValue = Rng.Next(0, damageDelta);
             var damageInRange = MinDamage + addedRandomizedDamageValue;
 
+            if (damageInRange > 100)
+            {
+                
+            }
+
             var dealtDamage = isCrit ? damageInRange * (100 + player.CriticalHitDamage / 100) : damageInRange;
 
             return new HitResult(dealtDamage, isCrit);
