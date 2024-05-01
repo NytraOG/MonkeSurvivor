@@ -38,7 +38,7 @@ public partial class ShopCard : PanelContainer
     {
         EnsureNodesExist();
 
-        itemNameLabel.Text = itemToSet.Displayname;
+        itemNameLabel.Text = itemToSet.TooltipName;
         itemCostLabel.Text = itemToSet.Price.ToString();
         itemImage.Texture  = itemToSet.ItemImage;
 

@@ -4,7 +4,7 @@ namespace MonkeSurvivor.Scripts.Ui;
 
 public partial class Deathscreen : PanelContainer
 {
-	private PackedScene CharacterSeletionScene => ResourceLoader.Load<PackedScene>("res://Scenes/Ui/monkey_selection.tscn");
+	private PackedScene ResetScene => ResourceLoader.Load<PackedScene>("res://Scenes/Ui/monkey_selection.tscn");
 	public override void _Process(double delta)
 	{
 		if (Input.IsAnythingPressed())
@@ -14,7 +14,7 @@ public partial class Deathscreen : PanelContainer
 	private void ResetPlaythrough()
 	{
 		var tree = GetTree();
-		tree.ChangeSceneToPacked(CharacterSeletionScene);
+		tree.ChangeSceneToPacked(ResetScene);
 		tree.Paused = false;
 	}
 }

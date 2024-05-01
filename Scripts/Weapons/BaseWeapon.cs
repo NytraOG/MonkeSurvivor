@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using MonkeSurvivor.Scripts.Enemies;
+using MonkeSurvivor.Scripts.Interfaces;
 using MonkeSurvivor.Scripts.Utils;
 
 namespace MonkeSurvivor.Scripts.Weapons;
 
-public abstract partial class BaseWeapon : StaticBody2D
+public abstract partial class BaseWeapon : StaticBody2D, ITooltipConsumable
 {
     public delegate void DamageDealtEventHandler(float totalDamage);
 
@@ -154,5 +155,12 @@ public abstract partial class BaseWeapon : StaticBody2D
             if (hitEnemy != enemy)
                 DealDamageTo(hitEnemy, SplashDamage);
         }
+    }
+
+    [Export]
+    public string TooltipName { get; set; }
+    public string GetTooltipDescription()
+    {
+        return "I bims Speer"; 
     }
 }
