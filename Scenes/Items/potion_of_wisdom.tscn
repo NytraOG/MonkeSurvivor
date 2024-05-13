@@ -7,4 +7,4 @@
 script = ExtResource("1_3624b")
 ItemImage = ExtResource("2_ke4uf")
 Price = 25
-Displayname = "Potion of Wisdom"
+TooltipName = "Potion of Fun"

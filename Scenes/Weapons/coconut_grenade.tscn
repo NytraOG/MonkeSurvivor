@@ -17,12 +17,15 @@ position = Vector2(0, 1)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_f8on5")
-DamageOnHit = 13
-SwingCooldown = 0.34
-DealsSplashDamag = true
+MinDamage = 3
+MaxDamage = 5
+SwingCooldown = 0.67
+DealsSplashDamage = true
 Speed = 30.0
+TooltipName = "Coconut Grenade"
 
 [node name="TextureRect" type="TextureRect" parent="."]
+unique_name_in_owner = true
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -48,6 +51,7 @@ disabled = true
 shape = SubResource("CircleShape2D_xfbba")
 
 [node name="ImpactArea" type="Area2D" parent="."]
+unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ImpactArea"]
 shape = SubResource("CircleShape2D_6t1pa")

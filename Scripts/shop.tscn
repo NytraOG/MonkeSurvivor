@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b02nultf4hf0k" path="res://Scenes/character_sheet.tscn" id="4_axdm2"]
 [ext_resource type="PackedScene" uid="uid://cbmfnsx53j3wb" path="res://Scenes/Ui/inventory.tscn" id="5_3qa3v"]
 [ext_resource type="PackedScene" uid="uid://cqxp00xn43ont" path="res://Scenes/Ui/item_tooltip.tscn" id="7_wjhwd"]
-[ext_resource type="PackedScene" uid="uid://safgos4ffg81" path="res://Scenes/Ui/weapon_slot.tscn" id="8_neuka"]
+[ext_resource type="PackedScene" uid="uid://c2eu2g06ttio" path="res://Scenes/Ui/weapon_slot.tscn" id="8_neuka"]
 
 [node name="Shop" type="Node"]
 script = ExtResource("1_i2oyi")
@@ -54,25 +54,29 @@ unique_name_in_owner = true
 layout_mode = 2
 SlotAmount = 45
 
-[node name="WeaponSlot" parent="UI" instance=ExtResource("8_neuka")]
+[node name="WeaponSlotHead" parent="UI" instance=ExtResource("8_neuka")]
+unique_name_in_owner = true
 offset_left = 582.0
 offset_top = 437.0
 offset_right = 710.0
 offset_bottom = 565.0
 
-[node name="WeaponSlot2" parent="UI" instance=ExtResource("8_neuka")]
+[node name="WeaponSlotTail" parent="UI" instance=ExtResource("8_neuka")]
+unique_name_in_owner = true
 offset_left = 440.0
 offset_top = 585.0
 offset_right = 568.0
 offset_bottom = 713.0
 
-[node name="WeaponSlot3" parent="UI" instance=ExtResource("8_neuka")]
+[node name="WeaponSlotLeftHand" parent="UI" instance=ExtResource("8_neuka")]
+unique_name_in_owner = true
 offset_left = 694.0
 offset_top = 713.0
 offset_right = 822.0
 offset_bottom = 841.0
 
-[node name="WeaponSlot4" parent="UI" instance=ExtResource("8_neuka")]
+[node name="WeaponSlotRightHand" parent="UI" instance=ExtResource("8_neuka")]
+unique_name_in_owner = true
 offset_left = 500.0
 offset_top = 716.0
 offset_right = 628.0

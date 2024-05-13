@@ -1,12 +1,13 @@
+using System.Linq;
+using Godot;
+
 namespace MonkeSurvivor.Scripts.Weapons;
 
 public partial class CoconutGrenade : BaseRangedWeapon
 {
-    public override void _Process(double delta) { }
-
-    protected override void ExecuteBehaviour()
+    protected override void ExecuteBehaviour(double delta)
     {
-        var target = FindTargetOrDefault();
+        var target = FindRandomTargetOrDefault();
 
         if (target is null || target.IsDead)
             return;
@@ -14,5 +15,20 @@ public partial class CoconutGrenade : BaseRangedWeapon
         var direction = (target.Position - Position).Normalized();
 
         MoveAndCollide(direction * Speed);
+
+        var overlappingBodies = GetOverlappingBodies();
+
+        if (!overlappingBodies.Any()) return;
+
+        var luckyBastard = overlappingBodies.First();
+
+        ExecuteAttack(luckyBastard);
+    }
+
+    protected override void ExecuteAttack(Node node)
+    {
+        base.ExecuteAttack(node);
+
+        QueueFree();
     }
 }

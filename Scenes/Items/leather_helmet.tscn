@@ -8,4 +8,4 @@ script = ExtResource("1_14sip")
 IncreasedDamagereduction = 10.0
 ItemImage = ExtResource("2_2x0py")
 Price = 49
-Displayname = "Leather Helmet"
+TooltipName = "Leather Helmet"
