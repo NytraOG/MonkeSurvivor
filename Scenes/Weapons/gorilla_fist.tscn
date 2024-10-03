@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b24g4alfvqwyd"]
 
+[ext_resource type="Script" path="res://Scripts/Weapons/Melee/GorillaFist.cs" id="1_66ibb"]
 [ext_resource type="Texture2D" uid="uid://dnwsjcoboiu35" path="res://Images/Weapons/GorillaFist.png" id="1_b7545"]
-[ext_resource type="Script" path="res://Scripts/Weapons/GorillaFist.cs" id="2_16blc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_480ko"]
 
@@ -27,12 +27,15 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_duy60"]
-radius = 59.0762
+radius = 120.798
 
 [node name="GorillaFist" type="StaticBody2D"]
-script = ExtResource("2_16blc")
+scale = Vector2(1.0022, 1)
+script = ExtResource("1_66ibb")
+TimeBetweenDamageTicks = 1.0
 MinDamage = 9
 MaxDamage = 12
+KnockbackForce = 2.0
 SwingCooldown = 1.0
 TooltipName = "Gorilla Fist"
 
@@ -42,7 +45,7 @@ shape = SubResource("CircleShape2D_480ko")
 disabled = true
 
 [node name="AnimationContainer" type="Node2D" parent="."]
-position = Vector2(36, 0)
+position = Vector2(70.8438, 0)
 
 [node name="TextureRect" type="TextureRect" parent="AnimationContainer"]
 unique_name_in_owner = true

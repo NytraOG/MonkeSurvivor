@@ -6,5 +6,5 @@ public interface ITooltipConsumable
 {
     [Export]
     public string TooltipName { get; set; }
-    public string GetTooltipDescription();
+    abstract  string GetTooltipDescription();
 }

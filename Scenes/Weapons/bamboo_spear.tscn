@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cuyv13hlq5sqp"]
 
-[ext_resource type="Script" path="res://Scripts/Weapons/BambooSpear.cs" id="1_rfgbp"]
+[ext_resource type="Script" path="res://Scripts/Weapons/Melee/BambooSpear.cs" id="1_cgwpw"]
 [ext_resource type="Texture2D" uid="uid://ihbnwfxsravg" path="res://Images/Weapons/BambooSpear.png" id="2_3ag70"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_os3da"]
@@ -69,13 +69,11 @@ _data = {
 }
 
 [node name="BambooSpear" type="StaticBody2D"]
-script = ExtResource("1_rfgbp")
-MinDamage = 3
-MaxDamage = 7
+script = ExtResource("1_cgwpw")
+MinDamage = 8
+MaxDamage = 10
 KnockbackForce = 1.0
 SwingCooldown = 1.0
-SplashDamage = 0.0
-TooltipName = "Bamboo Spear"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

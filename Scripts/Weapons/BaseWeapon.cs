@@ -4,12 +4,26 @@ using System.Linq;
 using Godot;
 using MonkeSurvivor.Scripts.Enemies;
 using MonkeSurvivor.Scripts.Interfaces;
+using MonkeSurvivor.Scripts.Ui;
 using MonkeSurvivor.Scripts.Utils;
 
 namespace MonkeSurvivor.Scripts.Weapons;
 
 public abstract partial class BaseWeapon : StaticBody2D, ITooltipConsumable
 {
+    public override void _Ready()
+    {
+        base._Ready();
+        
+        OnDamageDealt += damage =>
+        {
+            if (GetTree().CurrentScene is Battle battle)
+                battle.GetNode<CanvasLayer>("UI")
+                    .GetNode<DpsDisplay>("DpsDisplay")
+                    .DamageDealtInTimeFrame += damage;
+        };
+    }
+
     public delegate void DamageDealtEventHandler(float totalDamage);
 
     protected Area2D                  ImpactArea;
@@ -75,9 +89,9 @@ public abstract partial class BaseWeapon : StaticBody2D, ITooltipConsumable
 
     public override void _PhysicsProcess(double delta) => ExecuteBehaviour(delta);
 
-    protected virtual List<Node2D> GetOverlappingBodies()
+    protected virtual List<Node2D> GetOverlappingBodies(string areaName)
     {
-        ImpactArea ??= GetNode<Area2D>("%ImpactArea");
+        ImpactArea ??= GetNode<Area2D>(areaName);
 
         var overlappingBodies = ImpactArea.GetOverlappingBodies()
                                           .Where(b => b.Name != nameof(Player))
@@ -164,8 +178,9 @@ public abstract partial class BaseWeapon : StaticBody2D, ITooltipConsumable
 
     [Export]
     public string TooltipName { get; set; }
-    public string GetTooltipDescription()
+
+    public virtual string GetTooltipDescription()
     {
-        return "I bims Speer"; 
+        return "lulw";
     }
 }

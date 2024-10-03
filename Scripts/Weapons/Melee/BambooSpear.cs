@@ -14,16 +14,10 @@ public partial class BambooSpear : BaseMeleeWeapon
 
     public override void _Ready()
     {
+        base._Ready();
+        
         animationPlayer = GetNode<AnimationPlayer>("%" + nameof(AnimationPlayer));
         animationPlayer.AnimationFinished += AnimationPlayerOnAnimationFinished;
-
-        OnDamageDealt += damage =>
-        {
-            if (GetTree().CurrentScene is Battle battle)
-                battle.GetNode<CanvasLayer>("UI")
-                    .GetNode<DpsDisplay>("DpsDisplay")
-                    .DamageDealtInTimeFrame += damage;
-        };
     }
 
     protected override void ExecuteBehaviour(double delta)
@@ -31,7 +25,7 @@ public partial class BambooSpear : BaseMeleeWeapon
         if(!animationPlayer.IsPlaying())
             RotateToClosestEnemy();
         
-        var overlappingBodies = GetOverlappingBodies();
+        var overlappingBodies = GetOverlappingBodies("%ImpactArea");
 
         foreach (var body in overlappingBodies)
             ExecuteAttack(body);

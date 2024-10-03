@@ -16,7 +16,7 @@ public partial class CoconutGrenade : BaseRangedWeapon
 
         MoveAndCollide(direction * Speed);
 
-        var overlappingBodies = GetOverlappingBodies();
+        var overlappingBodies = GetOverlappingBodies("%ImpactArea");
 
         if (!overlappingBodies.Any()) return;
 
