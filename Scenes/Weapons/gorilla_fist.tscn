@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://b24g4alfvqwyd"]
+
+[ext_resource type="Texture2D" uid="uid://dnwsjcoboiu35" path="res://Images/Weapons/GorillaFist.png" id="1_b7545"]
+[ext_resource type="Script" path="res://Scripts/Weapons/GorillaFist.cs" id="2_16blc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_480ko"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_duy60"]
+radius = 30.2655
+
+[node name="GorillaFist" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_480ko")
+
+[node name="AnimationContainer" type="Node2D" parent="."]
+position = Vector2(35, -6)
+
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_b7545")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("2_16blc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationContainer"]
+unique_name_in_owner = true
+
+[node name="ImpactArea" type="Area2D" parent="AnimationContainer"]
+unique_name_in_owner = true
+
+[node name="ImpactCollision" type="CollisionShape2D" parent="AnimationContainer/ImpactArea"]
+unique_name_in_owner = true
+position = Vector2(0, 17)
+shape = SubResource("CircleShape2D_duy60")

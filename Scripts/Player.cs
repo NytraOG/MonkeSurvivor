@@ -66,6 +66,7 @@ public partial class Player : BaseUnit
     public void Initialize()
     {
         battleScene = GetTree().CurrentScene;
+        
         var unitSpawner = battleScene.GetNode<UnitSpawner>(nameof(UnitSpawner));
         unitSpawner.WaveSpawned += UnitSpawnerOnWaveSpawned;
 
