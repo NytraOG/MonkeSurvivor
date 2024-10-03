@@ -8,4 +8,4 @@ public abstract partial class BaseMeleeWeapon : BaseWeapon
     public double TimeBetweenDamageTicks { get; set; }
 
     protected double TimeSinceLastTick;
-}
+} //TODO disbale weapon collision method hier rein

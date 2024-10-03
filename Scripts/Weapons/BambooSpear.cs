@@ -46,12 +46,12 @@ public partial class BambooSpear : BaseMeleeWeapon
     {
         var target = FindClosestTargetOrDefault();
 
-        if (target is not null)
-        {
-            LookAt(target.Position);
+        if (target is null) 
+            return;
+        
+        LookAt(target.Position);
 
-            RotationDegrees += 90;
-        }
+        RotationDegrees += 90;
     }
 
     private void ExecuteAnimation()
