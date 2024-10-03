@@ -1,7 +1,7 @@
 using System.Linq;
 using Godot;
 
-namespace MonkeSurvivor.Scripts.Weapons;
+namespace MonkeSurvivor.Scripts.Weapons.Ranged;
 
 public partial class CoconutGrenade : BaseRangedWeapon
 {

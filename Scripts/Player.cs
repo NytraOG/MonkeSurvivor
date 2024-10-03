@@ -7,6 +7,7 @@ using MonkeSurvivor.Scripts.Enemies;
 using MonkeSurvivor.Scripts.Monkeys;
 using MonkeSurvivor.Scripts.Ui;
 using MonkeSurvivor.Scripts.Weapons;
+using CoconutGrenade = MonkeSurvivor.Scripts.Weapons.Ranged.CoconutGrenade;
 
 namespace MonkeSurvivor.Scripts;
 

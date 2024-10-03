@@ -4,4 +4,7 @@
         <EnableDynamicLoading>true</EnableDynamicLoading>
         <RootNamespace>MonkeSurvivor</RootNamespace>
     </PropertyGroup>
+    <ItemGroup>
+      <Folder Include="Scripts\Weapons\Magic\" />
+    </ItemGroup>
 </Project>

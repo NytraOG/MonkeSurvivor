@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Godot;
 using MonkeSurvivor.Scripts.Ui;
 
-namespace MonkeSurvivor.Scripts.Weapons;
+namespace MonkeSurvivor.Scripts.Weapons.Melee;
 
 public partial class BambooSpear : BaseMeleeWeapon
 {

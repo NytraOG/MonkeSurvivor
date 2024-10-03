@@ -1,9 +1,10 @@
 ﻿using Godot;
 
-namespace MonkeSurvivor.Scripts.Weapons;
+namespace MonkeSurvivor.Scripts.Weapons.Melee;
 
-public class GorillaFist : BaseMeleeWeapon
+public partial class GorillaFist : BaseMeleeWeapon
 {
+    private const string PoundAnimation = "GroundPound";
     private AnimationPlayer animationPlayer;
 
     public override void _Ready()
