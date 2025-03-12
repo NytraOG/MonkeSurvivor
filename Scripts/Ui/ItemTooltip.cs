@@ -1,6 +1,5 @@
 using Godot;
-using MonkeSurvivor.Scripts.Interfaces;
-using MonkeSurvivor.Scripts.Items;
+using Godot.Interfaces;
 using Environment = System.Environment;
 
 namespace MonkeSurvivor.Scripts.Ui;
@@ -30,7 +29,7 @@ public partial class ItemTooltip : BaseTooltip
         foreach (var inventorySlot in inventorySlots) inventorySlot.MouseEntering += InventorySlotOnMouseEntering;
     }
 
-    private void InventorySlotOnMouseEntering(bool entered, InventorySlot inventorySlot)
+    private void InventorySlotOnMouseEntering(bool entered, ITooltipObjectContainer inventorySlot)
     {
         if (entered)
         {
@@ -44,44 +43,32 @@ public partial class ItemTooltip : BaseTooltip
     private void SubscribeToWeaponSlots(Node shopScene)
     {
         var weaponSlotRight = shopScene.GetNode<WeaponSlot>("%WeaponSlotRightHand");
-        var weaponSlotLeft = shopScene.GetNode<WeaponSlot>("%WeaponSlotLeftHand");
-        var weaponSlotHead = shopScene.GetNode<WeaponSlot>("%WeaponSlotHead");
-        var weaponSlotTail = shopScene.GetNode<WeaponSlot>("%WeaponSlotTail");
-        
+        var weaponSlotLeft  = shopScene.GetNode<WeaponSlot>("%WeaponSlotLeftHand");
+        var weaponSlotHead  = shopScene.GetNode<WeaponSlot>("%WeaponSlotHead");
+        var weaponSlotTail  = shopScene.GetNode<WeaponSlot>("%WeaponSlotTail");
+
         weaponSlotRight.OnMouseEvent += WeaponSlotRightOnMouseEvent;
-        weaponSlotLeft.OnMouseEvent += WeaponSlotLeftOnMouseEvent;
-        weaponSlotHead.OnMouseEvent += WeaponSlotHeadOnMouseEvent;
-        weaponSlotTail.OnMouseEvent += WeaponSlotTailOnMouseEvent;
+        weaponSlotLeft.OnMouseEvent  += WeaponSlotLeftOnMouseEvent;
+        weaponSlotHead.OnMouseEvent  += WeaponSlotHeadOnMouseEvent;
+        weaponSlotTail.OnMouseEvent  += WeaponSlotTailOnMouseEvent;
     }
 
-    private void WeaponSlotTailOnMouseEvent(bool entered, WeaponSlot slot)
-    {
-        HandleTooltipBehaviour(entered, slot);
-    }
+    private void WeaponSlotTailOnMouseEvent(bool entered, WeaponSlot slot) => HandleTooltipBehaviour(entered, slot);
 
-    private void WeaponSlotHeadOnMouseEvent(bool entered, WeaponSlot slot)
-    {
-        HandleTooltipBehaviour(entered, slot);   
-    }
+    private void WeaponSlotHeadOnMouseEvent(bool entered, WeaponSlot slot) => HandleTooltipBehaviour(entered, slot);
 
-    private void WeaponSlotLeftOnMouseEvent(bool entered, WeaponSlot slot)
-    {
-        HandleTooltipBehaviour(entered, slot);
-    }
+    private void WeaponSlotLeftOnMouseEvent(bool entered, WeaponSlot slot) => HandleTooltipBehaviour(entered, slot);
 
-    private void WeaponSlotRightOnMouseEvent(bool entered, WeaponSlot slot)
-    {
-        HandleTooltipBehaviour(entered, slot);
-    }
+    private void WeaponSlotRightOnMouseEvent(bool entered, WeaponSlot slot) => HandleTooltipBehaviour(entered, slot);
 
     private void HandleTooltipBehaviour(bool entered, WeaponSlot slot)
     {
-        if (slot.Weapon is null)
+        if (slot.ContainedItem is null)
             return;
-        
+
         if (entered)
         {
-            SetDisplayedDataByItem(slot.Weapon);
+            SetDisplayedDataByItem(slot.ContainedItem);
             Position = new Vector2(845, 426);
         }
         else
@@ -100,7 +87,7 @@ public partial class ItemTooltip : BaseTooltip
         }
     }
 
-    public void SetDisplayedDataByItem(ITooltipConsumable item)
+    public void SetDisplayedDataByItem(ITooltipObject item)
     {
         itemNameLabel.Text = itemNameLabel.Text.Replace("ItemName", $"[u]{item.TooltipName}[/u]");
 
@@ -108,33 +95,32 @@ public partial class ItemTooltip : BaseTooltip
                                     $"{item.GetTooltipDescription()}{Environment.NewLine}" +
                                     $"{Environment.NewLine}";
     }
-    
 
     private void ShopCardOnOnMouseEvent(bool entered, ShopCard shopCard)
     {
         if (entered && !shopCard.Disabled)
         {
-            SetDisplayedDataByItem(shopCard.Item);
+            SetDisplayedDataByItem(shopCard.ContainedItem);
             SetPositionByNode(shopCard);
         }
         else
             ResetTooltip(shopCard);
     }
 
-    private void ResetTooltip(PanelContainer container)
+    private void ResetTooltip(ITooltipObjectContainer container)
     {
         Position = new Vector2(-900, -900);
 
         itemNameLabel.Text = container switch
         {
-            ShopCard { Item: not null } shopCard => itemNameLabel.Text.Replace($"[u]{shopCard.Item.TooltipName}[/u]", "ItemName"),
+            ShopCard { ContainedItem: not null } shopCard => itemNameLabel.Text.Replace($"[u]{shopCard.ContainedItem.TooltipName}[/u]", "ItemName"),
             InventorySlot { ContainedItem: not null } inventorySlot => itemNameLabel.Text.Replace($"[u]{inventorySlot.ContainedItem.TooltipName}[/u]", "ItemName"),
-            WeaponSlot {Weapon:not null} weaponSlot => itemNameLabel.Text.Replace($"[u]{weaponSlot.Weapon.TooltipName}[/u]", "ItemName"),
+            WeaponSlot { ContainedItem: not null } weaponSlot => itemNameLabel.Text.Replace($"[u]{weaponSlot.ContainedItem.TooltipName}[/u]", "ItemName"),
             _ => itemNameLabel.Text
         };
     }
 
-    public void SetPositionByNode(PanelContainer container)
+    public void SetPositionByNode(ITooltipObjectContainer container)
     {
         var xPosition = container.Position.X - Size.X + 10;
 

@@ -83,6 +83,7 @@ public partial class Shop : Node
         var itemsFromInventory = inventory.GetAllSlots()
                                           .Where(s => s.ContainedItem is not null)
                                           .Select(s => s.ContainedItem)
+                                          .Cast<BaseItem>()
                                           .ToList();
 
         StaticMemory.ItemsHeldByPlayer = itemsFromInventory;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using Godot.Interfaces;
 using MonkeSurvivor.Scripts.Enemies;
 using MonkeSurvivor.Scripts.Interfaces;
 using MonkeSurvivor.Scripts.Ui;
@@ -21,7 +22,7 @@ public interface IBaseWeapon
     float     Speed             { get; set; }
 }
 
-public abstract partial class BaseWeapon : StaticBody2D, ITooltipConsumable, IBaseWeapon
+public abstract partial class BaseWeapon : StaticBody2D, ITooltipObject, IBaseWeapon
 {
     public override void _Ready()
     {

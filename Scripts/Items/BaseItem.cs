@@ -1,10 +1,11 @@
 ﻿using Godot;
+using Godot.Interfaces;
 using MonkeSurvivor.Scripts.Interfaces;
 
 namespace MonkeSurvivor.Scripts.Items;
 
 public abstract partial class BaseItem : Node2D,
-                                         ITooltipConsumable
+                                         ITooltipObject
 {
     [Export] public CompressedTexture2D ItemImage { get; set; }
 

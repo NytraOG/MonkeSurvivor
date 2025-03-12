@@ -1,14 +1,18 @@
 using Godot;
+using Godot.Interfaces;
 using MonkeSurvivor.Scripts.Items;
 
 namespace MonkeSurvivor.Scripts.Ui;
 
-public partial class InventorySlot : PanelContainer
+public partial class InventorySlot : PanelContainer,
+                                     ITooltipObjectContainer
 {
     public delegate void MouseEnteringEventHandler(bool entered, InventorySlot inventorySlot);
 
-    private TextureRect                    itemImage;
-    public  BaseItem                       ContainedItem { get; set; }
+    private TextureRect    itemImage;
+    public  ITooltipObject ContainedItem { get; set; }
+
+    //public  BaseItem                       ContainedItem { get; set; }
     public event MouseEnteringEventHandler MouseEntering;
 
     public override void _Ready() => itemImage = GetNode<TextureRect>("%ItemImage");
@@ -25,7 +29,7 @@ public partial class InventorySlot : PanelContainer
         ContainedItem     = null;
         itemImage.Texture = null;
 
-        return item;
+        return (BaseItem)item;
     }
 
     public void _on_mouse_left_InventorySLot()

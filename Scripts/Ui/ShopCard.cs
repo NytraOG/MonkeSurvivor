@@ -1,10 +1,12 @@
 using Godot;
+using Godot.Interfaces;
 using MonkeSurvivor.Scripts.Items;
 using MonkeSurvivor.Scripts.Utils;
 
 namespace MonkeSurvivor.Scripts.Ui;
 
-public partial class ShopCard : PanelContainer
+public partial class ShopCard : PanelContainer,
+                                ITooltipObjectContainer
 {
     public delegate void ItemBoughtEventHandler(BaseItem boughtItem);
 
@@ -19,8 +21,10 @@ public partial class ShopCard : PanelContainer
     [Export]
     public int CardId { get; set; }
 
-    public bool                             Disabled { get; set; }
-    public BaseItem                         Item     { get; set; }
+    public bool            Disabled      { get; set; }
+    public ITooltipObject? ContainedItem { get; set; }
+
+    //public BaseItem                         Item          { get; set; }
     public event MouseEventHandler          OnMouseEvent;
     public event ItemBoughtEventHandler     ItemBought;
     public event PurchaseFailedEventHandler OnPurchaseFailed;
@@ -42,29 +46,29 @@ public partial class ShopCard : PanelContainer
         itemCostLabel.Text = itemToSet.Price.ToString();
         itemImage.Texture  = itemToSet.ItemImage;
 
-        Item = itemToSet;
+        ContainedItem = itemToSet;
     }
 
     public void _on_buy_pressed()
     {
-        if (Item is null)
+        if (ContainedItem is null || ContainedItem is not BaseItem item)
             return;
 
-        var fundsSufficient = StaticMemory.Player.BananasHeld >= Item.Price;
+        var fundsSufficient = StaticMemory.Player.BananasHeld >= item.Price;
 
         if (fundsSufficient)
         {
-            ItemBought?.Invoke(Item);
+            ItemBought?.Invoke(item);
 
-            Item     = null;
-            Modulate = new Color(Modulate, 0);
-            Disabled = true;
+            ContainedItem = null;
+            Modulate      = new Color(Modulate, 0);
+            Disabled      = true;
 
             _on_mouse_exited_shopCard();
         }
         else
         {
-            OnPurchaseFailed?.Invoke(Item);
+            OnPurchaseFailed?.Invoke(item);
 
             var animationPlayer = GetNode<AnimationPlayer>(nameof(AnimationPlayer));
 
