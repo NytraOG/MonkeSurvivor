@@ -9,7 +9,19 @@ using MonkeSurvivor.Scripts.Utils;
 
 namespace MonkeSurvivor.Scripts.Weapons;
 
-public abstract partial class BaseWeapon : StaticBody2D, ITooltipConsumable
+public interface IBaseWeapon
+{
+    int       MinDamage         { get; set; }
+    int       MaxDamage         { get; set; }
+    float     KnockbackForce    { get; set; }
+    HitResult FinalDamage       { get; }
+    float     SwingCooldown     { get; set; }
+    bool      DealsSplashDamage { get; set; }
+    float     SplashDamage      { get; set; }
+    float     Speed             { get; set; }
+}
+
+public abstract partial class BaseWeapon : StaticBody2D, ITooltipConsumable, IBaseWeapon
 {
     public override void _Ready()
     {

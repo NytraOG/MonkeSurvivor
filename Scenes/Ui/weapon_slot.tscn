@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c2eu2g06ttio"]
 
-[ext_resource type="Script" path="res://Scripts/Ui/WeaponSlot.cs" id="1_l3qhy"]
+[ext_resource type="Script" uid="uid://bjrhotufd83gu" path="res://Scripts/Ui/WeaponSlot.cs" id="1_l3qhy"]
 
 [node name="WeaponSlot" type="PanelContainer"]
 custom_minimum_size = Vector2(128, 128)

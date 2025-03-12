@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://rla0v1o4r52k"]
 
-[ext_resource type="Script" path="res://Scripts/Ui/Deathscreen.cs" id="1_g7j2b"]
+[ext_resource type="Script" uid="uid://qomkym2hudmm" path="res://Scripts/Ui/Deathscreen.cs" id="1_g7j2b"]
 
 [sub_resource type="FontFile" id="FontFile_bvuf5"]
 subpixel_positioning = 0

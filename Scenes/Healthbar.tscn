@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b550et8epspr4" path="res://Images/Hp_line.png" id="1_1up6e"]
 [ext_resource type="Texture2D" uid="uid://d17yj7bieuu72" path="res://Images/Hp_frame.png" id="1_an38s"]
-[ext_resource type="Script" path="res://Scripts/Ui/Healthbar.cs" id="1_fujb5"]
+[ext_resource type="Script" uid="uid://b0li5od544o77" path="res://Scripts/Ui/Healthbar.cs" id="1_fujb5"]
 
 [node name="Healthbar" type="PanelContainer"]
 anchors_preset = 15

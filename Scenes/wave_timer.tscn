@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cxjdev6p4pck2"]
 
-[ext_resource type="Script" path="res://Scripts/Ui/WaveTimer.cs" id="1_knl02"]
+[ext_resource type="Script" uid="uid://df7p6oca8nshd" path="res://Scripts/Ui/WaveTimer.cs" id="1_knl02"]
 
 [node name="WaveTimer" type="PanelContainer"]
 self_modulate = Color(1, 1, 1, 0)

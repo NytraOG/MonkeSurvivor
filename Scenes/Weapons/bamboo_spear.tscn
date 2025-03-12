@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cuyv13hlq5sqp"]
 
-[ext_resource type="Script" path="res://Scripts/Weapons/Melee/BambooSpear.cs" id="1_cgwpw"]
+[ext_resource type="Script" uid="uid://dhxnp71f5bcb4" path="res://Scripts/Weapons/Melee/BambooSpear.cs" id="1_cgwpw"]
 [ext_resource type="Texture2D" uid="uid://ihbnwfxsravg" path="res://Images/Weapons/BambooSpear.png" id="2_3ag70"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_os3da"]
@@ -64,8 +64,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_54vm6"]
 _data = {
-"WeaponPoke": SubResource("Animation_3aonp"),
-"WeaponSwing": SubResource("Animation_2aohn")
+&"WeaponPoke": SubResource("Animation_3aonp"),
+&"WeaponSwing": SubResource("Animation_2aohn")
 }
 
 [node name="BambooSpear" type="StaticBody2D"]
@@ -110,7 +110,7 @@ stretch_mode = 5
 unique_name_in_owner = true
 root_node = NodePath("../..")
 libraries = {
-"": SubResource("AnimationLibrary_54vm6")
+&"": SubResource("AnimationLibrary_54vm6")
 }
 
 [node name="ImpactArea" type="Area2D" parent="AnimationContainer"]

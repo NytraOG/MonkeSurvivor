@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ddmo33wthojvm"]
 
-[ext_resource type="Script" path="res://Scripts/Ui/EquipedWeaponsDisplay.cs" id="1_r5sbr"]
+[ext_resource type="Script" uid="uid://dsrlfgy6taf5i" path="res://Scripts/Ui/EquipedWeaponsDisplay.cs" id="1_r5sbr"]
 
 [node name="EquipedWeaponsDisplay" type="PanelContainer"]
 custom_minimum_size = Vector2(400, 400)

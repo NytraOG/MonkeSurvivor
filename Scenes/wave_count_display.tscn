@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://byg24jevou41s"]
 
-[ext_resource type="Script" path="res://Scripts/Ui/WaveCountDisplay.cs" id="1_gw1vw"]
+[ext_resource type="Script" uid="uid://be8608bo7wcpw" path="res://Scripts/Ui/WaveCountDisplay.cs" id="1_gw1vw"]
 
 [node name="WaveCountDisplay" type="PanelContainer"]
 self_modulate = Color(1, 1, 1, 0)

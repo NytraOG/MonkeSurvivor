@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://gcbeeo72jdsl"]
 
-[ext_resource type="Script" path="res://Scripts/Ui/SelectMonkeyButton.cs" id="1_skguf"]
+[ext_resource type="Script" uid="uid://cd3apni3krrln" path="res://Scripts/Ui/SelectMonkeyButton.cs" id="1_skguf"]
 
 [node name="SelectMonkeyButton" type="PanelContainer"]
 offset_right = 40.0

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c25sqsruyhljd"]
 
-[ext_resource type="Script" path="res://Scripts/Ui/MonkeySelectionCard.cs" id="1_0sibm"]
-[ext_resource type="Shader" path="res://Shaders/monkey_selection_card.gdshader" id="1_bcdu0"]
+[ext_resource type="Script" uid="uid://beelcuf26qe4g" path="res://Scripts/Ui/MonkeySelectionCard.cs" id="1_0sibm"]
+[ext_resource type="Shader" uid="uid://c2tlugi0t0003" path="res://Shaders/monkey_selection_card.gdshader" id="1_bcdu0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_56rc7"]
 resource_local_to_scene = true

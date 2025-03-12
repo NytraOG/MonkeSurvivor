@@ -20,10 +20,10 @@ shader_type canvas_item;
 //
 //
 //void fragment()
-//{	
+//{
 	//float PII = 3.14159;
 	//
-	////You can modify the *3.0, *-3.0 for a bigger or smaller 
+	////You can modify the *3.0, *-3.0 for a bigger or smaller
 	//float r = texture(SCREEN_TEXTURE, uv_curve(SCREEN_UV) + vec2(SCREEN_PIIXEL_SIZE.x*0.0), 0.0).r;
 	//float g = texture(SCREEN_TEXTURE, uv_curve(SCREEN_UV) + vec2(SCREEN_PIIXEL_SIZE.x*3.0), 0.0).g;
 	//float b = texture(SCREEN_TEXTURE, uv_curve(SCREEN_UV) + vec2(SCREEN_PIIXEL_SIZE.x*-3.0), 0.0).b;

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d4dvi0j3dam2h"]
 
-[ext_resource type="Script" path="res://Scripts/Ui/MonkeySelection.cs" id="1_a8w7j"]
+[ext_resource type="Script" uid="uid://blobx5js4w0jj" path="res://Scripts/Ui/MonkeySelection.cs" id="1_a8w7j"]
 [ext_resource type="PackedScene" uid="uid://gcbeeo72jdsl" path="res://Scenes/Ui/select_monkey_button.tscn" id="2_oawux"]
 
 [node name="MonkeySelection" type="Node"]

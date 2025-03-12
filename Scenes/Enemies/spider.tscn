@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c2wv5bys55p5a"]
 
-[ext_resource type="Script" path="res://Scripts/Enemies/Spider.cs" id="1_pospj"]
+[ext_resource type="Script" uid="uid://ckdxkrscmd3n7" path="res://Scripts/Enemies/Spider.cs" id="1_pospj"]
 [ext_resource type="Texture2D" uid="uid://dg7lftgbhe2ux" path="res://Images/Bananaspider.png" id="1_uqplb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_elduo"]

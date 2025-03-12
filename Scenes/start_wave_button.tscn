@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://5qkloygnrlqd"]
 
-[ext_resource type="Script" path="res://Scenes/Shop.cs" id="1_jtqcm"]
+[ext_resource type="Script" uid="uid://5p7kfvyqhn" path="res://Scenes/Shop.cs" id="1_jtqcm"]
 
 [node name="StartWaveButton" type="PanelContainer"]
 offset_right = 40.0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b24g4alfvqwyd"]
 
-[ext_resource type="Script" path="res://Scripts/Weapons/Melee/GorillaFist.cs" id="1_66ibb"]
+[ext_resource type="Script" uid="uid://c7tav27giocvk" path="res://Scripts/Weapons/Melee/GorillaFist.cs" id="1_66ibb"]
 [ext_resource type="Texture2D" uid="uid://dnwsjcoboiu35" path="res://Images/Weapons/GorillaFist.png" id="1_b7545"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_480ko"]
@@ -23,7 +23,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nb58s"]
 _data = {
-"GroundPound": SubResource("Animation_dht0s")
+&"GroundPound": SubResource("Animation_dht0s")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_duy60"]

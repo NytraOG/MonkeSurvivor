@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://djdwd0cq1i12"]
 
-[ext_resource type="Script" path="res://Scripts/Ui/XpDisplay.cs" id="1_iqrku"]
+[ext_resource type="Script" uid="uid://dueicf63ldtxq" path="res://Scripts/Ui/XpDisplay.cs" id="1_iqrku"]
 
 [node name="XpDisplay" type="PanelContainer"]
 custom_minimum_size = Vector2(67, 40)

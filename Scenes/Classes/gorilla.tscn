@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://biusehgrwoudt"]
 
-[ext_resource type="Script" path="res://Scripts/Monkeys/Gorilla.cs" id="1_si7nx"]
+[ext_resource type="Script" uid="uid://drso7m0qiu0b1" path="res://Scripts/Monkeys/Gorilla.cs" id="1_si7nx"]
 [ext_resource type="Texture2D" uid="uid://cv3a0baosavjk" path="res://Images/MonkeyClasses/Gorilla.png" id="2_gcw8k"]
 
 [node name="Gorilla" type="Node2D"]

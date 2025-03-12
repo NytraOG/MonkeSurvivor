@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bre2lf0vrxxs2"]
 
 [ext_resource type="Texture2D" uid="uid://ja0fekcerd5w" path="res://Images/Coconut.png" id="1_c7v6p"]
-[ext_resource type="Script" path="res://Scripts/Weapons/Ranged/CoconutGrenade.cs" id="1_p0uhb"]
+[ext_resource type="Script" uid="uid://va3pl3rfxsuw" path="res://Scripts/Weapons/Ranged/CoconutGrenade.cs" id="1_p0uhb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v8gyg"]
 radius = 20.0

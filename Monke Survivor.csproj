@@ -1,9 +1,9 @@
-<Project Sdk="Godot.NET.Sdk/4.2.1">
-    <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
-        <EnableDynamicLoading>true</EnableDynamicLoading>
-        <RootNamespace>MonkeSurvivor</RootNamespace>
-    </PropertyGroup>
+<Project Sdk="Godot.NET.Sdk/4.4.0">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <RootNamespace>MonkeSurvivor</RootNamespace>
+  </PropertyGroup>
     <ItemGroup>
       <Folder Include="Scripts\Weapons\Magic\" />
     </ItemGroup>

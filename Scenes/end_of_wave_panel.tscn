@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://o2krirg1072s"]
 
-[ext_resource type="Script" path="res://Scripts/Ui/EndOfWavePanel.cs" id="1_523ir"]
+[ext_resource type="Script" uid="uid://bj4bom0prnxn2" path="res://Scripts/Ui/EndOfWavePanel.cs" id="1_523ir"]
 
 [node name="EndOfWavePanel" type="PanelContainer"]
 process_mode = 2

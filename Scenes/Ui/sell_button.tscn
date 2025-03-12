@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bumwy4hhqb2wa"]
 
-[ext_resource type="Script" path="res://Scripts/Ui/SellButton.cs" id="1_6y21e"]
+[ext_resource type="Script" uid="uid://bvoihtx8pvwmg" path="res://Scripts/Ui/SellButton.cs" id="1_6y21e"]
 [ext_resource type="Texture2D" uid="uid://dxdoita0e0pse" path="res://Images/button3_ready.png" id="2_0cunq"]
 [ext_resource type="Texture2D" uid="uid://bhhvx5r8ifhfb" path="res://Images/button3_ready_pressed.png" id="3_07wod"]
 [ext_resource type="Texture2D" uid="uid://cgs2galy6t8gc" path="res://Images/button3_ready_hover.png" id="4_ox75y"]
